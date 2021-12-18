@@ -9,12 +9,13 @@ public class RoomsManager : Singleton<RoomsManager>
     // Registers a new room to 
     public void RegisterRoom(Room room)
     {
-        // TODO: implement
+        rooms.Add(room);
     }
 
     // Resets the current level
     public void ResetLevel()
     {
+        rooms.Clear();
         // TODO: implement
     }
 }
