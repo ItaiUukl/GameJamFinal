@@ -94,9 +94,9 @@ public class Player : MonoBehaviour
         isGrounded = false;
         if (colliders.Length > 0)
         {
-            for (int i = 0; i < colliders.Length; i++)
+            foreach (var t1 in colliders)
             {
-                if (colliders[i] != mainCollider)
+                if (t1 != mainCollider)
                 {
                     isGrounded = true;
                     break;

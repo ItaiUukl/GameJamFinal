@@ -11,19 +11,18 @@ public class Lever : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // TODO: implement. If no room field finds first room parent
+        room = room == null ? GetComponentInParent<Room>() : room;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
-    
+
     // Activates lever
     public void Activate()
     {
-        
-        // TODO: implement
+        room.Move(dir);
+        // TODO: Trigger lever animation
     }
 }

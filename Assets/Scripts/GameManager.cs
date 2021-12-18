@@ -7,10 +7,13 @@ public class GameManager : Singleton<GameManager>
 {
 
     [SerializeField] public Scene[] levels;
+    private int CurLevel = 0;
     
     // Advances game to the next level
     public void NextLevel()
     {
+        SceneManager.LoadScene(levels[++CurLevel].buildIndex);
+        
         // TODO: implement
     }
 

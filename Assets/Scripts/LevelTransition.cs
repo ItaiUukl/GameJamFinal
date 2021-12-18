@@ -19,6 +19,6 @@ public class LevelTransition : MonoBehaviour
     // Called when level is completed. Switches to next level with UI, etc.
     public void CompleteLevel()
     {
-        // TODO: implement
+        GameManager.Instance.NextLevel();
     }
 }
