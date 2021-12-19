@@ -19,6 +19,10 @@ public class Player : MonoBehaviour
     Rigidbody2D r2d;
     CapsuleCollider2D mainCollider;
     Transform t;
+    bool particleActive;
+    GameObject ps; 
+    // setting particle system child object
+
 
     // Use this for initialization
     void Start()
@@ -30,7 +34,7 @@ public class Player : MonoBehaviour
         r2d.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         r2d.gravityScale = gravityScale;
         facingRight = t.localScale.x > 0;
-
+        ps = t.GetChild(1).transform.gameObject;
         if (mainCamera)
         {
             cameraPos = mainCamera.transform.position;
@@ -40,6 +44,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         // Movement controls
         if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && (isGrounded || Mathf.Abs(r2d.velocity.x) > 0.01f))
         {
@@ -68,11 +73,18 @@ public class Player : MonoBehaviour
                 t.localScale = new Vector3(-Mathf.Abs(t.localScale.x), t.localScale.y, t.localScale.z);
             }
         }
+        if(!isGrounded)
+        {    
+            particleActive = false;
+        }
 
         // Jumping
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             r2d.velocity = new Vector2(r2d.velocity.x, jumpHeight);
+            Destroy(t.GetChild(t.childCount-1).transform.gameObject);
+
+
         }
 
         // Camera follow
@@ -84,6 +96,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+
         Bounds colliderBounds = mainCollider.bounds;
         float colliderRadius = mainCollider.size.x * 0.4f * Mathf.Abs(transform.localScale.x);
         Vector3 groundCheckPos =
@@ -99,6 +112,12 @@ public class Player : MonoBehaviour
                 if (t1 != mainCollider)
                 {
                     isGrounded = true;
+                    if(!particleActive){
+                    // checking if the particle system flag is active and create new object if it isn't
+                        Instantiate(ps, t, true);
+                        particleActive = true;
+                    }
+
                     break;
                 }
             }
