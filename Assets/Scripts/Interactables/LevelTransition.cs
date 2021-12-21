@@ -1,24 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelTransition : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            CompleteLevel();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
     // Called when level is completed. Switches to next level with UI, etc.
     public void CompleteLevel()
     {
+        // TODO: exit animation (maybe should be in game manager)
         GameManager.Instance.NextLevel();
     }
 }
