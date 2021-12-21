@@ -15,7 +15,7 @@ public class Room : MonoBehaviour
         GetComponent<PolygonCollider2D>().isTrigger = true;
         //
         // _body = gameObject.AddComponent<Rigidbody2D>();
-        // _body.bodyType = RigidbodyType2D.Kinematic;
+         _body.bodyType = RigidbodyType2D.Kinematic;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

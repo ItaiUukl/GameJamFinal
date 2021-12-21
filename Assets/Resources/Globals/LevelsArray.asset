@@ -10,6 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b934533ec04d498409c03fc44326d74d, type: 3}
-  m_Name: LevelsOrder
+  m_Name: LevelsArray
   m_EditorClassIdentifier: 
-  levelAdvancement: []
+  levelAdvancement:
+  - {fileID: 102900000, guid: c79a75260a25f9f49b9121fd9652b6a0, type: 3}
+  - {fileID: 102900000, guid: 362ef0e78c9cd7145a21276f0053b313, type: 3}
+  - {fileID: 102900000, guid: 98b5ad41399a55c4d90ee9b6154bbfd9, type: 3}
