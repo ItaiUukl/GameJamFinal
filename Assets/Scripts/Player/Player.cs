@@ -44,11 +44,11 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            // RoomsManager.Instance.MoveRoom(roomToMove, Vector2.left);
+            roomToMove.Move(Vector2.left);
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            // RoomsManager.Instance.MoveRoom(roomToMove, Vector2.right);
+            roomToMove.Move(Vector2.right);
         }
         // Movement controls
         if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && (isGrounded || Mathf.Abs(r2d.velocity.x) > 0.01f))

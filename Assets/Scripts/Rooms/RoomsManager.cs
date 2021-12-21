@@ -116,6 +116,7 @@ public class RoomsManager : Singleton<RoomsManager>
         CompositeCollider2D compColl = groupObject.AddComponent<CompositeCollider2D>();
         compColl.geometryType = CompositeCollider2D.GeometryType.Outlines;
         compColl.vertexDistance = .05f;
+        compColl.offsetDistance = .05f;
         
         _roomsGroups.Add(new RoomsGroup{GroupParent = groupObject, Rooms = new HashSet<Room>()});
         

@@ -9,6 +9,8 @@ public class Room : MonoBehaviour
 {
     public int RoomGroup { get; set; }
 
+    private Rigidbody2D _body;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,8 @@ public class Room : MonoBehaviour
         RoomsManager.Instance.RegisterRoom(this);
         GetComponent<PolygonCollider2D>().isTrigger = true;
         
-        // TODO: implement. Generates colliders
+        _body = gameObject.AddComponent<Rigidbody2D>();
+        _body.bodyType = RigidbodyType2D.Kinematic;
     }
 
     // Update is called once per frame
@@ -28,11 +31,25 @@ public class Room : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Rooms"))
         {
+            _body.velocity = Vector2.zero;
             Room room = other.GetComponent<Room>();
             
             if (room)
             {
                 RoomsManager.Instance.RoomConnection(this, room);
+            }
+        }
+    }
+    
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Rooms"))
+        {
+            Room room = other.GetComponent<Room>();
+            
+            if (room)
+            {
+                RoomsManager.Instance.RoomDisconnection(this);
             }
         }
     }
@@ -46,15 +63,9 @@ public class Room : MonoBehaviour
         newPoints.Add(B);
     }
 
-    private bool IsOnAB(Vector2 A, Vector2 B, Vector2 C)
-    {
-        return Vector2.Dot((B - A).normalized, (C - B).normalized) <= 0f &&
-               Vector2.Dot((A - B).normalized, (C - A).normalized) <= 0f;
-    }
-
     // Moves room until collision
     public void Move(Vector2 dir)
     {
-        // TODO: implement
+        _body.velocity = 3 * dir;
     }
 }
