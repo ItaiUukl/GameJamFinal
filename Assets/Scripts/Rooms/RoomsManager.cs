@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -53,7 +51,7 @@ public class RoomsManager : Singleton<RoomsManager>
         int originalGroup = room1.RoomGroup, newGroup = room2.RoomGroup;
         RoomsGroup group1 = _roomsGroups[originalGroup], group2 = _roomsGroups[newGroup];
         
-        // group1.GroupParent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        group1.GroupParent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
         if (group2.Rooms.Contains(room1))
         {
@@ -73,25 +71,34 @@ public class RoomsManager : Singleton<RoomsManager>
         CalculateGroupCollider(newGroup);
     }
     
-    public void RoomDisconnection(Room room)
+    public int RoomDisconnection(Room room)
     {
         // TODO: think about case of sticky rooms
 
         int original = room.RoomGroup, groupNum = AvailableGroup();
 
         room.RoomGroup = groupNum;
+        _roomsGroups[groupNum].Rooms.Add(room);
         
         room.transform.SetParent(_roomsGroups[groupNum].GroupParent.transform);
 
         CalculateGroupCollider(groupNum);
         CalculateGroupCollider(original);
+        
+        return groupNum;
     }
 
-    // public void MoveRoom(Room room, Vector2 dir)
-    // {
-    //     GameObject groupParent = _roomsGroups[room.RoomGroup].GroupParent;
-    //     groupParent.GetComponent<Rigidbody2D>().velocity = dir;
-    // }
+    public void MoveRoom(Room room, Vector2 dir)
+    {
+        int group = room.RoomGroup;
+        
+        if (_roomsGroups[group].Rooms.Count > 1)
+        {
+            group = RoomDisconnection(room);
+        }
+        
+        _roomsGroups[group].GroupParent.GetComponent<Rigidbody2D>().velocity = 3 * dir;
+    }
 
     private int AvailableGroup()
     {
@@ -129,7 +136,6 @@ public class RoomsManager : Singleton<RoomsManager>
         
         foreach (PolygonCollider2D coll in groupParent.GetComponents<PolygonCollider2D>())
         {
-            Debug.Log(group);
             Destroy(coll);
         }
         
@@ -137,7 +143,7 @@ public class RoomsManager : Singleton<RoomsManager>
         {
             PolygonCollider2D polyColl = groupParent.AddComponent<PolygonCollider2D>();
             PolygonCollider2D tempColl = room.GetComponent<PolygonCollider2D>();
-            polyColl.points = tempColl.points.Select(t => (Vector2)tempColl.transform.TransformPoint(t)).ToArray();
+            polyColl.points = tempColl.points.Select(t => (Vector2)polyColl.transform.InverseTransformPoint(tempColl.transform.TransformPoint(t))).ToArray();
             polyColl.usedByComposite = true;
         }
         
