@@ -7,6 +7,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     // Move player in 2D space
+    [SerializeField] private Room roomToMove;
     public float maxSpeed = 3.4f;
     public float jumpHeight = 6.5f;
     public float gravityScale = 1.5f;
@@ -40,6 +41,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            // RoomsManager.Instance.MoveRoom(roomToMove, Vector2.left);
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            // RoomsManager.Instance.MoveRoom(roomToMove, Vector2.right);
+        }
         // Movement controls
         if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && (isGrounded || Mathf.Abs(r2d.velocity.x) > 0.01f))
         {
