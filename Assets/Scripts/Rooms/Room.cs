@@ -13,22 +13,26 @@ public class Room : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("Rooms");
         RoomsManager.Instance.RegisterRoom(this);
         GetComponent<PolygonCollider2D>().isTrigger = true;
-        
-        _body = gameObject.AddComponent<Rigidbody2D>();
-        _body.bodyType = RigidbodyType2D.Kinematic;
+        //
+        // _body = gameObject.AddComponent<Rigidbody2D>();
+        // _body.bodyType = RigidbodyType2D.Kinematic;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Rooms"))
+        switch (LayerMask.LayerToName(other.gameObject.layer))
         {
-            _body.velocity = Vector2.zero;
-            Room room = other.GetComponent<Room>();
+            case "Rooms":
+                Room room = other.GetComponent<Room>();
             
-            if (room)
-            {
-                RoomsManager.Instance.RoomConnection(this, room);
-            }
+                if (room)
+                {
+                    RoomsManager.Instance.RoomConnection(this, room);
+                }
+                break;
+            case "Player":
+                other.transform.SetParent(transform);
+                break;
         }
     }
     

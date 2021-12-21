@@ -96,8 +96,10 @@ public class RoomsManager : Singleton<RoomsManager>
         {
             group = RoomDisconnection(room);
         }
+
+        // _roomsGroups[group].GroupParent.transform.position += (Vector3)dir;
         
-        _roomsGroups[group].GroupParent.GetComponent<Rigidbody2D>().velocity = 3 * dir;
+        _roomsGroups[group].GroupParent.GetComponent<Rigidbody2D>().velocity = 10 * dir;
     }
 
     private int AvailableGroup()
@@ -146,8 +148,6 @@ public class RoomsManager : Singleton<RoomsManager>
             polyColl.points = tempColl.points.Select(t => (Vector2)polyColl.transform.InverseTransformPoint(tempColl.transform.TransformPoint(t))).ToArray();
             polyColl.usedByComposite = true;
         }
-        
-        groupParent.GetComponent<CompositeCollider2D>().GenerateGeometry();
     }
     
     // private void CreateEdgeCollider(int group)
