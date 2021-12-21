@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -7,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     // Move player in 2D space
+    [SerializeField] private Room roomToMove;
     public float maxSpeed = 3.4f;
     public float jumpHeight = 6.5f;
     public float gravityScale = 1.5f;
