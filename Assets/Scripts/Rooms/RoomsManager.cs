@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class RoomsManager : Singleton<RoomsManager>
 {
-    struct RoomsGroup
-    {
-        public GameObject GroupParent { get; set; }
-        public HashSet<Room> Rooms { get; set; }
-        
-        public bool IsEmpty => Rooms.Count == 0;
-    }
+    // struct RoomsGroup
+    // {
+    //     public GameObject GroupParent { get; set; }
+    //     public HashSet<Room> Rooms { get; set; }
+    //     
+    //     public bool IsEmpty => Rooms.Count == 0;
+    // }
     
     // struct Line
     // {
@@ -20,135 +21,165 @@ public class RoomsManager : Singleton<RoomsManager>
     //     public float Len => Vector2.Distance(PointA, PointB);
     // }
     
-    [SerializeField] private Collider2D player;
+    // [SerializeField] private Collider2D player;
+    //
+    // private List<RoomsGroup> _roomsGroups = new List<RoomsGroup> ();
+
+
+    private GameObject _compositeHolder = null;
     
-    private List<RoomsGroup> _roomsGroups = new List<RoomsGroup> ();
-
     // Registers a new room to Int
-    public void RegisterRoom(Room room)
+    public PolygonCollider2D RegisterRoom(Room room)
     {
+        if (!_compositeHolder)
+        {
+            GenerateComposite();
+        }
+        PolygonCollider2D polyColl = _compositeHolder.AddComponent<PolygonCollider2D>();
+        PolygonCollider2D tempColl = room.GetComponent<PolygonCollider2D>();
+        polyColl.points = tempColl.points.Select(t => (Vector2)tempColl.transform.TransformPoint(t)).ToArray();
+        polyColl.usedByComposite = true;
+        return polyColl;
+
         // TODO maybe: Check if room overlaps other rooms and add it to appropriate group
-        int groupNum = AvailableGroup();
+        // int groupNum = AvailableGroup();
+        //
+        // room.RoomGroup = groupNum;
+        //
+        // room.transform.SetParent(_roomsGroups[groupNum].GroupParent.transform);
 
-        room.RoomGroup = groupNum;
-        
-        room.transform.SetParent(_roomsGroups[groupNum].GroupParent.transform);
-        
-        _roomsGroups[groupNum].Rooms.Add(room);
+        // _roomsGroups[groupNum].Rooms.Add(room);
 
-        CalculateGroupCollider(groupNum);
+        // CalculateGroupCollider(groupNum);
+    }
+
+    private void GenerateComposite()
+    {
+        _compositeHolder = new GameObject
+        {
+            layer = LayerMask.NameToLayer("Outline")
+        };
+        _compositeHolder.AddComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+
+        CompositeCollider2D compColl = _compositeHolder.AddComponent<CompositeCollider2D>();
+        compColl.geometryType = CompositeCollider2D.GeometryType.Outlines;
+        compColl.vertexDistance = .05f;
+        compColl.offsetDistance = .05f;
     }
 
     // Resets the current level
     public void ResetLevel()
     {
-        _roomsGroups.Clear();
+        _compositeHolder = null;
+        // _roomsGroups.Clear();
         // TODO: might need more
     }
     
-    public void RoomConnection(Room room1, Room room2)
-    {
-        int originalGroup = room1.RoomGroup, newGroup = room2.RoomGroup;
-        RoomsGroup group1 = _roomsGroups[originalGroup], group2 = _roomsGroups[newGroup];
-        
-        group1.GroupParent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
-        if (group2.Rooms.Contains(room1))
-        {
-            return;
-        }
-        
-        foreach (Room room in group1.Rooms)
-        {
-            group2.Rooms.Add(room);
-            room.transform.SetParent(group2.GroupParent.transform);
-            room.RoomGroup = newGroup;
-        }
-
-        group1.Rooms.Clear();
-        
-        CalculateGroupCollider(originalGroup);
-        CalculateGroupCollider(newGroup);
-    }
+    // public void RoomConnection(Room room1, Room room2)
+    // {
+    //     int originalGroup = room1.RoomGroup, newGroup = room2.RoomGroup;
+    //     RoomsGroup group1 = _roomsGroups[originalGroup], group2 = _roomsGroups[newGroup];
+    //     
+    //     group1.GroupParent.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    //
+    //     if (group2.Rooms.Contains(room1))
+    //     {
+    //         return;
+    //     }
+    //     
+    //     foreach (Room room in group1.Rooms)
+    //     {
+    //         group2.Rooms.Add(room);
+    //         room.transform.SetParent(group2.GroupParent.transform);
+    //         room.RoomGroup = newGroup;
+    //     }
+    //
+    //     group1.Rooms.Clear();
+    //     
+    //     CalculateGroupCollider(originalGroup);
+    //     CalculateGroupCollider(newGroup);
+    // }
     
-    public int RoomDisconnection(Room room)
-    {
-        // TODO: think about case of sticky rooms
+    // public int RoomDisconnection(Room room)
+    // {
+    //     // TODO: think about case of sticky rooms
+    //
+    //     int original = room.RoomGroup, groupNum = AvailableGroup();
+    //
+    //     room.RoomGroup = groupNum;
+    //     _roomsGroups[groupNum].Rooms.Add(room);
+    //     
+    //     room.transform.SetParent(_roomsGroups[groupNum].GroupParent.transform);
+    //
+    //     CalculateGroupCollider(groupNum);
+    //     CalculateGroupCollider(original);
+    //     
+    //     return groupNum;
+    // }
 
-        int original = room.RoomGroup, groupNum = AvailableGroup();
-
-        room.RoomGroup = groupNum;
-        _roomsGroups[groupNum].Rooms.Add(room);
-        
-        room.transform.SetParent(_roomsGroups[groupNum].GroupParent.transform);
-
-        CalculateGroupCollider(groupNum);
-        CalculateGroupCollider(original);
-        
-        return groupNum;
-    }
-
-    public void MoveRoom(Room room, Vector2 dir)
-    {
-        int group = room.RoomGroup;
-        
-        if (_roomsGroups[group].Rooms.Count > 1)
-        {
-            group = RoomDisconnection(room);
-        }
-
-        // _roomsGroups[group].GroupParent.transform.position += (Vector3)dir;
-        
-        _roomsGroups[group].GroupParent.GetComponent<Rigidbody2D>().velocity = 10 * dir;
-    }
-
-    private int AvailableGroup()
-    {
-        for (int i = 0; i < _roomsGroups.Count; i++)
-        {
-            if (_roomsGroups[i].IsEmpty)
-            {
-                return i;
-            }
-        }
-
-        int groupNum = _roomsGroups.Count;
-        
-        GameObject groupObject = new GameObject
-        {
-            // layer = LayerMask.NameToLayer("Rooms"),
-            name = "RoomGroup" + groupNum
-        };
-        
-        groupObject.AddComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-        
-        CompositeCollider2D compColl = groupObject.AddComponent<CompositeCollider2D>();
-        compColl.geometryType = CompositeCollider2D.GeometryType.Outlines;
-        compColl.vertexDistance = .05f;
-        compColl.offsetDistance = .05f;
-        
-        _roomsGroups.Add(new RoomsGroup{GroupParent = groupObject, Rooms = new HashSet<Room>()});
-        
-        return groupNum;
-    }
-        
-    private void CalculateGroupCollider(int group)
-    {
-        GameObject groupParent = _roomsGroups[group].GroupParent;
-        
-        foreach (PolygonCollider2D coll in groupParent.GetComponents<PolygonCollider2D>())
-        {
-            Destroy(coll);
-        }
-        
-        foreach (Room room in _roomsGroups[group].Rooms)
-        {
-            PolygonCollider2D polyColl = groupParent.AddComponent<PolygonCollider2D>();
-            PolygonCollider2D tempColl = room.GetComponent<PolygonCollider2D>();
-            polyColl.points = tempColl.points.Select(t => (Vector2)polyColl.transform.InverseTransformPoint(tempColl.transform.TransformPoint(t))).ToArray();
-            polyColl.usedByComposite = true;
-        }
-    }
+    // public void MoveRoom(Room room, Vector2 dir)
+    // {
+    //     int group = room.RoomGroup;
+    //     
+    //     if (_roomsGroups[group].Rooms.Count > 1)
+    //     {
+    //         group = RoomDisconnection(room);
+    //     }
+    //
+    //     // _roomsGroups[group].GroupParent.transform.position += (Vector3)dir;
+    //     
+    //     _roomsGroups[group].GroupParent.GetComponent<Rigidbody2D>().velocity = 10 * dir;
+    // }
+    //
+    // private int AvailableGroup()
+    // {
+    //     for (int i = 0; i < _roomsGroups.Count; i++)
+    //     {
+    //         if (_roomsGroups[i].IsEmpty)
+    //         {
+    //             return i;
+    //         }
+    //     }
+    //
+    //     int groupNum = _roomsGroups.Count;
+    //     
+    //     GameObject groupObject = new GameObject
+    //     {
+    //         // layer = LayerMask.NameToLayer("Rooms"),
+    //         name = "RoomGroup" + groupNum
+    //     };
+    //     
+    //     groupObject.AddComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+    //     
+    //     CompositeCollider2D compColl = groupObject.AddComponent<CompositeCollider2D>();
+    //     compColl.geometryType = CompositeCollider2D.GeometryType.Outlines;
+    //     compColl.vertexDistance = .05f;
+    //     compColl.offsetDistance = .05f;
+    //     
+    //     _roomsGroups.Add(new RoomsGroup{GroupParent = groupObject, Rooms = new HashSet<Room>()});
+    //     
+    //     return groupNum;
+    // }
+    //     
+    // private void CalculateGroupCollider()
+    // {
+    //     GameObject groupParent = _roomsGroups[group].GroupParent;
+    //     
+    //     foreach (PolygonCollider2D coll in groupParent.GetComponents<PolygonCollider2D>())
+    //     {
+    //         coll.
+    //         Destroy(coll);
+    //     }
+    //     
+    //     foreach (Room room in _roomsGroups[group].Rooms)
+    //     {
+    //         
+    //         PolygonCollider2D polyColl = groupParent.AddComponent<PolygonCollider2D>();
+    //         PolygonCollider2D tempColl = room.GetComponent<PolygonCollider2D>();
+    //         polyColl.points = tempColl.points.Select(t => (Vector2)polyColl.transform.InverseTransformPoint(tempColl.transform.TransformPoint(t))).ToArray();
+    //         polyColl.usedByComposite = true;
+    //     }
+    // }
     
     // private void CreateEdgeCollider(int group)
     // {
