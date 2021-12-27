@@ -1,8 +1,6 @@
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(CapsuleCollider2D))]
 public class Player : MonoBehaviour
 {
     // Move player in 2D space
@@ -123,6 +121,7 @@ public class Player : MonoBehaviour
         {
             _currRoom = room;
             r2d.isKinematic = true;
+            mainCollider.enabled = false;
             transform.SetParent(room.transform);
         }
     }
@@ -133,6 +132,7 @@ public class Player : MonoBehaviour
         {
             transform.SetParent(null);
             r2d.isKinematic = false;
+            mainCollider.enabled = true;
             _currRoom = null;
         }
     }
