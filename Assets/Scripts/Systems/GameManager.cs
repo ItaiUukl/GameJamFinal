@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     private LevelsSO _levels;
+    [SerializeField] public Player player;
     
     private void Awake()
     {
