@@ -58,7 +58,8 @@ public class Lever : MonoBehaviour
     // Activates lever
     public void Activate()
     {
-        RoomsManager.Instance.MoveRoom(room, _vecDir);
+        room.Move(_vecDir);
+        // RoomsManager.Instance.MoveRoom(room, _vecDir);
         // TODO: Trigger lever animation
     }
 

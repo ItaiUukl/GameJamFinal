@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     Rigidbody2D r2d;
     CapsuleCollider2D mainCollider;
     Transform t;
+    private Room _currRoom = null;
 
     // Use this for initialization
     void Start()
@@ -39,6 +41,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_currRoom)
+        {
+            return;
+        }
         // Movement controls
         if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && (isGrounded || Mathf.Abs(r2d.velocity.x) > 0.01f))
         {
@@ -109,5 +115,25 @@ public class Player : MonoBehaviour
         // Simple debug
         // Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(0, colliderRadius, 0), isGrounded ? Color.green : Color.red);
         // Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(colliderRadius, 0, 0), isGrounded ? Color.green : Color.red);
+    }
+
+    public void RoomMoving(Room room)
+    {
+        if (Physics2D.OverlapCircleAll(transform.position, 1f).Contains(room.GetComponent<Collider2D>()))
+        {
+            _currRoom = room;
+            r2d.isKinematic = true;
+            transform.SetParent(room.transform);
+        }
+    }
+
+    public void RoomStopping(Room room)
+    {
+        if (room == _currRoom)
+        {
+            transform.SetParent(null);
+            r2d.isKinematic = false;
+            _currRoom = null;
+        }
     }
 }
