@@ -57,6 +57,7 @@ public class RoomsManager : Singleton<RoomsManager>
     {
         _compositeHolder = new GameObject
         {
+            name = "RoomsEdgeCollider",
             layer = LayerMask.NameToLayer("Outline")
         };
         _compositeHolder.AddComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
