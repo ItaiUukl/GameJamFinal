@@ -25,6 +25,6 @@ public class GameManager : Singleton<GameManager>
    public void ReloadLevel()
     {
         RoomsManager.Instance.ResetLevel();
-        SceneManager.LoadScene(_levels.CurrentLevel());
+        SceneManager.LoadScene(_globals.AdvanceLevel(_currLevel));
     }
 }
