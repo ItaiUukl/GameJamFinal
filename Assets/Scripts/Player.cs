@@ -19,10 +19,15 @@ public class Player : MonoBehaviour
     Rigidbody2D r2d;
     CapsuleCollider2D mainCollider;
     Transform t;
+<<<<<<< Updated upstream:Assets/Scripts/Player.cs
     bool particleActive;
     GameObject ps; 
     // setting particle system child object
 
+=======
+    private Room _currRoom = null;
+    float cooldown = 0;
+>>>>>>> Stashed changes:Assets/Scripts/Player/Player.cs
 
     // Use this for initialization
     void Start()
@@ -79,12 +84,26 @@ public class Player : MonoBehaviour
         }
 
         // Jumping
+<<<<<<< Updated upstream:Assets/Scripts/Player.cs
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             r2d.velocity = new Vector2(r2d.velocity.x, jumpHeight);
             Destroy(t.GetChild(t.childCount-1).transform.gameObject);
 
 
+=======
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && cooldown <= 0)
+        {
+            r2d.velocity = new Vector2(r2d.velocity.x, jumpHeight);
+            cooldown = 0.7f;
+
+        }
+            cooldown -= Time.deltaTime;
+        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            GameManager.Instance.ReloadLevel();
+>>>>>>> Stashed changes:Assets/Scripts/Player/Player.cs
         }
 
         // Camera follow
