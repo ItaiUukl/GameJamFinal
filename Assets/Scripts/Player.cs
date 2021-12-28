@@ -20,10 +20,7 @@ public class Player : MonoBehaviour
     CapsuleCollider2D mainCollider;
     Transform t;
 <<<<<<< Updated upstream:Assets/Scripts/Player.cs
-    bool particleActive;
-    GameObject ps; 
-    // setting particle system child object
-
+  
 =======
     private Room _currRoom = null;
     float cooldown = 0;
@@ -88,7 +85,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             r2d.velocity = new Vector2(r2d.velocity.x, jumpHeight);
-            Destroy(t.GetChild(t.childCount-1).transform.gameObject);
 
 
 =======
@@ -96,6 +92,7 @@ public class Player : MonoBehaviour
         {
             r2d.velocity = new Vector2(r2d.velocity.x, jumpHeight);
             cooldown = 0.7f;
+            Destroy(t.GetChild(t.childCount-1).transform.gameObject);
 
         }
             cooldown -= Time.deltaTime;
