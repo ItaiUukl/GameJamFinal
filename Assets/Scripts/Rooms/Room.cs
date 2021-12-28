@@ -11,7 +11,7 @@ public class Room : MonoBehaviour
     private const float CollisionThreshold = .005f;
 
     private Player _player;
-    private Rigidbody2D _body;
+    // private Rigidbody2D _body;
     private PolygonCollider2D _collider, _outlineCollider;
     private Vector2 _moveDir = Vector2.zero;
 
@@ -22,12 +22,13 @@ public class Room : MonoBehaviour
         _collider = GetComponent<PolygonCollider2D>();
         _outlineCollider = RoomsManager.Instance.RegisterRoom(this);
 
-        _body = gameObject.AddComponent<Rigidbody2D>();
-        _body.bodyType = RigidbodyType2D.Dynamic;
-        _body.isKinematic = true;
-        _body.gravityScale = 0;
-        _body.mass = _body.drag = MaxMass;
-        _body.constraints = RigidbodyConstraints2D.FreezeRotation;
+        // _body = gameObject.AddComponent<Rigidbody2D>();
+        // _body.bodyType = RigidbodyType2D.Kinematic;
+        // _body.bodyType = RigidbodyType2D.Dynamic;
+        // _body.isKinematic = true;
+        // _body.gravityScale = 0;
+        // _body.mass = _body.drag = MaxMass;
+        // _body.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         _player = FindObjectOfType<Player>();
     }
@@ -46,23 +47,23 @@ public class Room : MonoBehaviour
     public void Move(Vector2 dir)
     {
         _moveDir = dir;
-        _body.isKinematic = false;
+        // _body.isKinematic = false;
         _player.RoomMoving(this);
-        _body.velocity = moveSpeed * dir;
-        _body.mass = 1;
-        _body.drag = 0;
+        // _body.velocity = moveSpeed * dir;
+        // _body.mass = 1;
+        // _body.drag = 0;
     }
 
     private IEnumerator Collide()
     {
         yield return new WaitForSeconds(0.05f);
-        if (!(_body.velocity.magnitude < CollisionThreshold)) yield break;
-        _body.mass = _body.drag = MaxMass;
-        _body.isKinematic = true;
+        // if (!(_body.velocity.magnitude < CollisionThreshold)) yield break;
+        // _body.mass = _body.drag = MaxMass;
+        // _body.isKinematic = true;
         _moveDir = Vector2.zero;
         // _body.velocity = Vector2.zero;
-        _outlineCollider.points = _collider.points.Select(t => (Vector2) _collider.transform.TransformPoint(t))
-            .ToArray();
+        // _outlineCollider.points = _collider.points.Select(t => (Vector2) _collider.transform.TransformPoint(t))
+        //     .ToArray();
         _player.RoomStopping(this);
     }
 }
