@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.WSA;
-
 
 public enum MoveDirection
 {
@@ -13,6 +8,7 @@ public enum MoveDirection
     Left
 }
 
+[RequireComponent(typeof(Collider2D))]
 public class Lever : MonoBehaviour
 {
     [SerializeField] private MoveDirection direction;
@@ -28,22 +24,15 @@ public class Lever : MonoBehaviour
         room = room ? room : GetComponentInParent<Room>();
         _collider = GetComponent<Collider2D>();
         _collider.isTrigger = true;
-        
-        switch (direction)
+
+        _vecDir = direction switch
         {
-            case MoveDirection.Up:
-                _vecDir = Vector2.up;
-                break;
-            case MoveDirection.Right:
-                _vecDir = Vector2.right;
-                break;
-            case MoveDirection.Down:
-                _vecDir = Vector2.down;
-                break;
-            case MoveDirection.Left:
-                _vecDir = Vector2.left;
-                break;
-        }
+            MoveDirection.Up => Vector2.up,
+            MoveDirection.Right => Vector2.right,
+            MoveDirection.Down => Vector2.down,
+            MoveDirection.Left => Vector2.left,
+            _ => _vecDir
+        };
     }
 
     private void Update()
@@ -59,13 +48,12 @@ public class Lever : MonoBehaviour
     public void Activate()
     {
         room.Move(_vecDir);
-        // RoomsManager.Instance.MoveRoom(room, _vecDir);
         // TODO: Trigger lever animation
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
         {
             _active = true;
         }
@@ -73,7 +61,7 @@ public class Lever : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
         {
             _active = false;
         }
