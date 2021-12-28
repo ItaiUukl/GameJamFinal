@@ -14,4 +14,8 @@ public class LevelsSO : ScriptableObject
         currLevel = (currLevel + 1) % levelAdvancement.Count;
         return levelAdvancement[currLevel].name;
     }
+     public string CurrentLevel()
+    {
+        return levelAdvancement[currLevel].name;
+    }
 }
