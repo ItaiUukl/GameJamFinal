@@ -82,6 +82,7 @@ public class Player : MonoBehaviour
             // Destroy(t.GetChild(t.childCount-1).transform.gameObject);
 
         }
+        
             cooldown -= Time.deltaTime;
 
 
@@ -89,6 +90,16 @@ public class Player : MonoBehaviour
         if (mainCamera)
         {
             mainCamera.transform.position = new Vector3(t.position.x, cameraPos.y, cameraPos.z);
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            //Reload scene
+            GameManager.Instance.ReloadLevel();
+        }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            //Exit the game
+            Application.Quit();
         }
     }
 

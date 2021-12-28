@@ -13,6 +13,7 @@ public class GameManager : Singleton<GameManager>
         _levels = Resources.LoadAll<LevelsSO>("Globals")[0];
     }
 
+
     public void NextLevel()
     {
         RoomsManager.Instance.ResetLevel();
