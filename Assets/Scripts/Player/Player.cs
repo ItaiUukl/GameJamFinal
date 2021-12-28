@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     CapsuleCollider2D mainCollider;
     Transform t;
     private Room _currRoom = null;
+    float cooldown = 0;
 
     // Use this for initialization
     void Start()
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
         r2d.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         r2d.gravityScale = gravityScale;
         facingRight = t.localScale.x > 0;
+        //ps = t.GetChild(1).transform.gameObject;
 
         if (mainCamera)
         {
@@ -73,15 +75,31 @@ public class Player : MonoBehaviour
         }
 
         // Jumping
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && cooldown <= 0)
         {
             r2d.velocity = new Vector2(r2d.velocity.x, jumpHeight);
+            cooldown = 0.7f;
+            // Destroy(t.GetChild(t.childCount-1).transform.gameObject);
+
         }
+        
+            cooldown -= Time.deltaTime;
+
 
         // Camera follow
         if (mainCamera)
         {
             mainCamera.transform.position = new Vector3(t.position.x, cameraPos.y, cameraPos.z);
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            //Reload scene
+            GameManager.Instance.ReloadLevel();
+        }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            //Exit the game
+            Application.Quit();
         }
     }
 
@@ -102,6 +120,13 @@ public class Player : MonoBehaviour
                 if (t1 != mainCollider)
                 {
                     isGrounded = true;
+                    /* ParticleSystem
+                    if(!particleActive){
+                    // checking if the particle system flag is active and create new object if it isn't
+                        //Instantiate(ps, t, true);
+                       // particleActive = true;
+                    }
+                    */
                     break;
                 }
             }
