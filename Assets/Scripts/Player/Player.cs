@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(CapsuleCollider2D))]
 public class Player : MonoBehaviour
 {
     // Move player in 2D space
+    [SerializeField] private Room roomToMove;
     public float maxSpeed = 3.4f;
     public float jumpHeight = 6.5f;
     public float gravityScale = 1.5f;
@@ -19,12 +17,8 @@ public class Player : MonoBehaviour
     Rigidbody2D r2d;
     CapsuleCollider2D mainCollider;
     Transform t;
-<<<<<<< Updated upstream:Assets/Scripts/Player.cs
-  
-=======
     private Room _currRoom = null;
     float cooldown = 0;
->>>>>>> Stashed changes:Assets/Scripts/Player/Player.cs
 
     // Use this for initialization
     void Start()
@@ -36,7 +30,8 @@ public class Player : MonoBehaviour
         r2d.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         r2d.gravityScale = gravityScale;
         facingRight = t.localScale.x > 0;
-        ps = t.GetChild(1).transform.gameObject;
+        //ps = t.GetChild(1).transform.gameObject;
+
         if (mainCamera)
         {
             cameraPos = mainCamera.transform.position;
@@ -46,7 +41,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (_currRoom)
+        {
+            return;
+        }
         // Movement controls
         if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && (isGrounded || Mathf.Abs(r2d.velocity.x) > 0.01f))
         {
@@ -75,33 +73,17 @@ public class Player : MonoBehaviour
                 t.localScale = new Vector3(-Mathf.Abs(t.localScale.x), t.localScale.y, t.localScale.z);
             }
         }
-        if(!isGrounded)
-        {    
-            particleActive = false;
-        }
 
         // Jumping
-<<<<<<< Updated upstream:Assets/Scripts/Player.cs
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            r2d.velocity = new Vector2(r2d.velocity.x, jumpHeight);
-
-
-=======
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && cooldown <= 0)
+         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && cooldown <= 0)
         {
             r2d.velocity = new Vector2(r2d.velocity.x, jumpHeight);
             cooldown = 0.7f;
-            Destroy(t.GetChild(t.childCount-1).transform.gameObject);
+            // Destroy(t.GetChild(t.childCount-1).transform.gameObject);
 
         }
             cooldown -= Time.deltaTime;
-        
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            GameManager.Instance.ReloadLevel();
->>>>>>> Stashed changes:Assets/Scripts/Player/Player.cs
-        }
+
 
         // Camera follow
         if (mainCamera)
@@ -112,7 +94,6 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-
         Bounds colliderBounds = mainCollider.bounds;
         float colliderRadius = mainCollider.size.x * 0.4f * Mathf.Abs(transform.localScale.x);
         Vector3 groundCheckPos =
@@ -128,12 +109,13 @@ public class Player : MonoBehaviour
                 if (t1 != mainCollider)
                 {
                     isGrounded = true;
+                    /* ParticleSystem
                     if(!particleActive){
                     // checking if the particle system flag is active and create new object if it isn't
-                        Instantiate(ps, t, true);
-                        particleActive = true;
+                        //Instantiate(ps, t, true);
+                       // particleActive = true;
                     }
-
+                    */
                     break;
                 }
             }
@@ -145,5 +127,27 @@ public class Player : MonoBehaviour
         // Simple debug
         // Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(0, colliderRadius, 0), isGrounded ? Color.green : Color.red);
         // Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(colliderRadius, 0, 0), isGrounded ? Color.green : Color.red);
+    }
+
+    public void RoomMoving(Room room)
+    {
+        if (Physics2D.OverlapCircleAll(transform.position, 1f).Contains(room.GetComponent<Collider2D>()))
+        {
+            _currRoom = room;
+            r2d.isKinematic = true;
+            mainCollider.enabled = false;
+            transform.SetParent(room.transform);
+        }
+    }
+
+    public void RoomStopping(Room room)
+    {
+        if (room == _currRoom)
+        {
+            transform.SetParent(null);
+            r2d.isKinematic = false;
+            mainCollider.enabled = true;
+            _currRoom = null;
+        }
     }
 }

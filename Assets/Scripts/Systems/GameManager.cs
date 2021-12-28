@@ -5,16 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-
-    [SerializeField] public Scene[] levels;
-    private int CurLevel = 0;
+    private LevelsSO _levels;
+    [SerializeField] public Player player;
     
-    // Advances game to the next level
+    private void Awake()
+    {
+        _levels = Resources.LoadAll<LevelsSO>("Globals")[0];
+    }
+
     public void NextLevel()
     {
-        SceneManager.LoadScene(levels[++CurLevel].buildIndex);
-        
-        // TODO: implement
+        RoomsManager.Instance.ResetLevel();
+        SceneManager.LoadScene(_levels.NextLevel());
     }
 
     // Resets the current level
