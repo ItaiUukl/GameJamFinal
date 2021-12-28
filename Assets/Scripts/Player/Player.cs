@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
@@ -100,6 +101,9 @@ public class Player : MonoBehaviour
                 _velocity.y = jumpForce / 2;
             }
             
+
+            _velocity.x = Mathf.Lerp(_velocity.x, xInput, Time.deltaTime * 2);
+            
         }
         _jumpBuffer = Mathf.Max(_jumpBuffer - Time.deltaTime, 0);
 
@@ -108,7 +112,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         Debug.Log(_velocity);
-        _rb.AddForce(_velocity * Time.deltaTime, ForceMode2D.Impulse);
+        _rb.MovePosition(_rb.position + _velocity * Time.deltaTime);
         _isGrounded = IsGrounded();
         Debug.Log(_isGrounded);
     }
@@ -158,11 +162,18 @@ public class Player : MonoBehaviour
         return new Vector2(colliderBounds.center.x + colliderBounds.extents.x, 
             colliderBounds.center.y - colliderBounds.extents.y);
     }
+    
+    private Vector2 GetBottom()
+    {
+        Bounds colliderBounds = _collider.bounds;
+        return new Vector2(colliderBounds.center.x, 
+            colliderBounds.center.y - colliderBounds.extents.y - 1);
+    }
 
     private bool IsGrounded()
     {
         Vector2 areaTL = GetBottomLeft() + _groundDetectionOffset;
         Vector2 areaBR = GetBottomRight() - _groundDetectionOffset;
-        return (bool)Physics2D.OverlapArea(areaTL, areaBR, LayerMask.NameToLayer("Outline"));
+        return Physics2D.BoxCast(GetBottom(), _collider.bounds.size, 0f, Vector2.down, .1f);
     }
 }
