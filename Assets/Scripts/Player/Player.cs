@@ -41,10 +41,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_currRoom)
-        {
-            return;
-        }
+        // if (_currRoom)
+        // {
+        //     return;
+        // }
         // Movement controls
         if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && (isGrounded || Mathf.Abs(r2d.velocity.x) > 0.01f))
         {
@@ -131,23 +131,25 @@ public class Player : MonoBehaviour
                 }
             }
         }
-
+        var adder = _currRoom == null ? Vector2.zero: _currRoom._body.velocity;
         // Apply movement velocity
-        r2d.velocity = new Vector2((moveDirection) * maxSpeed, r2d.velocity.y);
+        r2d.velocity = new Vector2((moveDirection) * maxSpeed, r2d.velocity.y) + adder;
 
         // Simple debug
         // Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(0, colliderRadius, 0), isGrounded ? Color.green : Color.red);
         // Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(colliderRadius, 0, 0), isGrounded ? Color.green : Color.red);
     }
 
-    public void RoomMoving(Room room)
+    public void RoomMoving(Room room, Vector2 newVelocity)
     {
         if (Physics2D.OverlapCircleAll(transform.position, 1f).Contains(room.GetComponent<Collider2D>()))
         {
             _currRoom = room;
-            r2d.isKinematic = true;
-            mainCollider.enabled = false;
-            transform.SetParent(room.transform);
+            // r2d.velocity = newVelocity;
+            r2d.AddForce(newVelocity);
+            // r2d.isKinematic = true;
+            // mainCollider.enabled = false;
+            // transform.SetParent(room.transform);
         }
     }
 
@@ -155,9 +157,10 @@ public class Player : MonoBehaviour
     {
         if (room == _currRoom)
         {
-            transform.SetParent(null);
-            r2d.isKinematic = false;
-            mainCollider.enabled = true;
+            r2d.velocity = Vector2.zero;
+            // transform.SetParent(null);
+            // r2d.isKinematic = false;
+            // mainCollider.enabled = true;
             _currRoom = null;
         }
     }

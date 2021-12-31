@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 [RequireComponent(typeof(PolygonCollider2D))]
 public class Room : MonoBehaviour
@@ -11,7 +13,7 @@ public class Room : MonoBehaviour
     private const float CollisionThreshold = .005f;
 
     private Player _player;
-    private Rigidbody2D _body;
+    public Rigidbody2D _body;
     private PolygonCollider2D _collider, _outlineCollider;
     private Vector2 _moveDir = Vector2.zero;
 
@@ -32,8 +34,18 @@ public class Room : MonoBehaviour
         _player = FindObjectOfType<Player>();
     }
 
+    private void FixedUpdate()
+    {
+        if (!(_body.velocity.magnitude < CollisionThreshold))
+        {
+            _outlineCollider.points = _collider.points
+                .Select(t => (Vector2) _collider.transform.TransformPoint(t)).ToArray();
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log("collision: " + gameObject.name + " with "+ other.gameObject.name);
         string layer = LayerMask.LayerToName(other.gameObject.layer);
         if (layer == GlobalsSO.RoomsLayer || layer == GlobalsSO.BorderLayer)
         {
@@ -47,8 +59,8 @@ public class Room : MonoBehaviour
     {
         _moveDir = dir;
         _body.isKinematic = false;
-        _player.RoomMoving(this);
         _body.velocity = moveSpeed * dir;
+        _player.RoomMoving(this, _body.velocity);
         _body.mass = 1;
         _body.drag = 0;
     }
