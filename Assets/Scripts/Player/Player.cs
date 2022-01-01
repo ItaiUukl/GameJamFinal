@@ -1,155 +1,136 @@
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Player : MonoBehaviour
 {
-    // Move player in 2D space
-    [SerializeField] private Room roomToMove;
-    public float maxSpeed = 3.4f;
-    public float jumpHeight = 6.5f;
-    public float gravityScale = 1.5f;
-    public Camera mainCamera;
+    [SerializeField] private float speed = 4f;
+    [SerializeField] private float airBuffer = .1f;
+    [SerializeField] private float coyoteTime = .1f;
+    [SerializeField] private float maxJumpPeak = 1.2f;
+    [SerializeField] private float minJumpPeak = .4f;
+    [SerializeField, Min(.0001f)] private float maxPeakDistance = 1.2f;
+    [SerializeField, Min(.0001f)] private float minPeakDistance = .4f;
+    [SerializeField, Min(.0001f)] private float fallDistance = .9f;
+    
+    public bool IsGrounded { set; get;}
+    
+    private Rigidbody2D _rb;
+    private Collider2D _collider;
+    private SpriteRenderer _sprite;
+    
+    private Room _currRoom;
+    private Vector2 _velocity = Vector2.zero;
+    
+    private float _jumpForce;
+    private float _gravity;
+    
+    private float _coyote;
+    private float _jumpBuffer;
+    
+    private float _height; 
+    private float _distance;
 
-    bool facingRight = true;
-    float moveDirection = 0;
-    bool isGrounded = false;
-    Vector3 cameraPos;
-    Rigidbody2D r2d;
-    CapsuleCollider2D mainCollider;
-    Transform t;
-    private Room _currRoom = null;
-    float cooldown = 0;
 
     // Use this for initialization
     void Start()
     {
-        t = transform;
-        r2d = GetComponent<Rigidbody2D>();
-        mainCollider = GetComponent<CapsuleCollider2D>();
-        r2d.freezeRotation = true;
-        r2d.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        r2d.gravityScale = gravityScale;
-        facingRight = t.localScale.x > 0;
-        //ps = t.GetChild(1).transform.gameObject;
+        _height = maxJumpPeak;
+        _distance = maxPeakDistance;
+        UpdateForces();
+        
+        _rb = GetComponent<Rigidbody2D>();
+        _rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        _rb.gravityScale = 0;
+        _rb.freezeRotation = true;
+        _rb.sharedMaterial = new PhysicsMaterial2D {friction = 0};
+        
+        _collider = GetComponent<Collider2D>();
 
-        if (mainCamera)
-        {
-            cameraPos = mainCamera.transform.position;
-        }
+        _sprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if (_currRoom)
-        // {
-        //     return;
-        // }
-        // Movement controls
-        if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && (isGrounded || Mathf.Abs(r2d.velocity.x) > 0.01f))
+        if (_currRoom)
         {
-            moveDirection = Input.GetKey(KeyCode.A) ? -1 : 1;
-        }
-        else
-        {
-            if (isGrounded || r2d.velocity.magnitude < 0.01f)
-            {
-                moveDirection = 0;
-            }
+            return;
         }
 
-        // Change facing direction
-        if (moveDirection != 0)
-        {
-            if (moveDirection > 0 && !facingRight)
-            {
-                facingRight = true;
-                t.localScale = new Vector3(Mathf.Abs(t.localScale.x), t.localScale.y, transform.localScale.z);
-            }
-
-            if (moveDirection < 0 && facingRight)
-            {
-                facingRight = false;
-                t.localScale = new Vector3(-Mathf.Abs(t.localScale.x), t.localScale.y, t.localScale.z);
-            }
-        }
-
-        // Jumping
-         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && cooldown <= 0)
-        {
-            r2d.velocity = new Vector2(r2d.velocity.x, jumpHeight);
-            cooldown = 0.7f;
-            // Destroy(t.GetChild(t.childCount-1).transform.gameObject);
-
-        }
+        float xInput = Input.GetAxis("Horizontal");
+        _velocity.x = xInput * speed;
+        _sprite.flipX = xInput < 0;
         
-            cooldown -= Time.deltaTime;
-
-
-        // Camera follow
-        if (mainCamera)
+        if (IsGrounded)
         {
-            mainCamera.transform.position = new Vector3(t.position.x, cameraPos.y, cameraPos.z);
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            //Reload scene
-            GameManager.Instance.ReloadLevel();
-        }
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            //Exit the game
-            Application.Quit();
-        }
-    }
-
-    void FixedUpdate()
-    {
-        Bounds colliderBounds = mainCollider.bounds;
-        float colliderRadius = mainCollider.size.x * 0.4f * Mathf.Abs(transform.localScale.x);
-        Vector3 groundCheckPos =
-            colliderBounds.min + new Vector3(colliderBounds.size.x * 0.5f, colliderRadius * 0.9f, 0);
-        // Check if player is grounded
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckPos, colliderRadius);
-        //Check if any of the overlapping colliders are not player collider, if so, set isGrounded to true
-        isGrounded = false;
-        if (colliders.Length > 0)
-        {
-            foreach (var t1 in colliders)
+            _distance = maxPeakDistance;
+            _height = maxJumpPeak;
+            UpdateForces();
+            
+            if (_jumpBuffer != 0)
             {
-                if (t1 != mainCollider)
+                _velocity.y = _jumpForce;
+            }
+            else
+            {
+                _coyote = _velocity.y < _jumpForce ? coyoteTime : _coyote;
+                
+                if (IsJumpPressed())
                 {
-                    isGrounded = true;
-                    /* ParticleSystem
-                    if(!particleActive){
-                    // checking if the particle system flag is active and create new object if it isn't
-                        //Instantiate(ps, t, true);
-                       // particleActive = true;
-                    }
-                    */
-                    break;
+                    _velocity.y = _jumpForce;
+                    _coyote = 0;
                 }
             }
         }
-        var adder = _currRoom == null ? Vector2.zero: _currRoom._body.velocity;
-        // Apply movement velocity
-        r2d.velocity = new Vector2((moveDirection) * maxSpeed, r2d.velocity.y) + adder;
-
-        // Simple debug
-        // Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(0, colliderRadius, 0), isGrounded ? Color.green : Color.red);
-        // Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(colliderRadius, 0, 0), isGrounded ? Color.green : Color.red);
+        else
+        {
+            _velocity.y = _rb.velocity.y;
+            if (_rb.velocity.y <= 0)
+            {
+                _distance = fallDistance;
+                _height = maxJumpPeak;
+                UpdateForces();
+            }
+            else if (IsJumpReleased())
+            {
+                _height = minJumpPeak;
+                _distance = minPeakDistance;
+                UpdateForces();
+                _velocity.y = Mathf.Min(_jumpForce, _velocity.y);
+            }
+            
+            _velocity.y -= _gravity * Time.deltaTime;
+             
+            if (IsJumpPressed())
+            {
+                if (_coyote > 0)
+                {
+                    _velocity.y = _jumpForce;
+                    _coyote = 0;
+                }
+                else
+                {
+                    _jumpBuffer = airBuffer;
+                }
+            }
+            
+            _coyote = Mathf.Max(_coyote - Time.deltaTime, 0);
+        }
+        _jumpBuffer = Mathf.Max(_jumpBuffer - Time.deltaTime, 0);
+        _rb.velocity = _velocity;
     }
 
-    public void RoomMoving(Room room, Vector2 newVelocity)
+    public void RoomMoving(Room room)
     {
         if (Physics2D.OverlapCircleAll(transform.position, 1f).Contains(room.GetComponent<Collider2D>()))
         {
             _currRoom = room;
-            // r2d.velocity = newVelocity;
-            r2d.AddForce(newVelocity);
-            // r2d.isKinematic = true;
-            // mainCollider.enabled = false;
-            // transform.SetParent(room.transform);
+            _rb.isKinematic = true;
+            _collider.enabled = false;
+            transform.SetParent(room.transform);
         }
     }
 
@@ -157,11 +138,26 @@ public class Player : MonoBehaviour
     {
         if (room == _currRoom)
         {
-            r2d.velocity = Vector2.zero;
-            // transform.SetParent(null);
-            // r2d.isKinematic = false;
-            // mainCollider.enabled = true;
+            transform.SetParent(null);
+            _rb.isKinematic = false;
+            _collider.enabled = true;
             _currRoom = null;
         }
+    }
+
+    private void UpdateForces()
+    {
+        _jumpForce = (2 * _height * speed) / _distance;
+        _gravity = (2 * _height * speed * speed) / (_distance * _distance);
+    }
+
+    private static bool IsJumpPressed()
+    {
+        return Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space);
+    }
+    
+    private static bool IsJumpReleased()
+    {
+        return Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.Space);
     }
 }
