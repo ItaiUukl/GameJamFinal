@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
 
         float xInput = Input.GetAxis("Horizontal");
         _velocity.x = xInput * speed;
-        _sprite.flipX = xInput < 0;
+        _sprite.flipX = xInput != 0 ? xInput < 0 : _sprite.flipX;
         
         if (IsGrounded)
         {

@@ -60,7 +60,7 @@ public class Room : MonoBehaviour
         _moveDir = dir;
         _body.isKinematic = false;
         _body.velocity = moveSpeed * dir;
-        _player.RoomMoving(this, _body.velocity);
+        _player.RoomMoving(this);
         _body.mass = 1;
         _body.drag = 0;
     }
