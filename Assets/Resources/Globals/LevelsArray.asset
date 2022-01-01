@@ -15,4 +15,7 @@ MonoBehaviour:
   levelAdvancement:
   - {fileID: 102900000, guid: c79a75260a25f9f49b9121fd9652b6a0, type: 3}
   - {fileID: 102900000, guid: 362ef0e78c9cd7145a21276f0053b313, type: 3}
+  - {fileID: 102900000, guid: 5b492a13f7932a549b030ef6958b8ed2, type: 3}
+  - {fileID: 102900000, guid: dbc9f82975765004f95250462c1c0e31, type: 3}
+  - {fileID: 102900000, guid: 7c3e97ee38404034dacfa500facf2675, type: 3}
   - {fileID: 102900000, guid: 98b5ad41399a55c4d90ee9b6154bbfd9, type: 3}
