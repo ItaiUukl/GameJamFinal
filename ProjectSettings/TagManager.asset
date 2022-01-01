@@ -50,12 +50,12 @@ TagManager:
   - name: Platform
     uniqueID: 3866500191
     locked: 0
-  - name: Door
-    uniqueID: 3348930991
-    locked: 0
-  - name: Lever
+  - name: Interactable
     uniqueID: 1666146011
     locked: 0
   - name: Player
     uniqueID: 4249864519
+    locked: 0
+  - name: UI
+    uniqueID: 4150259781
     locked: 0
