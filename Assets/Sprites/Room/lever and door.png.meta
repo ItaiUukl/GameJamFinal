@@ -145,10 +145,10 @@ TextureImporter:
       name: Exit door
       rect:
         serializedVersion: 2
-        x: 79
+        x: 98
         y: 5
-        width: 112
-        height: 173
+        width: 93
+        height: 162
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
