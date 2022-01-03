@@ -55,10 +55,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_currRoom)
-        {
-            return;
-        }
+        // if (_currRoom)
+        // {
+        //     return;
+        // }
 
         float xInput = Input.GetAxis("Horizontal");
         _velocity.x = xInput * speed;
@@ -125,11 +125,14 @@ public class Player : MonoBehaviour
 
     public void RoomMoving(Room room)
     {
+        _currRoom = room;
+        transform.SetParent(room.transform);
+        
         if (Physics2D.OverlapCircleAll(transform.position, 1f).Contains(room.GetComponent<Collider2D>()))
         {
             _currRoom = room;
-            _rb.isKinematic = true;
-            _collider.enabled = false;
+            // _rb.isKinematic = true;
+            // _collider.enabled = false;
             transform.SetParent(room.transform);
         }
     }
@@ -139,8 +142,8 @@ public class Player : MonoBehaviour
         if (room == _currRoom)
         {
             transform.SetParent(null);
-            _rb.isKinematic = false;
-            _collider.enabled = true;
+            // _rb.isKinematic = false;
+            // _collider.enabled = true;
             _currRoom = null;
         }
     }

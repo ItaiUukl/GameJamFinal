@@ -1,13 +1,5 @@
 using UnityEngine;
 
-public enum MoveDirection
-{
-    Up,
-    Right,
-    Down,
-    Left
-}
-
 [RequireComponent(typeof(Collider2D))]
 public class Lever : MonoBehaviour
 {
@@ -47,7 +39,7 @@ public class Lever : MonoBehaviour
     // Activates lever
     public void Activate()
     {
-        room.Move(_vecDir);
+        room.Move(direction);
         // TODO: Trigger lever animation
     }
 
