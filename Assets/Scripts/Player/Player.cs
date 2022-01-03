@@ -55,6 +55,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R)) GameManager.Instance.ReloadLevel();
+
         float xInput = Input.GetAxis("Horizontal");
         _velocity.x = xInput * speed;
         if (xInput != 0) _sprite.flipX = xInput < 0;

@@ -1,46 +1,57 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class Lever : MonoBehaviour
 {
-    [SerializeField] private MoveDirection direction;
+    [SerializeField] public MoveDirection direction;
     [SerializeField] private Room room;
 
     private Collider2D _collider;
-    private Vector2 _vecDir;
+    private SpriteRenderer _sprite;
     private bool _active;
 
     // Start is called before the first frame update
     void Start()
     {
         room = room ? room : GetComponentInParent<Room>();
+        room.AddLever(this);
+        
         _collider = GetComponent<Collider2D>();
-        _collider.isTrigger = true;
 
-        _vecDir = direction switch
-        {
-            MoveDirection.Up => Vector2.up,
-            MoveDirection.Right => Vector2.right,
-            MoveDirection.Down => Vector2.down,
-            MoveDirection.Left => Vector2.left,
-            _ => _vecDir
-        };
+        _sprite = GetComponent<SpriteRenderer>();
     }
 
-    private void Update()
+    // private void Update()
+    // {
+    //     // TODO: much more efficient to have the active levers register to an event and only game manager to check input.
+    //     if (_active && Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+    //     {
+    //         Activate();
+    //     }
+    // }
+
+    // // Activates lever
+    // public void Activate()
+    // {
+    //     room.Move(direction);
+    //     // TODO: Trigger lever animation
+    // }
+    public void SetActivation(bool state)
     {
-        // TODO: much more efficient to have the active levers register to an event and only game manager to check input.
-        if (_active && Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        _collider.enabled = state;
+        
+        Color tempColor = _sprite.color;
+        tempColor.a =  state ? 1f : .3f;
+        _sprite.color = tempColor;
+    }
+    
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
         {
-            Activate();
+            room.Move(direction);
         }
-    }
-
-    // Activates lever
-    public void Activate()
-    {
-        room.Move(direction);
-        // TODO: Trigger lever animation
     }
 
     private void OnTriggerEnter2D(Collider2D other)
