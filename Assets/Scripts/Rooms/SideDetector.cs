@@ -21,11 +21,12 @@ public class SideDetector : MonoBehaviour
         _triggerExit = exit;
 
         Vector2 dir = GameManager.GetDirection(side);
-        
+
+        float collOffset = 2f * breadth + 4f * Physics2D.defaultContactOffset;
         BoxCollider2D coll = gameObject.AddComponent<BoxCollider2D>();
-        coll.size = dir.x == 0 ? new Vector2(dimensions.x - 2 * breadth, breadth) 
-                               : new Vector2(breadth, dimensions.y - 2 * breadth);
-        coll.offset = dir * dimensions/ 2 - dir * (breadth + .1f)/2;
+        coll.size = dir.x == 0 ? new Vector2(dimensions.x - collOffset, breadth) 
+                               : new Vector2(breadth, dimensions.y - collOffset);
+        coll.offset = dir * dimensions/ 2 - dir * breadth/2;
         coll.isTrigger = true;
 
         Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>();
@@ -34,13 +35,11 @@ public class SideDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.name + " Entered: " + name);
         _triggerEnter(_side);
     }
     
     private void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log(other.name + " Exited: " + name);
         _triggerExit(_side);
     }
 }
