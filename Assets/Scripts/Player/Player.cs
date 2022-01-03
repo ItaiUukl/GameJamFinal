@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         _rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         _rb.gravityScale = 0;
         _rb.freezeRotation = true;
-        _rb.sharedMaterial = new PhysicsMaterial2D {friction = 0.05f};
+        _rb.sharedMaterial = new PhysicsMaterial2D {friction = 0.07f};
         
         _collider = GetComponent<Collider2D>();
 
