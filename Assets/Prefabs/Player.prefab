@@ -137,8 +137,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   airBuffer: 0.1
-  coyoteTime: 0.1
-  maxJumpPeak: 1.4
+  coyoteTime: 0.5
+  maxJumpPeak: 1.2
   minJumpPeak: 0.6
   maxPeakDistance: 1.4
   minPeakDistance: 0.6
