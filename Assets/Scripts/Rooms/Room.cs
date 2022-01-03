@@ -11,7 +11,7 @@ public class Room : MonoBehaviour
 
     private const int MaxMass = 1000000;
     private const float CollisionThreshold = .005f;
-    private const float sideSize = .5f;
+    private const float sideSize = .2f;
 
     private Player _player;
     private Rigidbody2D _body;

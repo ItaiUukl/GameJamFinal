@@ -25,7 +25,7 @@ public class SideDetector : MonoBehaviour
         BoxCollider2D coll = gameObject.AddComponent<BoxCollider2D>();
         coll.size = dir.x == 0 ? new Vector2(dimensions.x - 2 * breadth, breadth) 
                                : new Vector2(breadth, dimensions.y - 2 * breadth);
-        coll.offset = dir * dimensions/ 2 - dir * breadth/2;
+        coll.offset = dir * dimensions/ 2 - dir * (breadth + .1f)/2;
         coll.isTrigger = true;
 
         Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>();

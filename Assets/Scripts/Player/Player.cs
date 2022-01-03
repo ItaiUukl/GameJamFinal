@@ -55,14 +55,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (_currRoom)
-        // {
-        //     return;
-        // }
-
         float xInput = Input.GetAxis("Horizontal");
         _velocity.x = xInput * speed;
-        _sprite.flipX = xInput < 0;
+        if (xInput != 0) _sprite.flipX = xInput < 0;
         
         if (IsGrounded)
         {
