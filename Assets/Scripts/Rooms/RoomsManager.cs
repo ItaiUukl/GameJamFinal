@@ -6,19 +6,14 @@ public class RoomsManager : Singleton<RoomsManager>
     private GameObject _compositeHolder;
 
     // Registers a new room to Int
-    public PolygonCollider2D RegisterRoom(Room room)
+    public void RegisterRoom(Room room)
     {
         if (!_compositeHolder)
         {
             GenerateComposite();
         }
 
-        PolygonCollider2D polyColl = _compositeHolder.AddComponent<PolygonCollider2D>(),
-            tempColl = room.GetComponent<PolygonCollider2D>();
-        polyColl.points = tempColl.points
-            .Select(t => (Vector2) tempColl.transform.TransformPoint(t)).ToArray();
-        polyColl.usedByComposite = true;
-        return polyColl;
+        room.transform.SetParent(_compositeHolder.transform);
     }
 
     private void GenerateComposite()
