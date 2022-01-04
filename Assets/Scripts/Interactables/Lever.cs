@@ -10,6 +10,8 @@ public class Lever : MonoBehaviour
     private Collider2D _collider;
     private SpriteRenderer _sprite;
     // private bool _active;
+    private Animator _animator;
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,8 @@ public class Lever : MonoBehaviour
         _collider = GetComponent<Collider2D>();
 
         _sprite = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
+
     }
 
     // private void Update()
@@ -40,10 +44,7 @@ public class Lever : MonoBehaviour
     public void SetActivation(bool state)
     {
         _collider.enabled = state;
-        
-        Color tempColor = _sprite.color;
-        tempColor.a =  state ? 1f : .3f;
-        _sprite.color = tempColor;
+        _animator.SetBool("Pressed",!state);
     }
     
     private void OnCollisionEnter2D(Collision2D other)
