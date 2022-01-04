@@ -9,7 +9,7 @@ public class Lever : MonoBehaviour
 
     private Collider2D _collider;
     private SpriteRenderer _sprite;
-    private bool _active;
+    // private bool _active;
 
     // Start is called before the first frame update
     void Start()
@@ -54,19 +54,19 @@ public class Lever : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
-        {
-            _active = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
-        {
-            _active = false;
-        }
-    }
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
+    //     {
+    //         _active = true;
+    //     }
+    // }
+    //
+    // private void OnTriggerExit2D(Collider2D other)
+    // {
+    //     if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
+    //     {
+    //         _active = false;
+    //     }
+    // }
 }
