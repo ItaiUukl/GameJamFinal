@@ -44,13 +44,21 @@ public class Lever : MonoBehaviour
     public void SetActivation(bool state)
     {
         _collider.enabled = state;
-        _animator.SetBool("Pressed",!state);
+        Color tempColor = _sprite.color;
+        tempColor.a =  state ? 1f : .3f;
+        _sprite.color = tempColor;
+        SetAnimator(!state);
+
     }
-    
+    public void SetAnimator(bool state)
+    {
+        _animator.SetBool("Pressed",state);
+    }
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
         {
+            SetAnimator(true);
             room.Move(direction);
         }
     }
