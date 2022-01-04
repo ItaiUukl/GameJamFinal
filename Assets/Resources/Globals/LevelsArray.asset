@@ -19,3 +19,10 @@ MonoBehaviour:
   - {fileID: 102900000, guid: 57583fb0c43aaca4ea6cbd3a2916db32, type: 3}
   - {fileID: 102900000, guid: 7044963d0c8313e48bf000aa3e2d7d7d, type: 3}
   - {fileID: 102900000, guid: 8ec8043d4ef21f446a5de951f097ef15, type: 3}
+  stringAdvancement:
+  - level1
+  - level2
+  - level3
+  - level4
+  - level5
+  - level6

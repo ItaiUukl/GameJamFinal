@@ -5,11 +5,15 @@ using UnityEngine;
 public class GlobalsSO : ScriptableObject
 {
     public List<Object> levelAdvancement;
+    public List<string> stringAdvancement;
+
 
     public const string RoomsLayer = "Rooms", BorderLayer = "Border", OutlinesLayer = "Outline", PlayerLayer = "Player";
 
     public string AdvanceLevel(int currLevel)
     {
-        return levelAdvancement[currLevel].name;
+
+        return stringAdvancement[currLevel];
+    
     }
 }
