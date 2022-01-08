@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: -3339203742441412364
     second: Exit door
+  - first:
+      213: -2387231980770820605
+    second: Lever Disabled
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -104,9 +107,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4
-        y: 76
+        y: 115
         width: 35
-        height: 100
+        height: 59
       alignment: 5
       pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,10 +127,10 @@ TextureImporter:
       name: Lever pressed
       rect:
         serializedVersion: 2
-        x: 47
-        y: 78
-        width: 24
-        height: 100
+        x: 43
+        y: 116
+        width: 20
+        height: 59
       alignment: 5
       pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,6 +161,27 @@ TextureImporter:
       bones: []
       spriteID: 4f8ef1b53e3c8a1d0800000000000000
       internalID: -3339203742441412364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lever Disabled
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 115
+        width: 19
+        height: 57
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30ef3bd5929deded0800000000000000
+      internalID: -2387231980770820605
       vertices: []
       indices: 
       edges: []
