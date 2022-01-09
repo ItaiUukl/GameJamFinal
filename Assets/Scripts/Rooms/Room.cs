@@ -15,7 +15,7 @@ public class Room : MonoBehaviour
 
     private Player _player;
     private Rigidbody2D _body;
-    private PolygonCollider2D _collider, _outlineCollider;
+    public PolygonCollider2D _collider, _outlineCollider;
     private SpriteRenderer _sprite;
     private Vector2 _moveDir = Vector2.zero;
     private Dictionary<MoveDirection, List<Lever>> _levers = new Dictionary<MoveDirection, List<Lever>>();
