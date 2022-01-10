@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 [RequireComponent(typeof(PolygonCollider2D))]
 public class Room : MonoBehaviour
 {
