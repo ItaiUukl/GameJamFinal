@@ -12,7 +12,9 @@ public class Room : MonoBehaviour
     private const float SideSize = .2f;
 
     private Player _player;
+
     private PolygonCollider2D _collider;
+
     private SpriteRenderer _sprite;
     private Vector2 _moveDir = Vector2.zero;
     // private float _velocity = 0;
