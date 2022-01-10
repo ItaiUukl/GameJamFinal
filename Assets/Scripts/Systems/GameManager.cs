@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,7 +13,7 @@ public class GameManager : Singleton<GameManager>
 {
     private GlobalsSO _globals;
     private int _currLevel = 0;
-    
+
     private void Awake()
     {
         _globals = Resources.LoadAll<GlobalsSO>("Globals")[0];
@@ -32,7 +30,7 @@ public class GameManager : Singleton<GameManager>
             _ => Vector2.zero
         };
     }
-    
+
     public void NextLevel()
     {
         RoomsManager.Instance.ResetLevel();
@@ -41,7 +39,7 @@ public class GameManager : Singleton<GameManager>
     }
 
     // Resets the current level
-   public void ReloadLevel()
+    public void ReloadLevel()
     {
         RoomsManager.Instance.ResetLevel();
         SceneManager.LoadScene(_globals.AdvanceLevel(_currLevel));

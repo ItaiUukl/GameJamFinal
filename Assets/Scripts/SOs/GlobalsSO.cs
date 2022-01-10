@@ -8,12 +8,14 @@ public class GlobalsSO : ScriptableObject
     public List<string> stringAdvancement;
 
 
-    public const string RoomsLayer = "Rooms", BorderLayer = "Border", OutlinesLayer = "Outline", PlayerLayer = "Player";
+    public const string RoomsLayer = "Rooms",
+        BorderLayer = "Border",
+        OutlinesLayer = "Outline",
+        PlayerLayer = "Player",
+        DefaultLayer = "Default";
 
     public string AdvanceLevel(int currLevel)
     {
-
         return stringAdvancement[currLevel];
-    
     }
 }
