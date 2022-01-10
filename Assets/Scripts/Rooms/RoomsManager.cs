@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -30,8 +29,7 @@ public class RoomsManager : Singleton<RoomsManager>
             GenerateComposite();
         }
         room.transform.SetParent(_compositeHolder.transform);
-        _roomPoly.Add(room._collider);
-        collPoints.Add(room._collider.points);
+
     }
 
     private void GenerateComposite()
