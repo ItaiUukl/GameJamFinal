@@ -66,36 +66,32 @@ public class RoomsManager : Singleton<RoomsManager>
     // Input: settings up the line renderers points
     private void DrawPath()
     {
+        int j = 0;
         foreach (CompositeCollider2D cc in FindObjectsOfType<CompositeCollider2D>())
         {
             for (int i = 0; i < cc.pathCount; i++)
             {
-
                 Vector2[] points = new Vector2[cc.GetPathPointCount(i)];
                 cc.GetPath(i, points);          
-                int j = 0;
                 foreach (Vector2 vector2 in points)
                 {
-                    LineInsert(vector2, j);
+                    LineInsert(vector2, j , points.Length);
                     j++;
                 }
             }
         }
     }
 
-   
-    private void LineInsert(Vector2 v2, int index){
-        Vector3[] positions = new Vector3[4];
-        positions[index] = v2;
+    private void LineInsert(Vector2 v2, int index, int pointl){
         foreach (LineRenderer line in FindObjectsOfType<LineRenderer>())
         {
-            Debug.Log("v2 " + v2);
+            Vector3[] positions = new Vector3[8];
+            positions[index] = v2;
+            line.SetPosition(index , positions[index]);
+            line.GetComponent<LineRenderer>().positionCount = positions.Length; 
+            Debug.Log("line " + line);
+            Debug.Log("Point " + v2);
             Debug.Log("index " + index);
-            for (int i = 0; i < 4; i++)
-            {
-                line.SetPosition(index , positions[index]);
-                line.GetComponent<LineRenderer>().positionCount = positions.Length; 
-            }
         }
     }
     
