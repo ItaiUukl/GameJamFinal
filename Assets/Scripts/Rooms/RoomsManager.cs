@@ -13,42 +13,23 @@ public class RoomsManager : Singleton<RoomsManager>
     private List<Vector2> vectorarr = new List<Vector2>();
 
     private int index = 0;
-    private GameObject line;
-    private LineRenderer lr;
-    private Transform[] transforms;
-
+    private GameObject _line;
+    private GameObject[] lr;
+    private GameObject lineobj;
 
 
     // Registers a new room to Int
     public void RegisterRoom(Room room)
     {
-        Debug.Log(room);
-        if ((!_compositeHolder) && (!line))
+        if (!_compositeHolder)
         {    
             GenerateComposite();
+            
         }
         room.transform.SetParent(_compositeHolder.transform);
         _roomPoly.Add(room._collider);
+        GenerateLineObject(room.name);
 
-        if(!line){
-            GenerateLineObject();
-        }
-    }
-
-    void ConvertPointToWorldSpace()
-    {
-//        transforms = _roomCols[1].points.Select(t => (Vector2)_roomCols.transform.TransformPoint(t)).ToArray();
-
-    }
-        private void GenerateLineObject()
-    {
-        line = new GameObject
-        {
-            name = "LineRenderer",
-            layer = LayerMask.NameToLayer(GlobalsSO.OutlinesLayer)
-        };
-        lr = line.AddComponent<LineRenderer>();
-        line.AddComponent<Lines>();
     }
 
     private void GenerateComposite()
@@ -65,58 +46,55 @@ public class RoomsManager : Singleton<RoomsManager>
         compColl.vertexDistance = .05f;
         compColl.offsetDistance = .05f;
     }
-    private void Update() {
-        MatchPath();
-    }
-    private void Awake(){
-        
-    }
-    // converting vector2 to transform positions for line renderer points
-    public void SetUpLine(){
-        // From Itai line:
-        //transforms = _roomCols[0].points.Select(t => (Vector2)_roomCols[0].transform.TransformPoint(t)).ToArray();
-        for(int i = 0; i < transforms.Length; i++){
-            lr.SetPosition(i,transforms[i].position);
-        }
-        lr.positionCount = transforms.Length;
-    }
-    //input: vector2 array and settings up the line renderer object
-    private void MatchPath()
+    //Input: index, create a new line renderer object and return the game object
+    private void GenerateLineObject(string roomindex)
     {
-        foreach(PolygonCollider2D p in _roomPoly){
-            for(int p_in=0; p_in < p.points.Length; p_in++){
-                vectorarr.Add(p.points[p_in]);
-                Debug.Log("Polygon foreach" + p.points[p_in]);
-
-            }
-            foreach (CompositeCollider2D cp in FindObjectsOfType<CompositeCollider2D>())
+        _line = new GameObject
+        {
+            name = "LineRenderer " + roomindex,
+            layer = LayerMask.NameToLayer(GlobalsSO.OutlinesLayer)
+        };
+        _line.AddComponent<LineRenderer>();
+        _line.AddComponent<DrawLine>();
+    }
+    // Calling the funcation on Start, might need to call on Update aswell
+    private void Update() {
+    
+        DrawPath();
+    }
+        
+    // Input: settings up the line renderers points
+    private void DrawPath()
+    {
+        foreach (CompositeCollider2D cc in FindObjectsOfType<CompositeCollider2D>())
+        {
+            for (int i = 0; i < cc.pathCount; i++)
             {
-                for (int i = 0; i < cp.pathCount; i++)
+
+                Vector2[] points = new Vector2[cc.GetPathPointCount(i)];
+                cc.GetPath(i, points);          
+                int j = 0;
+                foreach (Vector2 vector2 in points)
                 {
-                    Vector2[] points = new Vector2[cp.GetPathPointCount(i)];
-                    cp.GetPath(i, points);
-                    bool colliderHasMatchingPaths = true;
-                    vectorarr.Add(p.points[i]);
-
-                    Debug.Log("CompositeCollider path for loop: " + points[i]);
-
-                    foreach (Vector2 vector2 in points)
-                    {
-                        Debug.Log("CompositeCollider points: " + vector2);
-                        if (!vectorarr.Contains(vector2))
-                        {           
-                            colliderHasMatchingPaths = false;
-                        }
-                    }
-                    if (colliderHasMatchingPaths)
-                    {
-                            Debug.Log(colliderHasMatchingPaths);
-                        Vector3 v3 = p.transform.TransformPoint(vectorarr[i]);
-                        transforms[i].position = v3;
-                        Debug.Log(i);
-                        SetUpLine();
-                    }
+                    LineInsert(vector2, j);
+                    j++;
                 }
+            }
+        }
+    }
+
+   
+    private void LineInsert(Vector2 v2, int index){
+        Vector3[] positions = new Vector3[4];
+        positions[index] = v2;
+        foreach (LineRenderer line in FindObjectsOfType<LineRenderer>())
+        {
+            Debug.Log("v2 " + v2);
+            Debug.Log("index " + index);
+            for (int i = 0; i < 4; i++)
+            {
+                line.SetPosition(index , positions[index]);
+                line.GetComponent<LineRenderer>().positionCount = positions.Length; 
             }
         }
     }
