@@ -66,7 +66,7 @@ public class Room : MonoBehaviour
         _levers[lever.direction].Add(lever);
     }
 
-    private void SideTriggerEnter(MoveDirection side, Collider2D other)
+    protected void SideTriggerEnter(MoveDirection side, Collider2D other)
     {
         // if (_moveDir.magnitude < .1f) return;
         // _velocity = 0;
