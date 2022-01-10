@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField, Min(.0001f)] private float maxPeakDistance = 1.2f;
     [SerializeField, Min(.0001f)] private float minPeakDistance = .4f;
     [SerializeField, Min(.0001f)] private float fallDistance = .9f;
+    [SerializeField] private bool useOldInputSystem = false;
 
     public bool IsGrounded { set; get; }
 
@@ -31,6 +33,7 @@ public class Player : MonoBehaviour
     private float _height;
     private float _distance;
 
+    private bool _inJump;
 
     // Use this for initialization
     void Start()
@@ -48,10 +51,37 @@ public class Player : MonoBehaviour
         _sprite = GetComponent<SpriteRenderer>();
     }
 
+    private void OnReset(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            GameManager.Instance.ReloadLevel();
+        }
+    }
+    
+    private void OnExit(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            Application.Quit();
+        }
+    }
+    
+    private void OnJump(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            _inJump = true;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) GameManager.Instance.ReloadLevel();
+        if (useOldInputSystem)
+        {
+            if (Input.GetKeyDown(KeyCode.R)) GameManager.Instance.ReloadLevel();
+        }
 
         float xInput = Input.GetAxisRaw("Horizontal");
         _velocity.x = xInput * speed;
