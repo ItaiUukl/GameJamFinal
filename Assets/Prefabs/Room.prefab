@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  maxSpeed: 50
+  acceleration: 5
 --- !u!212 &3791923466787292047
 SpriteRenderer:
   m_ObjectHideFlags: 0
