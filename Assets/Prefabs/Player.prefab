@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1623005161509950284}
   - component: {fileID: 1623005161509950283}
   - component: {fileID: 1623005161509950282}
+  - component: {fileID: 582360689009154429}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1623005161509950281}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.943, y: -1.986, z: 0}
-  m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 1404298838519872830}
   m_Father: {fileID: 0}
@@ -54,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 366cc734b4f10af4b80a8e7be6118c13, type: 2}
+  - {fileID: 2100000, guid: bd782a3df9c5f414a9fd3b4587da8184, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: -45102777
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3427114271967980436, guid: d99fb94ac79c13f49a60bd5a7928c61a, type: 3}
+  m_Sprite: {fileID: -5634107977525041186, guid: 09ebb5d2394656c438e0c8d32e0955d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -120,9 +121,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.09040342, y: 0.39439425}
-  m_Size: {x: 0.6228051, y: 0.74994475}
-  m_Direction: 0
+  m_Offset: {x: -0.0031512587, y: 0.33024007}
+  m_Size: {x: 0.921528, y: 0.6532701}
+  m_Direction: 1
 --- !u!114 &1623005161509950282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +144,25 @@ MonoBehaviour:
   maxPeakDistance: 1.4
   minPeakDistance: 0.6
   fallDistance: 1.2
+--- !u!95 &582360689009154429
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623005161509950281}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a73151a95a750324ab9cc9164ae6d5ed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7490545751217633152
 GameObject:
   m_ObjectHideFlags: 0
