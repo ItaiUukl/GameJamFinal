@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,7 +16,6 @@ public class RoomsManager : Singleton<RoomsManager>
 
     private CompositeCollider2D compColl;
     //room index for ref
-    private int r = 0;
     private GameObject _line;
     private GameObject[] lr;
     private GameObject lineobj;
@@ -50,8 +50,7 @@ public class RoomsManager : Singleton<RoomsManager>
 
     // Calling the funcation on Update, might need to find a better place for that, maybe on collision with other room
     private void Update() {
-            Calculatelines();
-       
+        Calculatelines();
     }
         
     // Input: settings up the line renderers points
@@ -71,11 +70,11 @@ public class RoomsManager : Singleton<RoomsManager>
             }
         
     }
-    //points = collPoints.Select(t => (Vector2)polyColl.transform.TransformPoint(t)).ToArray();
     //Input: point, index in the composite, room index create a new line renderer object and return the game object
     private void LineInsert(Vector3[] points, int idx){
         //create new line object
         LineRenderer l;
+        
         if(idx >= LinesList.Count()){
             LinesList.Add(new GameObject
             {
@@ -87,8 +86,7 @@ public class RoomsManager : Singleton<RoomsManager>
             l.startWidth = 0.2f;
             l.textureMode = LineTextureMode.Tile;
             l.sortingLayerName  = "Room";
-            l.material = Resources.Load("Materials/LineRenderRoom", typeof(Material)) as Material;
-
+            l.material = Resources.Load("Materials/RoomFrame/LinesShader", typeof(Material)) as Material;
         } 
         else
         {
@@ -96,12 +94,10 @@ public class RoomsManager : Singleton<RoomsManager>
         }
             l.positionCount = points.Count();
             l.SetPositions(points);
- 
-            
-
     
     }
-    
+
+
     // Resets the current level
     public void ResetLevel()
     {
