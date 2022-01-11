@@ -10,6 +10,10 @@ public class Lever : MonoBehaviour
     private SpriteRenderer _sprite;
     private Animator _animator;
 
+    private static readonly int Pressed = Animator.StringToHash("Pressed");
+    private static readonly int Disabled = Animator.StringToHash("Disabled");
+
+    private bool _pressable = true;
 
     // Start is called before the first frame update
     void Start()
@@ -24,24 +28,26 @@ public class Lever : MonoBehaviour
 
     public void SetActivation(bool state)
     {
-        _collider.enabled = state;
+        _collider.enabled = _pressable = state;
         Color tempColor = _sprite.color;
-        tempColor.a = state ? 1f : .3f;
+        tempColor.a = state ? 1f : .7f;
+        _animator.SetBool(Disabled, !state);
         _sprite.color = tempColor;
-        SetAnimator(!state);
     }
 
-    public void SetAnimator(bool state)
+    private void OnPressed()
     {
-        _animator.SetBool("Pressed", state);
+        Debug.Log(room.name + " pressed, animated by " + _animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+        room.Move(direction);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
+        if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer) && _pressable)
         {
-            SetAnimator(true);
-            room.Move(direction);
+            Debug.Log("player collided with " + name + " in " + room.name);
+            _pressable = false;
+            _animator.SetTrigger(Pressed);
         }
     }
 }
