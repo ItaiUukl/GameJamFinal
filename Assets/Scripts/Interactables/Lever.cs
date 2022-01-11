@@ -37,7 +37,6 @@ public class Lever : MonoBehaviour
 
     private void OnPressed()
     {
-        Debug.Log(room.name + " pressed, animated by " + _animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
         room.Move(direction);
     }
 
@@ -45,7 +44,6 @@ public class Lever : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer) && _pressable)
         {
-            Debug.Log("player collided with " + name + " in " + room.name);
             _pressable = false;
             _animator.SetTrigger(Pressed);
         }

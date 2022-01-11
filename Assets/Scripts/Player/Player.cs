@@ -16,8 +16,12 @@ public class Player : MonoBehaviour
 
     public bool IsGrounded { set; get; }
 
+    public bool IsActive { set; get; }
+
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
+    private Animator _animator;
+    private CameraTransitions _camera;
 
     private Room _currRoom;
     private Vector2 _velocity = Vector2.zero;
@@ -30,6 +34,11 @@ public class Player : MonoBehaviour
 
     private float _height;
     private float _distance;
+    
+    private static readonly int AnimatorVelocityY = Animator.StringToHash("VelocityY");
+    private static readonly int AnimatorRun = Animator.StringToHash("Run");
+    private static readonly int AnimatorJump = Animator.StringToHash("Jump");
+    private static readonly int AnimatorGrounded = Animator.StringToHash("Grounded");
 
 
     // Use this for initialization
@@ -46,24 +55,32 @@ public class Player : MonoBehaviour
         _rb.sharedMaterial = new PhysicsMaterial2D {friction = 0};
 
         _sprite = GetComponent<SpriteRenderer>();
+
+        _animator = GetComponent<Animator>();
+        
+        _camera = FindObjectOfType<CameraTransitions>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) GameManager.Instance.ReloadLevel();
+        if (Input.GetKeyDown(KeyCode.R)) _camera.ExitTransition(true);
+        if (Input.GetKeyDown(KeyCode.Escape)) GameManager.Instance.QuitGame();
 
-        float xInput = Input.GetAxisRaw("Horizontal");
+        float xInput = IsActive ? Input.GetAxisRaw("Horizontal") : 0;
         _velocity.x = xInput * speed;
         if (xInput != 0) _sprite.flipX = xInput < 0;
-
+        
         if (IsGrounded)
         {
+            _animator.SetBool(AnimatorGrounded, true);
             _distance = maxPeakDistance;
             _height = maxJumpPeak;
             UpdateForces();
-
-            if (_jumpBuffer != 0)
+            
+            _velocity.y = Mathf.Max(0, _velocity.y);
+            
+            if (_jumpBuffer > 0)
             {
                 _velocity.y = _jumpForce;
             }
@@ -73,6 +90,8 @@ public class Player : MonoBehaviour
 
                 if (IsJumpPressed())
                 {
+                    _animator.SetTrigger(AnimatorJump);
+                    // _jumping = true;
                     _velocity.y = _jumpForce;
                     _coyote = 0;
                 }
@@ -80,6 +99,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            _animator.SetBool(AnimatorGrounded, false);
             _velocity.y = _rb.velocity.y;
             if (_rb.velocity.y <= 0)
             {
@@ -101,6 +121,8 @@ public class Player : MonoBehaviour
             {
                 if (_coyote > 0)
                 {
+                    _animator.SetTrigger(AnimatorJump);
+                    // _jumping = true;
                     _velocity.y = _jumpForce;
                     _coyote = 0;
                 }
@@ -115,7 +137,17 @@ public class Player : MonoBehaviour
 
         _jumpBuffer = Mathf.Max(_jumpBuffer - Time.deltaTime, 0);
         _rb.velocity = _velocity;
+        
+        _animator.SetFloat(AnimatorVelocityY, _rb.velocity.y);
+        _animator.SetBool(AnimatorRun, Mathf.Abs(_rb.velocity.x) > 0.05);
     }
+
+    // public void Jumping()
+    // {
+    //     _jumping = false;
+    //     _velocity.y = _jumpForce;
+    //     _coyote = 0;
+    // }
 
     public void RoomMoving(Room room)
     {
@@ -136,13 +168,13 @@ public class Player : MonoBehaviour
         _gravity = (2 * _height * speed * speed) / (_distance * _distance);
     }
 
-    private static bool IsJumpPressed()
+    private bool IsJumpPressed()
     {
-        return Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space);
+        return IsActive && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space));
     }
 
-    private static bool IsJumpReleased()
+    private bool IsJumpReleased()
     {
-        return Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.Space);
+        return IsActive && (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.Space));
     }
 }

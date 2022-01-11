@@ -53,7 +53,6 @@ public class Room : MonoBehaviour
     // Moves room until collision
     public void Move(MoveDirection dir)
     {
-        Debug.Log(name + " moving");
         if (_blockedSides[dir]) return;
         _moveDir = GameManager.GetDirection(dir);
         _player.RoomMoving(this);
