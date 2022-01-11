@@ -11,14 +11,6 @@ public class RoomsManager : Singleton<RoomsManager>
 
     private CompositeCollider2D compColl;
 
-    //room index for ref
-    private int r = 0;
-    private GameObject _line;
-    private GameObject[] lr;
-    private GameObject lineobj;
-
-    // TODO: enable levers not in mooving room
-
     // Registers a new room to Int
     public void RegisterRoom(Room room)
     {
@@ -50,7 +42,7 @@ public class RoomsManager : Singleton<RoomsManager>
 
         compColl = _compositeHolder.AddComponent<CompositeCollider2D>();
         compColl.geometryType = CompositeCollider2D.GeometryType.Outlines;
-        compColl.vertexDistance = .05f;
+        compColl.vertexDistance = .005f;
         compColl.offsetDistance = .05f;
     }
 

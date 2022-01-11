@@ -31,6 +31,11 @@ public class GameManager : Singleton<GameManager>
         };
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void NextLevel()
     {
         RoomsManager.Instance.ResetLevel();
