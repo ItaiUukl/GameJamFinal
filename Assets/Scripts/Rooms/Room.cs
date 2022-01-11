@@ -6,7 +6,7 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 20;
-    [SerializeField] private float maxSpeed = 50;
+    [SerializeField] private float maxSpeed = 20;
     [SerializeField] private float acceleration = 5;
 
     private const float SideSize = .2f;
@@ -17,7 +17,7 @@ public class Room : MonoBehaviour
 
     private SpriteRenderer _sprite;
     private Vector2 _moveDir = Vector2.zero;
-    // private float _velocity = 0;
+    private float _velocity = 0;
     private readonly Dictionary<MoveDirection, List<Lever>> _levers = new Dictionary<MoveDirection, List<Lever>>();
     private readonly Dictionary<MoveDirection, bool> _blockedSides = new Dictionary<MoveDirection, bool>();
 
@@ -45,7 +45,7 @@ public class Room : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // _velocity = Mathf.Min(Time.fixedDeltaTime * acceleration + _velocity, maxSpeed) * _moveDir.magnitude;
+        _velocity = Mathf.Min(Time.fixedDeltaTime * acceleration + _velocity, maxSpeed) * _moveDir.magnitude;
         // transform.position += (Vector3) _moveDir * _velocity * Time.fixedDeltaTime;
         transform.position += (Vector3) _moveDir * moveSpeed * Time.fixedDeltaTime;
     }
@@ -53,6 +53,7 @@ public class Room : MonoBehaviour
     // Moves room until collision
     public void Move(MoveDirection dir)
     {
+        Debug.Log(name + " moving");
         if (_blockedSides[dir]) return;
         _moveDir = GameManager.GetDirection(dir);
         _player.RoomMoving(this);
@@ -64,14 +65,13 @@ public class Room : MonoBehaviour
         {
             _levers[lever.direction] = new List<Lever>();
         }
+
         _levers[lever.direction].Add(lever);
     }
 
     private void SideTriggerEnter(MoveDirection side, Collider2D other)
     {
-        // if (_moveDir.magnitude < .1f) return;
-        // _velocity = 0;
-        
+        _velocity = 0;
         SetBlocked(side, true);
         if (_moveDir != GameManager.GetDirection(side)) return;
         FixPosition(side, other);
@@ -81,7 +81,7 @@ public class Room : MonoBehaviour
 
     private void SideTriggerExit(MoveDirection side)
     {
-        if (!IsMoving) return;
+        // if (!IsMoving) return;
         SetBlocked(side, false);
     }
 
@@ -110,12 +110,26 @@ public class Room : MonoBehaviour
     private void SetBlocked(MoveDirection side, bool state)
     {
         _blockedSides[side] = state;
-
+        // RoomsManager.Instance.UpdateRoomsLevers();
         if (!_levers.ContainsKey(side)) return;
         
         foreach (Lever l in _levers[side])
         {
+            // l.Activated = !state;
             l.SetActivation(!state);
         }
     }
+
+    // public void UpdateLevers()
+    // {
+    //     foreach (var pair in _blockedSides)
+    //     {
+    //         if (!_levers.ContainsKey(pair.Key)) continue;
+    //         foreach (Lever l in _levers[pair.Key])
+    //         {
+    //             l.Activated = !pair.Value;
+    //             // l.SetActivation(!pair.Value);
+    //         }
+    //     }
+    // }
 }
