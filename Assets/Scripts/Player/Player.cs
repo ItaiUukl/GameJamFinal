@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        
         _height = maxJumpPeak;
         _distance = maxPeakDistance;
         UpdateForces();
@@ -52,13 +53,15 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R)) GameManager.Instance.ReloadLevel();
-
+        
         float xInput = Input.GetAxisRaw("Horizontal");
         _velocity.x = xInput * speed;
         if (xInput != 0) _sprite.flipX = xInput < 0;
 
         if (IsGrounded)
         {
+           
+
             _distance = maxPeakDistance;
             _height = maxJumpPeak;
             UpdateForces();
@@ -92,6 +95,7 @@ public class Player : MonoBehaviour
                 _height = minJumpPeak;
                 _distance = minPeakDistance;
                 UpdateForces();
+
                 _velocity.y = Mathf.Min(_jumpForce, _velocity.y);
             }
 
@@ -99,6 +103,7 @@ public class Player : MonoBehaviour
 
             if (IsJumpPressed())
             {
+
                 if (_coyote > 0)
                 {
                     _velocity.y = _jumpForce;

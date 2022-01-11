@@ -17,8 +17,10 @@ MonoBehaviour:
   - {fileID: 102900000, guid: 362ef0e78c9cd7145a21276f0053b313, type: 3}
   - {fileID: 102900000, guid: 4c99e0fadb0868e4bb061e33c9030fef, type: 3}
   - {fileID: 102900000, guid: 57583fb0c43aaca4ea6cbd3a2916db32, type: 3}
+  - {fileID: 102900000, guid: 3c6c3158aa92a2a4888a2eb3d24a024f, type: 3}
   - {fileID: 102900000, guid: 7044963d0c8313e48bf000aa3e2d7d7d, type: 3}
   - {fileID: 102900000, guid: 8ec8043d4ef21f446a5de951f097ef15, type: 3}
+  - {fileID: 102900000, guid: ef727e9ec43dfbe4ca3c434456c3adc3, type: 3}
   stringAdvancement:
   - level1
   - level2
@@ -26,3 +28,5 @@ MonoBehaviour:
   - level4
   - level5
   - level6
+  - level7
+  - level8
