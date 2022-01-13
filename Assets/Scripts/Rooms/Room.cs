@@ -55,7 +55,7 @@ public class Room : MonoBehaviour
     {
         if (_blockedSides[dir]) return;
         _moveDir = GameManager.GetDirection(dir);
-        _player.RoomMoving(this);
+        // _player.RoomMoving(this);
     }
 
     public void AddLever(Lever lever)
@@ -75,7 +75,7 @@ public class Room : MonoBehaviour
         if (_moveDir != GameManager.GetDirection(side)) return;
         FixPosition(side, other);
         GameManager.Instance.cam.ShakeCamera();
-        _player.RoomStopping(this);
+        // _player.RoomStopping(this);
         _moveDir = Vector2.zero;
     }
 

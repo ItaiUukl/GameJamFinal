@@ -146,18 +146,18 @@ public class Player : MonoBehaviour
     //     _coyote = 0;
     // }
 
-    public void RoomMoving(Room room)
-    {
-        _currRoom = room;
-        transform.SetParent(room.transform);
-    }
-
-    public void RoomStopping(Room room)
-    {
-        if (room != _currRoom) return;
-        transform.SetParent(null);
-        _currRoom = null;
-    }
+    // public void RoomMoving(Room room)
+    // {
+    //     _currRoom = room;
+    //     transform.SetParent(room.transform);
+    // }
+    //
+    // public void RoomStopping(Room room)
+    // {
+    //     if (room != _currRoom) return;
+    //     transform.SetParent(null);
+    //     _currRoom = null;
+    // }
 
     private void UpdateForces()
     {
