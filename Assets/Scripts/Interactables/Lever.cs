@@ -37,6 +37,7 @@ public class Lever : MonoBehaviour
 
     private void OnPressed()
     {
+        _collider.enabled = false;
         room.Move(direction);
     }
 
