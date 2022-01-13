@@ -74,7 +74,7 @@ public class Room : MonoBehaviour
         SetBlocked(side, true);
         if (_moveDir != GameManager.GetDirection(side)) return;
         FixPosition(side, other);
-        _player._camera.ShakeCamera(); // TODO: should hold a reference, probably in GameManager
+        GameManager.Instance.cam.ShakeCamera();
         _player.RoomStopping(this);
         _moveDir = Vector2.zero;
     }

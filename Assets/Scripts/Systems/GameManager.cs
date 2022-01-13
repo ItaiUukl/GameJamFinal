@@ -13,6 +13,7 @@ public class GameManager : Singleton<GameManager>
 {
     private GlobalsSO _globals;
     private int _currLevel = 0;
+    public CameraTransitions cam = null;
 
     private void Awake()
     {
