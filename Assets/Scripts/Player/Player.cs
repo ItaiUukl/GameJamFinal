@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
     private Animator _animator;
-    private CameraTransitions _camera;
+    public CameraTransitions _camera;
 
     private Room _currRoom;
     private Vector2 _velocity = Vector2.zero;

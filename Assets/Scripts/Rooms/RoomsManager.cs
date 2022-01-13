@@ -23,14 +23,6 @@ public class RoomsManager : Singleton<RoomsManager>
         room.transform.SetParent(_compositeHolder.transform);
     }
 
-    // public void UpdateRoomsLevers()
-    // {
-    //     foreach (Room room in rooms)
-    //     {
-    //         room.UpdateLevers();
-    //     }
-    // }
-
     private void GenerateComposite()
     {
         _compositeHolder = new GameObject

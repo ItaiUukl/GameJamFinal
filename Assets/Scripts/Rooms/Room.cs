@@ -21,7 +21,7 @@ public class Room : MonoBehaviour
     private readonly Dictionary<MoveDirection, List<Lever>> _levers = new Dictionary<MoveDirection, List<Lever>>();
     private readonly Dictionary<MoveDirection, bool> _blockedSides = new Dictionary<MoveDirection, bool>();
 
-    private bool IsMoving => _moveDir.magnitude != 0;
+    public bool IsMoving => _moveDir.magnitude != 0;
 
     // Start is called before the first frame update
     void Start()
@@ -74,13 +74,13 @@ public class Room : MonoBehaviour
         SetBlocked(side, true);
         if (_moveDir != GameManager.GetDirection(side)) return;
         FixPosition(side, other);
+        _player._camera.ShakeCamera(); // TODO: should hold a reference, probably in GameManager
         _player.RoomStopping(this);
         _moveDir = Vector2.zero;
     }
 
     private void SideTriggerExit(MoveDirection side)
     {
-        // if (!IsMoving) return;
         SetBlocked(side, false);
     }
 
@@ -118,17 +118,4 @@ public class Room : MonoBehaviour
             l.SetActivation(!state);
         }
     }
-
-    // public void UpdateLevers()
-    // {
-    //     foreach (var pair in _blockedSides)
-    //     {
-    //         if (!_levers.ContainsKey(pair.Key)) continue;
-    //         foreach (Lever l in _levers[pair.Key])
-    //         {
-    //             l.Activated = !pair.Value;
-    //             // l.SetActivation(!pair.Value);
-    //         }
-    //     }
-    // }
 }
