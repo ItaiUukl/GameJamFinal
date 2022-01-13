@@ -34,11 +34,24 @@ public class SideDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        _triggerEnter(_side, other);
+        if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.RoomsLayer) ||
+            other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.BorderLayer))
+        {
+            _triggerEnter(_side, other);
+        }
+        else if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer) &&
+                 other.gameObject.transform.parent != transform.parent)
+        {
+            other.gameObject.transform.SetParent(transform.parent);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        _triggerExit(_side);
+        if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.RoomsLayer) ||
+            other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.BorderLayer))
+        {
+            _triggerExit(_side);
+        }
     }
 }

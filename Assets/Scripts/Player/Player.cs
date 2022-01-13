@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
     private Animator _animator;
-    private CameraTransitions _camera;
 
     private Room _currRoom;
     private Vector2 _velocity = Vector2.zero;
@@ -57,14 +56,12 @@ public class Player : MonoBehaviour
         _sprite = GetComponent<SpriteRenderer>();
 
         _animator = GetComponent<Animator>();
-        
-        _camera = FindObjectOfType<CameraTransitions>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) _camera.ExitTransition(true);
+        if (Input.GetKeyDown(KeyCode.R)) GameManager.Instance.cam.ExitTransition(true);
         if (Input.GetKeyDown(KeyCode.Escape)) GameManager.Instance.QuitGame();
 
         float xInput = IsActive ? Input.GetAxisRaw("Horizontal") : 0;
@@ -149,18 +146,18 @@ public class Player : MonoBehaviour
     //     _coyote = 0;
     // }
 
-    public void RoomMoving(Room room)
-    {
-        _currRoom = room;
-        transform.SetParent(room.transform);
-    }
-
-    public void RoomStopping(Room room)
-    {
-        if (room != _currRoom) return;
-        transform.SetParent(null);
-        _currRoom = null;
-    }
+    // public void RoomMoving(Room room)
+    // {
+    //     _currRoom = room;
+    //     transform.SetParent(room.transform);
+    // }
+    //
+    // public void RoomStopping(Room room)
+    // {
+    //     if (room != _currRoom) return;
+    //     transform.SetParent(null);
+    //     _currRoom = null;
+    // }
 
     private void UpdateForces()
     {

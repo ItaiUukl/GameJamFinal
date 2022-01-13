@@ -1,17 +1,14 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class LevelTransition : MonoBehaviour
 {
-    private CameraTransitions _camera;
-    
+
     private bool _wasActivated = false;
-    
+
     private void Start()
     {
         GetComponent<Collider2D>().isTrigger = true;
-        _camera = FindObjectOfType<CameraTransitions>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -27,6 +24,6 @@ public class LevelTransition : MonoBehaviour
     {
         Debug.Log("next level");
         _wasActivated = true;
-        _camera.ExitTransition(false);
+        GameManager.Instance.cam.ExitTransition(false);
     }
 }

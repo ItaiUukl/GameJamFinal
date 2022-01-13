@@ -37,12 +37,13 @@ public class Lever : MonoBehaviour
 
     private void OnPressed()
     {
+        _collider.enabled = false;
         room.Move(direction);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer) && _pressable)
+        if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer) && _pressable && !room.IsMoving)
         {
             _pressable = false;
             _animator.SetTrigger(Pressed);
