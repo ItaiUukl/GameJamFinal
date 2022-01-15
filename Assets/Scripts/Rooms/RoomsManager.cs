@@ -74,6 +74,7 @@ public class RoomsManager : Singleton<RoomsManager>
     // Input: settings up the line renderers points
     private void CalculateLines()
     {
+        if (!_compColl) return;
         for (int i = 0; i < _compColl.pathCount; i++)
         {
             Vector2[] points = new Vector2[_compColl.GetPathPointCount(i)];
