@@ -1,11 +1,18 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "New Levels", menuName = "Levels Order")]
 public class GlobalsSO : ScriptableObject
 {
-    public List<Object> levelAdvancement;
-    public List<string> stringAdvancement;
+    [FormerlySerializedAs("stringAdvancement")] public List<string> levelAdvancement;
+    
+    [Header("Outline")]
+    public float outlineWidth = .2f;
+    public LineTextureMode outlineTextureMode = LineTextureMode.Tile;
+    public float outlineAnimationSpeed = .15f;
+    public List<Material> outlineMaterials;
 
 
     public const string RoomsLayer = "Rooms",
@@ -16,6 +23,6 @@ public class GlobalsSO : ScriptableObject
 
     public string AdvanceLevel(int currLevel)
     {
-        return stringAdvancement[currLevel];
+        return levelAdvancement[currLevel];
     }
 }

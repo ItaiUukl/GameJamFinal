@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,11 +7,30 @@ using UnityEngine;
 public class RoomsManager : Singleton<RoomsManager>
 {
     private GameObject _compositeHolder;
+    private CompositeCollider2D _compColl;
+    private HashSet<Room> _rooms = new HashSet<Room>();
 
-    public List<GameObject> LinesList = new List<GameObject>();
-    private HashSet<Room> rooms = new HashSet<Room>();
+    private List<GameObject> _linesList = new List<GameObject>();
+    // private float _outlineWidth;
+    // private LineTextureMode _outlineTextureMode;
+    // private List<Material> _outlineMaterials;
+    // private float _outlineTransition;
+    private List<Coroutine> _materialsRoutines = new List<Coroutine>();
 
-    private CompositeCollider2D compColl;
+
+    // private void Start()
+    // {
+    //     _outlineWidth = GameManager.Globals.outlineWidth;
+    //     _outlineTextureMode = GameManager.Globals.outlineTextureMode;
+    //     _outlineMaterials = GameManager.Globals.outlineMaterials;
+    //     _outlineTransition = GameManager.Globals.outlineAnimationSpeed;
+    // }
+
+    // Calling the funcation on Update, might need to find a better place for that, maybe on collision with other room
+    private void Update()
+    {
+        CalculateLines();
+    }
 
     // Registers a new room to Int
     public void RegisterRoom(Room room)
@@ -19,8 +40,20 @@ public class RoomsManager : Singleton<RoomsManager>
             GenerateComposite();
         }
 
-        rooms.Add(room);
+        _rooms.Add(room);
         room.transform.SetParent(_compositeHolder.transform);
+    }
+
+    private IEnumerator ChangeMaterial(LineRenderer line)
+    {
+        int idx = 0;
+        
+        while (true)
+        {
+            line.material = GameManager.Globals.outlineMaterials[idx];
+            idx = (idx+1) % GameManager.Globals.outlineMaterials.Count;
+            yield return new WaitForSeconds(GameManager.Globals.outlineAnimationSpeed);
+        }
     }
 
     private void GenerateComposite()
@@ -32,33 +65,27 @@ public class RoomsManager : Singleton<RoomsManager>
         };
         _compositeHolder.AddComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
 
-        compColl = _compositeHolder.AddComponent<CompositeCollider2D>();
-        compColl.geometryType = CompositeCollider2D.GeometryType.Outlines;
-        compColl.vertexDistance = .005f;
-        compColl.offsetDistance = .05f;
-    }
-
-    // Calling the funcation on Update, might need to find a better place for that, maybe on collision with other room
-    private void Update()
-    {
-        Calculatelines();
+        _compColl = _compositeHolder.AddComponent<CompositeCollider2D>();
+        _compColl.geometryType = CompositeCollider2D.GeometryType.Outlines;
+        _compColl.vertexDistance = .005f;
+        _compColl.offsetDistance = .05f;
     }
 
     // Input: settings up the line renderers points
-    private void Calculatelines()
+    private void CalculateLines()
     {
-        for (int i = 0; i < compColl.pathCount; i++)
+        for (int i = 0; i < _compColl.pathCount; i++)
         {
-            Vector2[] points = new Vector2[compColl.GetPathPointCount(i)];
-            compColl.GetPath(i, points);
+            Vector2[] points = new Vector2[_compColl.GetPathPointCount(i)];
+            _compColl.GetPath(i, points);
             // fill the list with transform converted points
-            Vector3[] points3 = points.Select(p => (Vector3) compColl.transform.TransformPoint(p)).ToArray();
+            Vector3[] points3 = points.Select(p => (Vector3) _compColl.transform.TransformPoint(p)).ToArray();
             LineInsert(points3, i);
         }
 
-        if (compColl.pathCount < LinesList.Count())
+        if (_compColl.pathCount < _linesList.Count)
         {
-            for (int i = compColl.pathCount; i < LinesList.Count(); i++)
+            for (int i = _compColl.pathCount; i < _linesList.Count; i++)
                 LineInsert(new Vector3[] { }, i);
         }
     }
@@ -68,23 +95,23 @@ public class RoomsManager : Singleton<RoomsManager>
     {
         //create new line object
         LineRenderer l;
-        if (idx >= LinesList.Count())
+        if (idx >= _linesList.Count)
         {
-            LinesList.Add(new GameObject
+            _linesList.Add(new GameObject
             {
                 name = "LineRenderer " + idx,
                 layer = LayerMask.NameToLayer(GlobalsSO.OutlinesLayer)
             });
-            l = LinesList[idx].AddComponent<LineRenderer>();
+            l = _linesList[idx].AddComponent<LineRenderer>();
             l.loop = true;
-            l.startWidth = 0.2f;
-            l.textureMode = LineTextureMode.Tile;
+            l.startWidth = GameManager.Globals.outlineWidth;
+            l.textureMode = GameManager.Globals.outlineTextureMode;
             l.sortingLayerName = "Room";
-            l.material = Resources.Load("Materials/LineRenderRoom", typeof(Material)) as Material;
+            _materialsRoutines.Add(StartCoroutine(ChangeMaterial(l)));
         }
         else
         {
-            l = LinesList[idx].GetComponent<LineRenderer>();
+            l = _linesList[idx].GetComponent<LineRenderer>();
         }
 
         l.positionCount = points.Count();
@@ -94,11 +121,14 @@ public class RoomsManager : Singleton<RoomsManager>
     // Resets the current level
     public void ResetLevel()
     {
-        LinesList.Clear();
-        rooms.Clear();
+        _linesList.Clear();
+        _rooms.Clear();
         _compositeHolder = null;
-        compColl = null;
-
-        // TODO: might need more
+        _compColl = null;
+        foreach (Coroutine routine in _materialsRoutines)
+        {
+            StopCoroutine(routine);
+        }
+        _materialsRoutines.Clear();
     }
 }
