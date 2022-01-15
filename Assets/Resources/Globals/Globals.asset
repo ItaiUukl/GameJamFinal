@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Globals
   m_EditorClassIdentifier: 
   levelAdvancement:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - level1
+  - level2
+  - level3
+  - level4
+  - level5
+  - level6
+  - level7
+  - level8
   outlineWidth: 0.15
   outlineTextureMode: 0
   outlineAnimationSpeed: 0.4
