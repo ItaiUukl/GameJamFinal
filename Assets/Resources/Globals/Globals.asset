@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: Globals
   m_EditorClassIdentifier: 
   levelAdvancement:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  outlineWidth: 0.2
-  outlineTextureMode: 1
-  outlineMaterials: []
-  outlineAnimationSpeed: 0.15
+  - level1
+  - level2
+  - level3
+  - level4
+  - level5
+  - level6
+  - level7
+  - level8
+  outlineWidth: 0.15
+  outlineTextureMode: 0
+  outlineAnimationSpeed: 0.4
+  outlineMaterials:
+  - {fileID: 2100000, guid: 101502b80ffd05c479c2c819836b6e0b, type: 2}
+  - {fileID: 2100000, guid: c3cc31aeb1fd833409c033c21de485e0, type: 2}
+  - {fileID: 2100000, guid: aa261e59a0d189544ba747aa25ad803f, type: 2}
+  - {fileID: 2100000, guid: 01e35eb3252e4dd418ca7b48d7439a46, type: 2}
