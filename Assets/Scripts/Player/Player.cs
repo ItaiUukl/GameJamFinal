@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     [SerializeField, Min(.0001f)] private float maxPeakDistance = 1.2f;
     [SerializeField, Min(.0001f)] private float minPeakDistance = .4f;
     [SerializeField, Min(.0001f)] private float fallDistance = .9f;
-    [SerializeField] private bool useOldInputSystem = false;
 
     public bool IsGrounded { set; get; }
 
@@ -24,9 +23,9 @@ public class Player : MonoBehaviour
     private SpriteRenderer _sprite;
     private Animator _animator;
 
-    private Room _currRoom;
     private Vector2 _velocity = Vector2.zero;
 
+    private float _xInput;
     private float _jumpForce;
     private float _gravity;
 
@@ -36,6 +35,9 @@ public class Player : MonoBehaviour
     private float _height;
     private float _distance;
     
+    private bool _isJumpPressed;
+    private bool _isJumpReleased;
+
     private static readonly int AnimatorVelocityY = Animator.StringToHash("VelocityY");
     private static readonly int AnimatorRun = Animator.StringToHash("Run");
     private static readonly int AnimatorJump = Animator.StringToHash("Jump");
@@ -45,6 +47,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        GameManager.Instance.DoNothing(); // TODO: delete
         _height = maxJumpPeak;
         _distance = maxPeakDistance;
         UpdateForces();
@@ -63,24 +66,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (useOldInputSystem)
-        {
-            if (Input.GetKeyDown(KeyCode.R)) GameManager.Instance.ReloadLevel();
-        }
-        if (Input.GetKeyDown(KeyCode.R)) GameManager.Instance.cam.ExitTransition(true);
-        if (Input.GetKeyDown(KeyCode.Escape)) GameManager.Instance.QuitGame();
+        _velocity.x = _xInput * speed;
+        if (_xInput != 0) _sprite.flipX = _xInput < 0;
 
-        float xInput = IsActive ? Input.GetAxisRaw("Horizontal") : 0;
-        _velocity.x = xInput * speed;
-        if (xInput != 0) _sprite.flipX = xInput < 0;
-        
         if (IsGrounded)
         {
             _animator.SetBool(AnimatorGrounded, true);
             _distance = maxPeakDistance;
             _height = maxJumpPeak;
             UpdateForces();
-            
+
             if (_jumpBuffer > 0)
             {
                 _velocity.y = _jumpForce;
@@ -89,10 +84,10 @@ public class Player : MonoBehaviour
             {
                 _coyote = _velocity.y < _jumpForce ? coyoteTime : _coyote;
 
-                if (IsJumpPressed())
+                if (_isJumpPressed)
                 {
+                    _isJumpPressed = false;
                     _animator.SetTrigger(AnimatorJump);
-                    // _jumping = true;
                     _velocity.y = _jumpForce;
                     _coyote = 0;
                 }
@@ -108,8 +103,9 @@ public class Player : MonoBehaviour
                 _height = maxJumpPeak;
                 UpdateForces();
             }
-            else if (IsJumpReleased())
+            else if (_isJumpReleased)
             {
+                _isJumpReleased = false;
                 _height = minJumpPeak;
                 _distance = minPeakDistance;
                 UpdateForces();
@@ -118,12 +114,12 @@ public class Player : MonoBehaviour
 
             _velocity.y -= _gravity * Time.deltaTime;
 
-            if (IsJumpPressed())
+            if (_isJumpPressed)
             {
+                _isJumpPressed = false;
                 if (_coyote > 0)
                 {
                     _animator.SetTrigger(AnimatorJump);
-                    // _jumping = true;
                     _velocity.y = _jumpForce;
                     _coyote = 0;
                 }
@@ -138,30 +134,10 @@ public class Player : MonoBehaviour
 
         _jumpBuffer = Mathf.Max(_jumpBuffer - Time.deltaTime, 0);
         _rb.velocity = _velocity;
-        
+
         _animator.SetFloat(AnimatorVelocityY, _rb.velocity.y);
         _animator.SetBool(AnimatorRun, Mathf.Abs(_rb.velocity.x) > 0.05);
     }
-
-    // public void Jumping()
-    // {
-    //     _jumping = false;
-    //     _velocity.y = _jumpForce;
-    //     _coyote = 0;
-    // }
-
-    // public void RoomMoving(Room room)
-    // {
-    //     _currRoom = room;
-    //     transform.SetParent(room.transform);
-    // }
-    //
-    // public void RoomStopping(Room room)
-    // {
-    //     if (room != _currRoom) return;
-    //     transform.SetParent(null);
-    //     _currRoom = null;
-    // }
 
     private void UpdateForces()
     {
@@ -169,13 +145,22 @@ public class Player : MonoBehaviour
         _gravity = (2 * _height * speed * speed) / (_distance * _distance);
     }
 
-    private bool IsJumpPressed()
+    public void OnJump(InputAction.CallbackContext ctx)
     {
-        return IsActive && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space));
+        if (ctx.started)
+        {
+            _isJumpPressed = true;
+            _isJumpReleased = false;
+        }
+        else if (ctx.canceled)
+        {
+            _isJumpReleased = true;
+            _isJumpPressed = false;
+        }
     }
 
-    private bool IsJumpReleased()
+    public void OnMove(InputAction.CallbackContext ctx)
     {
-        return IsActive && (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.Space));
+        _xInput = IsActive ? ctx.ReadValue<float>() : 0;
     }
 }
