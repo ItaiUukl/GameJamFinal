@@ -2018,11 +2018,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8673723214626924310, guid: 0cab67b3601e60c49954827dfa18fe7b, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8673723214626924310, guid: 0cab67b3601e60c49954827dfa18fe7b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.232
+      value: 1.355
       objectReference: {fileID: 0}
     - target: {fileID: 8673723214626924310, guid: 0cab67b3601e60c49954827dfa18fe7b, type: 3}
       propertyPath: m_LocalPosition.y
