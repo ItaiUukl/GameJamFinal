@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(PolygonCollider2D))]
 public class Room : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 20;
-    [SerializeField] private float maxSpeed = 20;
+    [FormerlySerializedAs("moveSpeed")] [SerializeField] private float maxSpeed = 20;
     [SerializeField] private float acceleration = 5;
 
     private const float SideSize = .2f;
@@ -46,8 +46,8 @@ public class Room : MonoBehaviour
     private void FixedUpdate()
     {
         _velocity = Mathf.Min(Time.fixedDeltaTime * acceleration + _velocity, maxSpeed) * _moveDir.magnitude;
-        // transform.position += (Vector3) _moveDir * _velocity * Time.fixedDeltaTime;
-        transform.position += (Vector3) _moveDir * moveSpeed * Time.fixedDeltaTime;
+        transform.position += (Vector3) _moveDir * _velocity * Time.fixedDeltaTime;
+        // transform.position += (Vector3) _moveDir * moveSpeed * Time.fixedDeltaTime;
     }
 
     // Moves room until collision
@@ -55,7 +55,10 @@ public class Room : MonoBehaviour
     {
         if (_blockedSides[dir]) return;
         _moveDir = GameManager.GetDirection(dir);
-        // _player.RoomMoving(this);
+        if (_collider.IsTouchingLayers(LayerMask.NameToLayer(GlobalsSO.PlayerLayer))) 
+        {
+            _player.transform.SetParent(transform);
+        }
     }
 
     public void AddLever(Lever lever)
@@ -70,9 +73,9 @@ public class Room : MonoBehaviour
 
     private void SideTriggerEnter(MoveDirection side, Collider2D other)
     {
-        _velocity = 0;
         SetBlocked(side, true);
         if (_moveDir != GameManager.GetDirection(side)) return;
+        _velocity = 0;
         FixPosition(side, other);
         GameManager.Instance.cam.ShakeCamera();
         // _player.RoomStopping(this);

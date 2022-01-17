@@ -75,8 +75,6 @@ public class Player : MonoBehaviour
             _height = maxJumpPeak;
             UpdateForces();
             
-            _velocity.y = Mathf.Max(0, _velocity.y);
-            
             if (_jumpBuffer > 0)
             {
                 _velocity.y = _jumpForce;
