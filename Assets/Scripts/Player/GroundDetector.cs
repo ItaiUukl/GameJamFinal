@@ -30,6 +30,6 @@ public class GroundDetector : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         if (!_groundLayers.Contains(other.gameObject.layer)) return;
-        player.IsGrounded = false;
+        player.IsGrounded = _collider.IsTouchingLayers();
     }
 }

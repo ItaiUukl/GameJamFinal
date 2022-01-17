@@ -11,12 +11,13 @@ public enum MoveDirection
 
 public class GameManager : Singleton<GameManager>
 {
-    private GlobalsSO _globals;
+    public static GlobalsSO Globals;
     private int _currLevel = 0;
+    public CameraTransitions cam = null;
 
     private void Awake()
     {
-        _globals = Resources.LoadAll<GlobalsSO>("Globals")[0];
+        Globals = Resources.LoadAll<GlobalsSO>("Globals")[0];
     }
 
     public static Vector2 GetDirection(MoveDirection dir)
@@ -31,17 +32,22 @@ public class GameManager : Singleton<GameManager>
         };
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void NextLevel()
     {
         RoomsManager.Instance.ResetLevel();
-        _currLevel = (_currLevel + 1) % _globals.levelAdvancement.Count;
-        SceneManager.LoadScene(_globals.AdvanceLevel(_currLevel));
+        _currLevel = (_currLevel + 1) % Globals.levelAdvancement.Count;
+        SceneManager.LoadScene(Globals.AdvanceLevel(_currLevel));
     }
 
     // Resets the current level
     public void ReloadLevel()
     {
         RoomsManager.Instance.ResetLevel();
-        SceneManager.LoadScene(_globals.AdvanceLevel(_currLevel));
+        SceneManager.LoadScene(Globals.AdvanceLevel(_currLevel));
     }
 }

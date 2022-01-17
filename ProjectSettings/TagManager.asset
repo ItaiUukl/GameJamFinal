@@ -15,8 +15,8 @@ TagManager:
   - Outline
   - Border
   - Lever
-  - 
-  - 
+  - GroundDetector
+  - Exit
   - 
   - 
   - 
@@ -58,4 +58,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 4150259781
+    locked: 0
+  - name: Transition
+    uniqueID: 3839082917
     locked: 0

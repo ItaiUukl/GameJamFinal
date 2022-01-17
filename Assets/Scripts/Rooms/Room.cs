@@ -1,25 +1,27 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(PolygonCollider2D))]
 public class Room : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 20;
-    [SerializeField] private float maxSpeed = 50;
+    [FormerlySerializedAs("moveSpeed")] [SerializeField] private float maxSpeed = 20;
     [SerializeField] private float acceleration = 5;
 
     private const float SideSize = .2f;
 
     private Player _player;
+
     private PolygonCollider2D _collider;
+
     private SpriteRenderer _sprite;
     private Vector2 _moveDir = Vector2.zero;
-    // private float _velocity = 0;
+    private float _velocity = 0;
     private readonly Dictionary<MoveDirection, List<Lever>> _levers = new Dictionary<MoveDirection, List<Lever>>();
     private readonly Dictionary<MoveDirection, bool> _blockedSides = new Dictionary<MoveDirection, bool>();
 
-    private bool IsMoving => _moveDir.magnitude != 0;
+    public bool IsMoving => _moveDir.magnitude != 0;
 
     // Start is called before the first frame update
     void Start()
@@ -43,9 +45,9 @@ public class Room : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // _velocity = Mathf.Min(Time.fixedDeltaTime * acceleration + _velocity, maxSpeed) * _moveDir.magnitude;
-        // transform.position += (Vector3) _moveDir * _velocity * Time.fixedDeltaTime;
-        transform.position += (Vector3) _moveDir * moveSpeed * Time.fixedDeltaTime;
+        _velocity = Mathf.Min(Time.fixedDeltaTime * acceleration + _velocity, maxSpeed) * _moveDir.magnitude;
+        transform.position += (Vector3) _moveDir * _velocity * Time.fixedDeltaTime;
+        // transform.position += (Vector3) _moveDir * moveSpeed * Time.fixedDeltaTime;
     }
 
     // Moves room until collision
@@ -53,7 +55,10 @@ public class Room : MonoBehaviour
     {
         if (_blockedSides[dir]) return;
         _moveDir = GameManager.GetDirection(dir);
-        _player.RoomMoving(this);
+        if (_collider.IsTouchingLayers(LayerMask.NameToLayer(GlobalsSO.PlayerLayer))) 
+        {
+            _player.transform.SetParent(transform);
+        }
     }
 
     public void AddLever(Lever lever)
@@ -62,24 +67,23 @@ public class Room : MonoBehaviour
         {
             _levers[lever.direction] = new List<Lever>();
         }
+
         _levers[lever.direction].Add(lever);
     }
 
     private void SideTriggerEnter(MoveDirection side, Collider2D other)
     {
-        // if (_moveDir.magnitude < .1f) return;
-        // _velocity = 0;
-        
         SetBlocked(side, true);
         if (_moveDir != GameManager.GetDirection(side)) return;
+        _velocity = 0;
         FixPosition(side, other);
-        _player.RoomStopping(this);
+        GameManager.Instance.cam.ShakeCamera();
+        // _player.RoomStopping(this);
         _moveDir = Vector2.zero;
     }
 
     private void SideTriggerExit(MoveDirection side)
     {
-        if (!IsMoving) return;
         SetBlocked(side, false);
     }
 
@@ -108,11 +112,12 @@ public class Room : MonoBehaviour
     private void SetBlocked(MoveDirection side, bool state)
     {
         _blockedSides[side] = state;
-
+        // RoomsManager.Instance.UpdateRoomsLevers();
         if (!_levers.ContainsKey(side)) return;
         
         foreach (Lever l in _levers[side])
         {
+            // l.Activated = !state;
             l.SetActivation(!state);
         }
     }
