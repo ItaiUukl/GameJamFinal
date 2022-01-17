@@ -14,6 +14,12 @@ TextureImporter:
   - first:
       213: -2387231980770820605
     second: Lever Disabled
+  - first:
+      213: 5213229242370633579
+    second: Door_0
+  - first:
+      213: 436563815456543028
+    second: Door_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -103,76 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lever idle
+      name: Door_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 115
-        width: 35
-        height: 59
-      alignment: 5
-      pivot: {x: 1, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 490d065ffbd6868a0800000000000000
-      internalID: -6311674206536806252
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lever pressed
-      rect:
-        serializedVersion: 2
-        x: 43
-        y: 116
-        width: 20
-        height: 59
-      alignment: 5
-      pivot: {x: 1, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9d20a599584683f50800000000000000
-      internalID: 6861344557265191641
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Exit door
-      rect:
-        serializedVersion: 2
-        x: 98
+        x: 0
         y: 5
-        width: 93
+        width: 90
         height: 162
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4f8ef1b53e3c8a1d0800000000000000
-      internalID: -3339203742441412364
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lever Disabled
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 115
-        width: 19
-        height: 57
       alignment: 5
       pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -180,8 +123,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30ef3bd5929deded0800000000000000
-      internalID: -2387231980770820605
+      spriteID: b6f2e24006c195840800000000000000
+      internalID: 5213229242370633579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door_1
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 5
+        width: 92
+        height: 162
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43193162a7cfe0600800000000000000
+      internalID: 436563815456543028
       vertices: []
       indices: 
       edges: []
