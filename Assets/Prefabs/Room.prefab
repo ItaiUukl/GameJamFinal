@@ -45,9 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9304f2cd1eaded9479f1c5760014fb73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  maxSpeed: 50
-  acceleration: 5
+  maxSpeed: 30
+  acceleration: 10
 --- !u!212 &3791923466787292047
 SpriteRenderer:
   m_ObjectHideFlags: 0
