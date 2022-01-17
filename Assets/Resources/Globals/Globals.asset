@@ -21,6 +21,7 @@ MonoBehaviour:
   - level6
   - level7
   - level8
+  inputAction: {fileID: -944628639613478452, guid: 3a28cb42729c8a74bb5efc4685531545, type: 3}
   outlineWidth: 0.15
   outlineTextureMode: 0
   outlineAnimationSpeed: 0.4

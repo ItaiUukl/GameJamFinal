@@ -11,6 +11,7 @@ public class RoomsManager : Singleton<RoomsManager>
     private HashSet<Room> _rooms = new HashSet<Room>();
 
     private List<GameObject> _linesList = new List<GameObject>();
+
     // private float _outlineWidth;
     // private LineTextureMode _outlineTextureMode;
     // private List<Material> _outlineMaterials;
@@ -47,11 +48,11 @@ public class RoomsManager : Singleton<RoomsManager>
     private IEnumerator ChangeMaterial(LineRenderer line)
     {
         int idx = 0;
-        
+
         while (true)
         {
             line.material = GameManager.Globals.outlineMaterials[idx];
-            idx = (idx+1) % GameManager.Globals.outlineMaterials.Count;
+            idx = (idx + 1) % GameManager.Globals.outlineMaterials.Count;
             yield return new WaitForSeconds(GameManager.Globals.outlineAnimationSpeed);
         }
     }
@@ -130,6 +131,7 @@ public class RoomsManager : Singleton<RoomsManager>
         {
             StopCoroutine(routine);
         }
+
         _materialsRoutines.Clear();
     }
 }

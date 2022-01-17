@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class LevelTransition : MonoBehaviour
 {
-
     private bool _wasActivated = false;
 
     private void Start()
@@ -24,6 +23,6 @@ public class LevelTransition : MonoBehaviour
     {
         Debug.Log("next level");
         _wasActivated = true;
-        GameManager.Instance.cam.ExitTransition(false);
+        GameManager.Cam.ExitTransition(false);
     }
 }

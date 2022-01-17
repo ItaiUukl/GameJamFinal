@@ -6,7 +6,9 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(PolygonCollider2D))]
 public class Room : MonoBehaviour
 {
-    [FormerlySerializedAs("moveSpeed")] [SerializeField] private float maxSpeed = 20;
+    [FormerlySerializedAs("moveSpeed")] [SerializeField]
+    private float maxSpeed = 20;
+
     [SerializeField] private float acceleration = 5;
 
     private const float SideSize = .2f;
@@ -47,7 +49,6 @@ public class Room : MonoBehaviour
     {
         _velocity = Mathf.Min(Time.fixedDeltaTime * acceleration + _velocity, maxSpeed) * _moveDir.magnitude;
         transform.position += (Vector3) _moveDir * _velocity * Time.fixedDeltaTime;
-        // transform.position += (Vector3) _moveDir * moveSpeed * Time.fixedDeltaTime;
     }
 
     // Moves room until collision
@@ -55,7 +56,7 @@ public class Room : MonoBehaviour
     {
         if (_blockedSides[dir]) return;
         _moveDir = GameManager.GetDirection(dir);
-        if (_collider.IsTouchingLayers(LayerMask.NameToLayer(GlobalsSO.PlayerLayer))) 
+        if (_collider.IsTouchingLayers(LayerMask.NameToLayer(GlobalsSO.PlayerLayer)))
         {
             _player.transform.SetParent(transform);
         }
@@ -77,8 +78,7 @@ public class Room : MonoBehaviour
         if (_moveDir != GameManager.GetDirection(side)) return;
         _velocity = 0;
         FixPosition(side, other);
-        GameManager.Instance.cam.ShakeCamera();
-        // _player.RoomStopping(this);
+        GameManager.Cam.ShakeCamera();
         _moveDir = Vector2.zero;
     }
 
@@ -112,12 +112,10 @@ public class Room : MonoBehaviour
     private void SetBlocked(MoveDirection side, bool state)
     {
         _blockedSides[side] = state;
-        // RoomsManager.Instance.UpdateRoomsLevers();
         if (!_levers.ContainsKey(side)) return;
-        
+
         foreach (Lever l in _levers[side])
         {
-            // l.Activated = !state;
             l.SetActivation(!state);
         }
     }
