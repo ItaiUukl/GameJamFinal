@@ -203,10 +203,22 @@ PrefabInstance:
     - target: {fileID: 6376564188240390122, guid: 77be28e82bf463c4491f8795a86a6ebf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 556615106}
+      objectReference: {fileID: 556615108}
     - target: {fileID: 6376564188240390122, guid: 77be28e82bf463c4491f8795a86a6ebf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6376564188240390122, guid: 77be28e82bf463c4491f8795a86a6ebf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LevelSelect
+      objectReference: {fileID: 0}
+    - target: {fileID: 6376564188240390122, guid: 77be28e82bf463c4491f8795a86a6ebf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Menu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6376564188240390122, guid: 77be28e82bf463c4491f8795a86a6ebf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6527585787811851068, guid: 77be28e82bf463c4491f8795a86a6ebf, type: 3}
       propertyPath: m_Pivot.x
