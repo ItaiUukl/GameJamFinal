@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Text.RegularExpressions;
 
 [RequireComponent(typeof(Collider2D))]
 public class LevelSelection : MonoBehaviour
@@ -17,7 +18,8 @@ public class LevelSelection : MonoBehaviour
         Debug.Log(sceneString);
         if (!_wasActivated && other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
         {
-            RoomsManager.Instance.ResetLevel();
+            string stringindex = sceneString.Substring(sceneString.Length - 1);
+            GameManager.Instance.SetLevel(int.Parse(stringindex));
             SelectLevel(sceneString);
         }
     }
