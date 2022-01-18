@@ -193,7 +193,7 @@
                 {
                     "name": "",
                     "id": "4e74eeb1-305b-4375-ad6d-eb06f9108401",
-                    "path": "<XInputController>/buttonEast",
+                    "path": "<XInputController>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -204,17 +204,6 @@
                 {
                     "name": "",
                     "id": "56b8bce3-6852-40a7-adb5-03957385092d",
-                    "path": "<XInputController>/leftStick/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0acf741a-8f28-452d-aedc-f6de6a9a837e",
                     "path": "<XInputController>/dpad/up",
                     "interactions": "",
                     "processors": "",
@@ -272,7 +261,7 @@
                 {
                     "name": "",
                     "id": "2ba4df4f-3c6f-48d1-b208-6cacd3b4fbc1",
-                    "path": "<XInputController>/buttonWest",
+                    "path": "<XInputController>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Collider2D))]
-public class LevelTransition : MonoBehaviour
+public class LevelSelection : MonoBehaviour
 {
     private bool _wasActivated = false;
 
@@ -13,18 +13,16 @@ public class LevelTransition : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        string sceneString = gameObject.name;
+        Debug.Log(sceneString);
         if (!_wasActivated && other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
         {
-            CompleteLevel();
+            RoomsManager.Instance.ResetLevel();
+            SelectLevel(sceneString);
         }
     }
 
     // Called when level is completed. Switches to next level with UI, etc.
-    private void CompleteLevel()
-    {
-        Debug.Log("next level");
-        _wasActivated = true;
-        GameManager.Cam.ExitTransition(false);
-    }
+    private void SelectLevel(string sceneString) => SceneManager.LoadScene(sceneString);
 
 }
