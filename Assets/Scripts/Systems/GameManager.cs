@@ -60,6 +60,18 @@ public class GameManager : Singleton<GameManager>
             _ => Vector2.zero
         };
     }
+    
+    public static MoveDirection OppositeDirection(MoveDirection dir)
+    {
+        return dir switch
+        {
+            MoveDirection.Up => MoveDirection.Down,
+            MoveDirection.Right => MoveDirection.Left,
+            MoveDirection.Down => MoveDirection.Up,
+            MoveDirection.Left => MoveDirection.Right,
+            _ => MoveDirection.Up
+        };
+    }
 
     private void OnSwitchLevel(InputValue value)
     {

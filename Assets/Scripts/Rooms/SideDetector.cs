@@ -1,9 +1,9 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class SideDetector : MonoBehaviour
+public class SideDetector : Directional
 {
-    private MoveDirection _side;
     private Action<MoveDirection, Collider2D> _triggerEnter;
     private Action<MoveDirection> _triggerExit;
     private BoxCollider2D _collider;
@@ -35,10 +35,22 @@ public class SideDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.RoomsLayer) ||
-            other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.BorderLayer))
+        Directional directional;
+        if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.RoomsLayer))
         {
-            _triggerEnter(_side, other);
+            directional = other.GetComponent<Directional>();
+            if (directional && directional.GetSide() == GameManager.OppositeDirection(_side))
+            {
+                _triggerEnter(_side, other);
+            }
+        }
+        else if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.BorderLayer))
+        {
+            directional = other.GetComponent<Directional>();
+            if (directional && directional.GetSide() == _side)
+            {
+                _triggerEnter(_side, other);
+            }
         }
         else if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer) &&
                  other.gameObject.transform.parent != transform.parent)
@@ -51,10 +63,23 @@ public class SideDetector : MonoBehaviour
     {
         LayerMask roomsLayer = LayerMask.NameToLayer(GlobalsSO.RoomsLayer), 
                   borderLayer = LayerMask.NameToLayer(GlobalsSO.BorderLayer);
-        if ((other.gameObject.layer == borderLayer || other.gameObject.layer == roomsLayer) &&
-            !(_collider.IsTouchingLayers(borderLayer) || _collider.IsTouchingLayers(roomsLayer)))
+        
+        Directional directional;
+        if (other.gameObject.layer == roomsLayer && !_collider.IsTouchingLayers(roomsLayer))
         {
-            _triggerExit(_side);
+            directional = other.GetComponent<Directional>();
+            if (directional && directional.GetSide() == GameManager.OppositeDirection(_side))
+            {
+                _triggerExit(_side);
+            }
+        }
+        else if (other.gameObject.layer == borderLayer && !_collider.IsTouchingLayers(borderLayer))
+        {
+            directional = other.GetComponent<Directional>();
+            if (directional && directional.GetSide() == _side)
+            {
+                _triggerExit(_side);
+            }
         }
     }
 }

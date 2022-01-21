@@ -15,13 +15,14 @@ public class Player : MonoBehaviour
     [SerializeField, Min(.0001f)] private float minPeakDistance = .4f;
     [SerializeField, Min(.0001f)] private float fallDistance = .9f;
 
-    public bool IsGrounded { set; get; }
+    // public bool IsGrounded { set; get; }
 
     public bool IsActive { set; get; }
 
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
     private Animator _animator;
+    private GroundDetector _groundDetector;
 
     private Vector2 _velocity = Vector2.zero;
 
@@ -61,6 +62,8 @@ public class Player : MonoBehaviour
         _sprite = GetComponent<SpriteRenderer>();
 
         _animator = GetComponent<Animator>();
+
+        _groundDetector = GetComponentInChildren<GroundDetector>();
     }
 
     // Update is called once per frame
@@ -69,7 +72,7 @@ public class Player : MonoBehaviour
         _velocity.x = _xInput * speed;
         if (_xInput != 0) _sprite.flipX = _xInput < 0;
 
-        if (IsGrounded)
+        if (_groundDetector.IsGrounded())
         {
             _animator.SetBool(AnimatorGrounded, true);
             _distance = maxPeakDistance;
