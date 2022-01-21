@@ -1,0 +1,1047 @@
+fileFormatVersion: 2
+guid: 47ddfb5f764f8f64f945d2df691540b0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8007471993833899281
+    second: Qube enter level_0
+  - first:
+      213: -2751968309164931520
+    second: Qube enter level_1
+  - first:
+      213: -1711583204868907515
+    second: Qube enter level_2
+  - first:
+      213: 9002665682045558597
+    second: Qube enter level_3
+  - first:
+      213: 5585167012015036866
+    second: Qube enter level_4
+  - first:
+      213: -3328501677091507674
+    second: Qube enter level_5
+  - first:
+      213: -2237984999136597565
+    second: Qube enter level_6
+  - first:
+      213: -466773178775044959
+    second: Qube enter level_7
+  - first:
+      213: 7766280318226878945
+    second: Qube enter level_8
+  - first:
+      213: 3718615567828389525
+    second: Qube enter level_9
+  - first:
+      213: 5771829038086827980
+    second: Qube enter level_10
+  - first:
+      213: 6968348023681496047
+    second: Qube enter level_11
+  - first:
+      213: 8759337319971748461
+    second: Qube enter level_12
+  - first:
+      213: 91591641740162049
+    second: Qube enter level_13
+  - first:
+      213: 4110631043636550139
+    second: Qube enter level_14
+  - first:
+      213: 3338763464642766376
+    second: Qube enter level_15
+  - first:
+      213: -1193112941737754913
+    second: Qube enter level_16
+  - first:
+      213: 4855794160622039161
+    second: Qube enter level_17
+  - first:
+      213: -3944721967925331008
+    second: Qube enter level_18
+  - first:
+      213: -8998479905503250350
+    second: Qube enter level_19
+  - first:
+      213: -4606226432676243787
+    second: Qube enter level_20
+  - first:
+      213: -2532075041193215718
+    second: Qube enter level_21
+  - first:
+      213: -1859539433013121818
+    second: Qube enter level_22
+  - first:
+      213: -1720811789238002136
+    second: Qube enter level_23
+  - first:
+      213: 1646915017130184713
+    second: Qube enter level_24
+  - first:
+      213: -2266953088349014989
+    second: Qube enter level_25
+  - first:
+      213: 9158239483455084666
+    second: Qube enter level_26
+  - first:
+      213: -2903193325686093963
+    second: Qube enter level_27
+  - first:
+      213: 2837605665642395863
+    second: Qube enter level_28
+  - first:
+      213: 4561432039712440112
+    second: Qube enter level_29
+  - first:
+      213: 2659659603501380568
+    second: Qube enter level_30
+  - first:
+      213: -1796658026954715713
+    second: Qube enter level_31
+  - first:
+      213: 6451850951639915737
+    second: Qube enter level_32
+  - first:
+      213: -5320498059627059590
+    second: Qube enter level_33
+  - first:
+      213: 5847130011585774807
+    second: Qube enter level_34
+  - first:
+      213: -2354659417102909855
+    second: Qube enter level_35
+  - first:
+      213: 8918089893047382990
+    second: Qube enter level_36
+  - first:
+      213: 3970038177200593821
+    second: Qube enter level_37
+  - first:
+      213: -5728763987915270328
+    second: Qube enter level_38
+  - first:
+      213: 6203643890825379580
+    second: Qube enter level_39
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Qube enter level_0
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 812
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 115cb5d5a51402f60800000000000000
+      internalID: 8007471993833899281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_1
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 812
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0468713476b0fc9d0800000000000000
+      internalID: -2751968309164931520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_2
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 812
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50e934eb42c3f38e0800000000000000
+      internalID: -1711583204868907515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_3
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 812
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54fdce95db4efec70800000000000000
+      internalID: 9002665682045558597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_4
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 812
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c9d2625ecf728d40800000000000000
+      internalID: 5585167012015036866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_5
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 812
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6223bae1c59cec1d0800000000000000
+      internalID: -3328501677091507674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_6
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 812
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c96fc9208411f0e0800000000000000
+      internalID: -2237984999136597565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_7
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 812
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1acfe685440b589f0800000000000000
+      internalID: -466773178775044959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 609
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e1550a4dce57cb60800000000000000
+      internalID: 7766280318226878945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_9
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 609
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59e06a8282d2b9330800000000000000
+      internalID: 3718615567828389525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_10
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 609
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccf237ffde7a91050800000000000000
+      internalID: 5771829038086827980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_11
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 609
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe3b4de8b9b84b060800000000000000
+      internalID: 6968348023681496047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_12
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 609
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6afcb032ea6f8970800000000000000
+      internalID: 8759337319971748461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_13
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 609
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1043156ec16654100800000000000000
+      internalID: 91591641740162049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_14
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 609
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf956a6b725eb0930800000000000000
+      internalID: 4110631043636550139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_15
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 609
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 826a51b7eaba55e20800000000000000
+      internalID: 3338763464642766376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_16
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 609
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdebcc2d916317fe0800000000000000
+      internalID: -1193112941737754913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 406
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 970fa4edf0f336340800000000000000
+      internalID: 4855794160622039161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_18
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 406
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cb712c25488149c0800000000000000
+      internalID: -3944721967925331008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_19
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 406
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 258fcf1b33afe1380800000000000000
+      internalID: -8998479905503250350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_20
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 406
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b6515dd6756310c0800000000000000
+      internalID: -4606226432676243787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_21
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 406
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a19bb016a234cdcd0800000000000000
+      internalID: -2532075041193215718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_22
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 406
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eceb69ecb69136e0800000000000000
+      internalID: -1859539433013121818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_23
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 406
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82e1a218bc27e18e0800000000000000
+      internalID: -1720811789238002136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_24
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 406
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9001d4b7b740bd610800000000000000
+      internalID: 1646915017130184713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_25
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 406
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3347b7e4d2a2a80e0800000000000000
+      internalID: -2266953088349014989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 203
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a781c4ba94a981f70800000000000000
+      internalID: 9158239483455084666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_27
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 203
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57702345d09c5b7d0800000000000000
+      internalID: -2903193325686093963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_28
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 203
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d830419153316720800000000000000
+      internalID: 2837605665642395863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_29
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 203
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03f352ac5467d4f30800000000000000
+      internalID: 4561432039712440112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_30
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 203
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d3f722615209e420800000000000000
+      internalID: 2659659603501380568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_31
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 203
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbd82882b0df017e0800000000000000
+      internalID: -1796658026954715713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_32
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 203
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9dc5344d144998950800000000000000
+      internalID: 6451850951639915737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_33
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 203
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7626c7343bc926b0800000000000000
+      internalID: -5320498059627059590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_34
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 203
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d4881024cd252150800000000000000
+      internalID: 5847130011585774807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16e7d845cb1925fd0800000000000000
+      internalID: -2354659417102909855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_36
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 0
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec33716f18b63cb70800000000000000
+      internalID: 8918089893047382990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_37
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 0
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9bd7c020b8681730800000000000000
+      internalID: 3970038177200593821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Qube enter level_38
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 0
+        width: 114
+        height: 203
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 847924a51875f70b0800000000000000
+      internalID: -5728763987915270328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
