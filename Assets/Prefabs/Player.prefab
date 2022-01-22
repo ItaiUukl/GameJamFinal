@@ -1,5 +1,77 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &465072895465575625
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8221874682270124977}
+  - component: {fileID: 8360846976215999827}
+  m_Layer: 6
+  m_Name: Point Light 2D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8221874682270124977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465072895465575625}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.055, y: 0.369, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1623005161509950286}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8360846976215999827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465072895465575625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.91
+  m_Color: {r: 1, g: 0.43212414, b: 0, a: 1}
+  m_Intensity: 1.23
+  m_LightVolumeOpacity: 0.426
+  m_ApplyToSortingLayers: 45f05ff7
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 1
+  m_ShadowVolumeIntensity: 0.713
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0.87
+  m_PointLightOuterRadius: 5.43
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &1623005161509950281
 GameObject:
   m_ObjectHideFlags: 0
@@ -15,6 +87,7 @@ GameObject:
   - component: {fileID: 1623005161509950282}
   - component: {fileID: 582360689009154429}
   - component: {fileID: 3622745557634114856}
+  - component: {fileID: 1414572049}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -35,6 +108,7 @@ Transform:
   m_Children:
   - {fileID: 1404298838519872830}
   - {fileID: 1783748714889249156}
+  - {fileID: 8221874682270124977}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -57,7 +131,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bd782a3df9c5f414a9fd3b4587da8184, type: 2}
+  - {fileID: 2100000, guid: 7b104f06fbb8c3d4da503d29925e7617, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -249,6 +323,42 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1414572049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623005161509950281}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000dbd241a2bd6364995f1c76e6db5e4f6347c94ffd45f05ff7a5c1d3e4
+  m_ShapePath:
+  - {x: -0.33424285, y: 0.13459666, z: 0}
+  - {x: -0.11207592, y: 0.1378459, z: 0}
+  - {x: -0.10955928, y: 0.011560483, z: 0}
+  - {x: -0.02690909, y: 0.011585914, z: 0}
+  - {x: -0.05754641, y: 0.059323013, z: 0}
+  - {x: -0.058385115, y: 0.13566464, z: 0}
+  - {x: 0.080483645, y: 0.13572054, z: 0}
+  - {x: 0.0833362, y: 0.014860328, z: 0}
+  - {x: 0.16314602, y: 0.014021493, z: 0}
+  - {x: 0.12729529, y: 0.043886997, z: 0}
+  - {x: 0.12276533, y: 0.13320376, z: 0}
+  - {x: 0.28358397, y: 0.13422698, z: 0}
+  - {x: 0.28262076, y: 0.7585903, z: 0}
+  - {x: -0.3212114, y: 0.7536771, z: 0}
+  m_ShapePathHash: 87061306
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 38524
 --- !u!1 &3018711705197936822
 GameObject:
   m_ObjectHideFlags: 0
