@@ -18,7 +18,7 @@ public class SideDetector : MonoBehaviour
         _triggerEnter = enter;
         _triggerExit = exit;
 
-        Vector2 dir = GameManager.GetDirection(side);
+        Vector2 dir = MoveDirectionFunctions.ToVector2(side);
 
         float collOffset = 2f * breadth + 4f * Physics2D.defaultContactOffset + .08f;
         _collider = gameObject.AddComponent<BoxCollider2D>();
@@ -49,8 +49,8 @@ public class SideDetector : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        LayerMask roomsLayer = LayerMask.NameToLayer(GlobalsSO.RoomsLayer), 
-                  borderLayer = LayerMask.NameToLayer(GlobalsSO.BorderLayer);
+        LayerMask roomsLayer = LayerMask.NameToLayer(GlobalsSO.RoomsLayer),
+            borderLayer = LayerMask.NameToLayer(GlobalsSO.BorderLayer);
         if ((other.gameObject.layer == borderLayer || other.gameObject.layer == roomsLayer) &&
             !(_collider.IsTouchingLayers(borderLayer) || _collider.IsTouchingLayers(roomsLayer)))
         {

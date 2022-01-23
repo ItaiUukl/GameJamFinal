@@ -55,7 +55,7 @@ public class Room : MonoBehaviour
     public void Move(MoveDirection dir)
     {
         if (_blockedSides[dir]) return;
-        _moveDir = GameManager.GetDirection(dir);
+        _moveDir = MoveDirectionFunctions.ToVector2(dir);
         if (_collider.IsTouchingLayers(LayerMask.NameToLayer(GlobalsSO.PlayerLayer)))
         {
             _player.transform.SetParent(transform);
@@ -75,10 +75,10 @@ public class Room : MonoBehaviour
     private void SideTriggerEnter(MoveDirection side, Collider2D other)
     {
         SetBlocked(side, true);
-        if (_moveDir != GameManager.GetDirection(side)) return;
+        if (_moveDir != MoveDirectionFunctions.ToVector2(side)) return;
         _velocity = 0;
         FixPosition(side, other);
-        GameManager.Cam.ShakeCamera();
+        GameManager.Cam.ShakeCamera(MoveDirectionFunctions.ToOppositeVector2(side));
         _moveDir = Vector2.zero;
     }
 

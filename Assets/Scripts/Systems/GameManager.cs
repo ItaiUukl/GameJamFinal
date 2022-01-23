@@ -3,13 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public enum MoveDirection
-{
-    Up,
-    Right,
-    Down,
-    Left
-}
 
 public class GameManager : Singleton<GameManager>
 {
@@ -47,18 +40,6 @@ public class GameManager : Singleton<GameManager>
     {
         if (!value.isPressed) return;
         Application.Quit();
-    }
-
-    public static Vector2 GetDirection(MoveDirection dir)
-    {
-        return dir switch
-        {
-            MoveDirection.Up => Vector2.up,
-            MoveDirection.Right => Vector2.right,
-            MoveDirection.Down => Vector2.down,
-            MoveDirection.Left => Vector2.left,
-            _ => Vector2.zero
-        };
     }
 
     private void OnSwitchLevel(InputValue value)
