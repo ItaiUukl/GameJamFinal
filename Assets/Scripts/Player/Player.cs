@@ -138,6 +138,10 @@ public class Player : MonoBehaviour
         _animator.SetFloat(AnimatorVelocityY, _rb.velocity.y);
         _animator.SetBool(AnimatorRun, Mathf.Abs(_rb.velocity.x) > 0.05);
     }
+    public void Activate()
+    {
+        IsActive = true;
+    }
 
     private void UpdateForces()
     {
