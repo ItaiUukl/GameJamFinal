@@ -1,29 +1,27 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class CameraTransitions : MonoBehaviour
 {
     private Player _player;
-    private Animator _animator;
+
+    // private Animator _animator;
+    private Transform _levelTransition;
+    private Transform _camTransform;
 
     private bool _reloadOnExit;
 
-    private static readonly int Shake = Animator.StringToHash("Shake");
-    private static readonly int Exit = Animator.StringToHash("Exit");
+    [Header("Transition Animation Settings")]
+    [SerializeField] private float transitionDuration = .5f;
+    private const Ease TransitionEase = Ease.OutCubic;
 
-    // shake fields
+    // private static readonly int Shake = Animator.StringToHash("Shake");
+    // private static readonly int Exit = Animator.StringToHash("Exit");
 
-    private bool _isShaking;
-    private Vector2 _shakeDir;
-    private Transform _camTransform;
-    private Vector2 _originalPos;
-
-    // How long the object should shake for.
-    private float _curShakeDuration = 0f;
-
-    // Amplitude of the shake. A larger value shakes the camera harder.
-    [SerializeField] private float shakeAmount = 0.7f;
-    [SerializeField] private float decreaseFactor = 1.0f;
-    [SerializeField] private float shakeDuration = 1f;
+    [Header("Camera Shake Animation Settings")]
+    [SerializeField] private float shakeStrength = .5f;
+    [SerializeField] private float shakeDuration = .35f;
+    [SerializeField] private int shakeVibrato = 15;
 
     private void Awake()
     {
@@ -35,36 +33,13 @@ public class CameraTransitions : MonoBehaviour
         GameManager.Cam = this;
     }
 
-    private void OnEnable()
-    {
-        _originalPos = _camTransform.localPosition;
-    }
-
     private void Start()
     {
         _player = FindObjectOfType<Player>();
-        _animator = GetComponent<Animator>();
+        _levelTransition = transform.GetChild(0);
+        // _animator = GetComponent<Animator>();
         _player.IsActive = false;
-        _camTransform.localPosition = new Vector2(10, 10);
-    }
-
-    private void Update()
-    {
-        if (_isShaking)
-        {
-            if (_curShakeDuration > 0)
-            {
-                _camTransform.localPosition = _originalPos + _shakeDir * shakeAmount;
-        
-                _curShakeDuration -= Time.deltaTime * decreaseFactor;
-            }
-            else
-            {
-                _curShakeDuration = 0f;
-                _camTransform.localPosition = _originalPos;
-                _isShaking = false;
-            }
-        }
+        PlayEnterAnimation();
     }
 
     public void OnFinishedEnter()
@@ -89,18 +64,42 @@ public class CameraTransitions : MonoBehaviour
         }
     }
 
-    public void ShakeCamera(Vector2 dir)
+    public void ShakeCamera(Vector2 dir, float strength)
     {
-        _isShaking = true;
-        _shakeDir = dir;
-        _curShakeDuration = shakeDuration;
+        _camTransform.DOShakePosition(shakeDuration, dir * shakeStrength * strength, (int) (shakeVibrato * strength));
+
         // _animator.SetTrigger(Shake);
     }
 
     public void ExitTransition(bool reload)
     {
         _reloadOnExit = reload;
+        PlayExitAnimation();
+        // _animator.SetTrigger(Exit);
+    }
 
-        _animator.SetTrigger(Exit);
+    private void PlayEnterAnimation()
+    {
+        SpriteRenderer lTSprite = _levelTransition.GetComponent<SpriteRenderer>();
+        var lTCol = lTSprite.color;
+        lTCol.a = 255;
+        lTSprite.color = lTCol;
+        _camTransform.DOMoveX(-1.5f, transitionDuration)
+            .From()
+            .SetEase(TransitionEase);
+        _levelTransition.transform.DOMoveX(23, transitionDuration)
+            .SetEase(TransitionEase)
+            .OnComplete(OnFinishedEnter);
+    }
+
+    private void PlayExitAnimation()
+    {
+        _levelTransition.transform.localPosition = new Vector3(-23, 0, 20);
+        _camTransform.DOMoveX(1.5f, transitionDuration)
+            .SetEase(TransitionEase);
+        _levelTransition.transform.DOMoveX(0, transitionDuration)
+            .SetEase(TransitionEase)
+            .OnPlay(OnStartedExit)
+            .OnComplete(OnFinishedExit);
     }
 }

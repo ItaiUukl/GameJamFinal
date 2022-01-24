@@ -76,9 +76,9 @@ public class Room : MonoBehaviour
     {
         SetBlocked(side, true);
         if (_moveDir != MoveDirectionFunctions.ToVector2(side)) return;
+        GameManager.Cam.ShakeCamera(MoveDirectionFunctions.ToVector2(side), _velocity / maxSpeed);
         _velocity = 0;
         FixPosition(side, other);
-        GameManager.Cam.ShakeCamera(MoveDirectionFunctions.ToOppositeVector2(side));
         _moveDir = Vector2.zero;
     }
 
