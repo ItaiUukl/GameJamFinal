@@ -13,8 +13,8 @@ public class CameraTransitions : MonoBehaviour
 
     [Header("Transition Animation Settings")]
     [SerializeField] private float transitionDuration = .5f;
-    private const Ease TransitionEase = Ease.OutCubic;
 
+    private const Ease TransitionEase = Ease.OutQuart;
     // private static readonly int Shake = Animator.StringToHash("Shake");
     // private static readonly int Exit = Animator.StringToHash("Exit");
 
