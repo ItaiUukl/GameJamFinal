@@ -16,6 +16,6 @@ MonoBehaviour:
   clip: {fileID: 8300000, guid: 15e3dabffaaf5464cbabf557453513bd, type: 3}
   volume: 1
   pitch: 0
-  loop: 1
+  loop: 0
   overlap: 0
   source: {fileID: 0}
