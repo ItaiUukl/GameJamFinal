@@ -577,6 +577,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: controller_layout
       objectReference: {fileID: 0}
+    - target: {fileID: 5676510589657722137, guid: caef660ee63a38b41a7b58f32c386095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5676510589657722140, guid: caef660ee63a38b41a7b58f32c386095, type: 3}
       propertyPath: m_RootOrder
       value: 1
