@@ -56,7 +56,7 @@ public class RoomsManager : Singleton<RoomsManager>
             yield return new WaitForSeconds(GameManager.Globals.outlineAnimationSpeed);
         }
     }
-
+    
     private void GenerateComposite()
     {
         _compositeHolder = new GameObject
@@ -69,7 +69,7 @@ public class RoomsManager : Singleton<RoomsManager>
         _compColl = _compositeHolder.AddComponent<CompositeCollider2D>();
         _compColl.geometryType = CompositeCollider2D.GeometryType.Outlines;
         _compColl.vertexDistance = .005f;
-        _compColl.offsetDistance = .05f;
+        _compColl.offsetDistance = .08f;
     }
 
     // Input: settings up the line renderers points
