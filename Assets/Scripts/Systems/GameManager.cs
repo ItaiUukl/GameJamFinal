@@ -35,7 +35,11 @@ public class GameManager : Singleton<GameManager>
     {
         Debug.Log("reset");
         if (!value.isPressed) return;
-        if (_menu) SetLevel(_selectedLevel - 1);
+        if (_menu) 
+        {
+            SetLevel(_selectedLevel - 1);
+            _menu = false;
+        }
         Cam.ExitTransition(true);
     }
 
