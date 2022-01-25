@@ -15,13 +15,14 @@ public class Player : MonoBehaviour
     [SerializeField, Min(.0001f)] private float minPeakDistance = .4f;
     [SerializeField, Min(.0001f)] private float fallDistance = .9f;
 
-    public bool IsGrounded { set; get; }
+    // public bool IsGrounded { set; get; }
 
     public bool IsActive { set; get; }
 
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
     private Animator _animator;
+    private GroundDetector _groundDetector;
 
     private Vector2 _velocity = Vector2.zero;
 
@@ -34,7 +35,7 @@ public class Player : MonoBehaviour
 
     private float _height;
     private float _distance;
-    
+
     private bool _isJumpPressed;
     private bool _isJumpReleased;
 
@@ -61,6 +62,8 @@ public class Player : MonoBehaviour
         _sprite = GetComponent<SpriteRenderer>();
 
         _animator = GetComponent<Animator>();
+
+        _groundDetector = GetComponentInChildren<GroundDetector>();
     }
 
     // Update is called once per frame
@@ -69,7 +72,7 @@ public class Player : MonoBehaviour
         _velocity.x = _xInput * speed;
         if (_xInput != 0) _sprite.flipX = _xInput < 0;
 
-        if (IsGrounded)
+        if (_groundDetector.IsGrounded())
         {
             _animator.SetBool(AnimatorGrounded, true);
             _distance = maxPeakDistance;
@@ -139,6 +142,11 @@ public class Player : MonoBehaviour
         _animator.SetBool(AnimatorRun, Mathf.Abs(_rb.velocity.x) > 0.05);
     }
 
+    public void Activate()
+    {
+        IsActive = true;
+    }
+
     private void UpdateForces()
     {
         _jumpForce = (2 * _height * speed) / _distance;
@@ -147,7 +155,11 @@ public class Player : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (ctx.started)
+        if (!IsActive)
+        {
+            _isJumpPressed = _isJumpReleased = false;
+        }
+        else if (ctx.started)
         {
             _isJumpPressed = true;
             _isJumpReleased = false;
@@ -161,6 +173,6 @@ public class Player : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        _xInput = IsActive ? ctx.ReadValue<float>() : 0;
+        _xInput = IsActive ? (int) ctx.ReadValue<float>() : 0;
     }
 }

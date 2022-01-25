@@ -8,7 +8,7 @@ public enum MoveDirection
     Left
 }
 
-public static class MoveDirectionFunctions
+public static class MoveDirectionUtils
 {
     public static Vector2 ToVector2(MoveDirection dir)
     {

@@ -39,9 +39,16 @@ public class GameManager : Singleton<GameManager>
     private void OnExit(InputValue value)
     {
         if (!value.isPressed) return;
-        Application.Quit();
+        if (SceneManager.GetActiveScene().name == Globals.mainMenuSceneName)
+        {
+            Application.Quit();
+        }
+        else
+        {
+            RoomsManager.Instance.ResetLevel();
+            SceneManager.LoadScene(Globals.mainMenuSceneName);
+        }
     }
-
     private void OnSwitchLevel(InputValue value)
     {
         SetLevel(_currLevel + (int) value.Get<float>());
