@@ -108,6 +108,13 @@ public class RoomsManager : Singleton<RoomsManager>
             l.loop = true;
             l.startWidth = GameManager.Globals.outlineWidth;
             l.textureMode = GameManager.Globals.outlineTextureMode;
+            /* if you would want different line color in the menu
+            if(GameManager._menu)
+            {
+                l.endColor = GameManager.Globals.MenuColor;
+                l.startColor = GameManager.Globals.MenuColor;
+            } */
+            //new Color(60, 104, 140);
             l.sortingLayerName = "Room";
             _materialsRoutines.Add(StartCoroutine(ChangeMaterial(l)));
         }

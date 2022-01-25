@@ -10,8 +10,7 @@ public class GameManager : Singleton<GameManager>
     private int _selectedLevel = 0;
     public static CameraTransitions Cam = null;
     private PlayerInput _inputSystem;
-
-    private bool _menu = false;
+    private bool _menu = true;
 
     private void Awake()
     {
@@ -68,8 +67,10 @@ public class GameManager : Singleton<GameManager>
     {
         RoomsManager.Instance.ResetLevel();
         _currLevel = Math.Max(0, lvl) % Globals.levelAdvancement.Count;
+        int unlockedLevel = PlayerPrefs.GetInt("currLevel", 1);
+        if(unlockedLevel < _currLevel+1)
+            PlayerPrefs.SetInt("currLevel", _currLevel+1);
         SceneManager.LoadScene(Globals.AdvanceLevel(_currLevel));
-        PlayerPrefs.SetInt("currLevel", _currLevel);
     }
 
     // Resets the current level
