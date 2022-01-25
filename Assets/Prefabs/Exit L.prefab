@@ -50,7 +50,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 366cc734b4f10af4b80a8e7be6118c13, type: 2}
+  - {fileID: 2100000, guid: 8d613fcca73fa114084e3f48b16a2237, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9102ee00b131e8947ab07e693eee9a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menu: 0
 --- !u!95 &3671636669866316325
 Animator:
   serializedVersion: 3
@@ -225,7 +226,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 366cc734b4f10af4b80a8e7be6118c13, type: 2}
+  - {fileID: 2100000, guid: 8d613fcca73fa114084e3f48b16a2237, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
