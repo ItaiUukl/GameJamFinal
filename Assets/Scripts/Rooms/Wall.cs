@@ -20,7 +20,7 @@ public class Wall : MonoBehaviour
         for (int i = 0; i < directions.Length; ++i)
         {
             side = (MoveDirection) directions.GetValue(i);
-            dir = GameManager.GetDirection((MoveDirection) directions.GetValue((i + offset) % directions.Length));
+            dir = MoveDirectionUtils.ToVector2((MoveDirection) directions.GetValue((i + offset) % directions.Length));
             temp = new GameObject();
             temp.AddComponent<Directional>().GenerateCollider(transform, side, dir, _sprite.size, SideSize);
             temp.layer = LayerMask.NameToLayer(GlobalsSO.BorderLayer);

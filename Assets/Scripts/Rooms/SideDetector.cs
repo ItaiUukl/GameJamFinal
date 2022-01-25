@@ -14,7 +14,7 @@ public class SideDetector : Directional
         gameObject.layer = LayerMask.NameToLayer(GlobalsSO.RoomsLayer);
         _triggerEnter = enter;
         _triggerExit = exit;
-        _collider = GenerateCollider(parent, side, GameManager.GetDirection(side), dimensions, breadth);
+        _collider = GenerateCollider(parent, side, MoveDirectionUtils.ToVector2(side), dimensions, breadth);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -23,7 +23,7 @@ public class SideDetector : Directional
             other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.BorderLayer))
         {
             Directional directional = other.GetComponent<Directional>();
-            if (directional && directional.GetSide() == GameManager.OppositeDirection(_side))
+            if (directional && directional.GetSide() == MoveDirectionUtils.ToOppositeDir(_side))
             {
                 _triggerEnter(_side, other);
             }
@@ -44,7 +44,7 @@ public class SideDetector : Directional
             !(_collider.IsTouchingLayers(borderLayer) || _collider.IsTouchingLayers(roomsLayer)))
         {
             Directional directional = other.GetComponent<Directional>();
-            if (directional && directional.GetSide() == GameManager.OppositeDirection(_side))
+            if (directional && directional.GetSide() == MoveDirectionUtils.ToOppositeDir(_side))
             {
                 _triggerExit(_side);
             }

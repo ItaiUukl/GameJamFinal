@@ -10,7 +10,7 @@ public class Directional : MonoBehaviour
     {
         if (_isBorder)
         {
-            _side = GameManager.OppositeDirection(_side);
+            _side = MoveDirectionUtils.ToOppositeDir(_side);
         }
     }
 
