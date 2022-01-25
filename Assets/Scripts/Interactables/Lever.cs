@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 [RequireComponent(typeof(Collider2D))]
 public class Lever : MonoBehaviour
 {
@@ -33,6 +34,12 @@ public class Lever : MonoBehaviour
         tempColor.a = state ? 1f : .7f;
         _animator.SetBool(Disabled, !state);
         _sprite.color = tempColor;
+    }
+
+    public void Moving(bool state)
+    {
+        Debug.Log(name + " pressable: " + _pressable);
+        _collider.enabled = _pressable && !state;
     }
 
     private void OnPressed()

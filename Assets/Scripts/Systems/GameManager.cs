@@ -3,14 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public enum MoveDirection
-{
-    Up,
-    Right,
-    Down,
-    Left
-}
-
 public class GameManager : Singleton<GameManager>
 {
     public static GlobalsSO Globals;
@@ -18,7 +10,7 @@ public class GameManager : Singleton<GameManager>
     private int _selectedLevel = 0;
     public static CameraTransitions Cam = null;
     private PlayerInput _inputSystem;
-    
+
     private bool _menu = false;
 
     private void Awake()
@@ -50,20 +42,15 @@ public class GameManager : Singleton<GameManager>
     private void OnExit(InputValue value)
     {
         if (!value.isPressed) return;
-        RoomsManager.Instance.ResetLevel();
-        SceneManager.LoadScene(0);
-    }
-
-    public static Vector2 GetDirection(MoveDirection dir)
-    {
-        return dir switch
+        if (SceneManager.GetActiveScene().name == Globals.mainMenuSceneName)
         {
-            MoveDirection.Up => Vector2.up,
-            MoveDirection.Right => Vector2.right,
-            MoveDirection.Down => Vector2.down,
-            MoveDirection.Left => Vector2.left,
-            _ => Vector2.zero
-        };
+            Application.Quit();
+        }
+        else
+        {
+            RoomsManager.Instance.ResetLevel();
+            SceneManager.LoadScene(Globals.mainMenuSceneName);
+        }
     }
 
     private void OnSwitchLevel(InputValue value)
@@ -88,16 +75,9 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(Globals.AdvanceLevel(_currLevel));
     }
 
-    public void SetMenuLevel(string index){
+    public void SetMenuLevel(string index)
+    {
         _menu = int.TryParse(index, out _selectedLevel);
-        if(_menu){
-        Debug.Log("Convertion done");
-
-        }
-        else{
-        Debug.Log("Convertion failed");
-
-        }
-        
+        Debug.Log(_menu ? "Convertion done" : "Convertion failed");
     }
 }
