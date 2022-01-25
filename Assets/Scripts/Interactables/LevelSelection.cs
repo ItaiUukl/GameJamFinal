@@ -1,30 +1,24 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Text.RegularExpressions;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Collider2D))]
 public class LevelSelection : MonoBehaviour
 {
     private bool _wasActivated = false;
-
+    public GameObject[] doors_array;
+    private GlobalsSO globalSO;
+   
     private void Start()
     {
-        GetComponent<Collider2D>().isTrigger = true;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        string sceneString = gameObject.name;
-        Debug.Log(sceneString);
-        if (!_wasActivated && other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
-        {
-            string stringindex = sceneString.Substring(sceneString.Length - 1);
-            GameManager.Instance.SetLevel(int.Parse(stringindex));
-            SelectLevel(sceneString);
+        int currLevel = PlayerPrefs.GetInt("currLevel", 1);
+        for(int i = 0; i < doors_array.Length; i++){
+            //if(i + 2 > int.Parse(GlobalsSO.AdvanceLevel(i))
+                doors_array[i].SetActive(false);
         }
     }
-
     // Called when level is completed. Switches to next level with UI, etc.
-    private void SelectLevel(string sceneString) => SceneManager.LoadScene(sceneString);
+    private void SelectLevel(string stringScene) => SceneManager.LoadScene(stringScene);
 
 }

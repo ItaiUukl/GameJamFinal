@@ -15,8 +15,11 @@ public class GameManager : Singleton<GameManager>
 {
     public static GlobalsSO Globals;
     private int _currLevel = 0;
+    private int _selectedLevel = 0;
     public static CameraTransitions Cam = null;
     private PlayerInput _inputSystem;
+    
+    private bool _menu = false;
 
     private void Awake()
     {
@@ -40,13 +43,15 @@ public class GameManager : Singleton<GameManager>
     {
         Debug.Log("reset");
         if (!value.isPressed) return;
+        if (_menu) SetLevel(_selectedLevel - 1);
         Cam.ExitTransition(true);
     }
 
     private void OnExit(InputValue value)
     {
         if (!value.isPressed) return;
-        Application.Quit();
+        RoomsManager.Instance.ResetLevel();
+        SceneManager.LoadScene(0);
     }
 
     public static Vector2 GetDirection(MoveDirection dir)
@@ -73,6 +78,7 @@ public class GameManager : Singleton<GameManager>
         RoomsManager.Instance.ResetLevel();
         _currLevel = Math.Max(0, lvl) % Globals.levelAdvancement.Count;
         SceneManager.LoadScene(Globals.AdvanceLevel(_currLevel));
+        PlayerPrefs.SetInt("currLevel", _currLevel);
     }
 
     // Resets the current level
@@ -80,5 +86,18 @@ public class GameManager : Singleton<GameManager>
     {
         RoomsManager.Instance.ResetLevel();
         SceneManager.LoadScene(Globals.AdvanceLevel(_currLevel));
+    }
+
+    public void SetMenuLevel(string index){
+        _menu = int.TryParse(index, out _selectedLevel);
+        if(_menu){
+        Debug.Log("Convertion done");
+
+        }
+        else{
+        Debug.Log("Convertion failed");
+
+        }
+        
     }
 }

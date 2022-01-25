@@ -151,7 +151,11 @@ public class Player : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (ctx.started)
+        if(!IsActive){
+            _isJumpPressed = false;
+            _isJumpPressed = false;
+        }
+        else if (ctx.started)
         {
             _isJumpPressed = true;
             _isJumpReleased = false;
