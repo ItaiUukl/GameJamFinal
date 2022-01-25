@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b934533ec04d498409c03fc44326d74d, type: 3}
   m_Name: Globals
   m_EditorClassIdentifier: 
+  mainMenuSceneName: Main Menu
   levelAdvancement:
   - level1
   - level2
@@ -21,6 +22,8 @@ MonoBehaviour:
   - level6
   - level7
   - level8
+  - level9
+  - level10
   inputAction: {fileID: -944628639613478452, guid: 3a28cb42729c8a74bb5efc4685531545, type: 3}
   outlineWidth: 0.15
   outlineTextureMode: 0
