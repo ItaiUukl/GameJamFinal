@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
 
     private float _height;
     private float _distance;
-    
+
     private bool _isJumpPressed;
     private bool _isJumpReleased;
 
@@ -141,6 +141,7 @@ public class Player : MonoBehaviour
         _animator.SetFloat(AnimatorVelocityY, _rb.velocity.y);
         _animator.SetBool(AnimatorRun, Mathf.Abs(_rb.velocity.x) > 0.05);
     }
+
     public void Activate()
     {
         IsActive = true;
@@ -154,7 +155,11 @@ public class Player : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (ctx.started)
+        if (!IsActive)
+        {
+            _isJumpPressed = _isJumpReleased = false;
+        }
+        else if (ctx.started)
         {
             _isJumpPressed = true;
             _isJumpReleased = false;
