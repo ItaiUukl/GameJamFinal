@@ -122,7 +122,10 @@ public class Room : MonoBehaviour
                 {
                     l.SetActivation(!state);
                 }
-                l.Moving(!state);
+                if (IsMoving)
+                {
+                    l.Moving(!state);
+                }
             }
         }
     }
