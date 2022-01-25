@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b934533ec04d498409c03fc44326d74d, type: 3}
   m_Name: Globals
   m_EditorClassIdentifier: 
+  mainMenuSceneName: Main Menu
   levelAdvancement:
   - level1
   - level2
