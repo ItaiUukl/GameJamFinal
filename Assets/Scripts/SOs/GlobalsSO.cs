@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -10,6 +8,7 @@ public class GlobalsSO : ScriptableObject
 {
     [FormerlySerializedAs("stringAdvancement")]
     public string mainMenuSceneName;
+
     public List<string> levelAdvancement;
 
     public InputActionAsset inputAction;
