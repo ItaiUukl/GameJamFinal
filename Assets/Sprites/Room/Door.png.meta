@@ -16,10 +16,16 @@ TextureImporter:
     second: Lever Disabled
   - first:
       213: 5213229242370633579
-    second: Door_0
+    second: Door_R
   - first:
       213: 436563815456543028
-    second: Door_1
+    second: Door_R1
+  - first:
+      213: -8689009931745917929
+    second: Door_R
+  - first:
+      213: 289144848352645085
+    second: Door_L
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -109,15 +115,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Door_0
+      name: Door_L1
       rect:
         serializedVersion: 2
         x: 0
         y: 5
         width: 90
         height: 162
-      alignment: 5
-      pivot: {x: 1, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -130,7 +136,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Door_1
+      name: Door_R1
       rect:
         serializedVersion: 2
         x: 92
@@ -146,6 +152,48 @@ TextureImporter:
       bones: []
       spriteID: 43193162a7cfe0600800000000000000
       internalID: 436563815456543028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door_R
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 5
+        width: 92
+        height: 162
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7148170e08f6a6780800000000000000
+      internalID: -8689009931745917929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Door_L
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 5
+        width: 92
+        height: 162
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddf81b625bf330400800000000000000
+      internalID: 289144848352645085
       vertices: []
       indices: 
       edges: []
