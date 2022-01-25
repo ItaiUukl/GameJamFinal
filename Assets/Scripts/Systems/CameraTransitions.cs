@@ -11,17 +11,18 @@ public class CameraTransitions : MonoBehaviour
 
     private bool _reloadOnExit;
 
-    [Header("Transition Animation Settings")]
-    [SerializeField] private float transitionDuration = .5f;
+    [Header("Transition Animation Settings")] [SerializeField]
+    private float transitionDuration = .5f;
 
     private const Ease TransitionEase = Ease.OutQuart;
     // private static readonly int Shake = Animator.StringToHash("Shake");
     // private static readonly int Exit = Animator.StringToHash("Exit");
 
-    [Header("Camera Shake Animation Settings")]
-    [SerializeField] private float shakeStrength = .5f;
-    [SerializeField] private float shakeDuration = .35f;
-    [SerializeField] private int shakeVibrato = 15;
+    [Header("Camera Shake Animation Settings")] [SerializeField]
+    private float shakeStrength = .4f;
+
+    [SerializeField] private float shakeDuration = .3f;
+    [SerializeField] private int shakeVibrato = 25;
 
     private void Awake()
     {
@@ -66,8 +67,9 @@ public class CameraTransitions : MonoBehaviour
 
     public void ShakeCamera(Vector2 dir, float strength)
     {
-        _camTransform.DOShakePosition(shakeDuration, dir * shakeStrength * strength, (int) (shakeVibrato * strength));
-
+        _camTransform.DOShakePosition(shakeDuration,
+            (dir + (Vector2.Perpendicular(dir) * 0.1f)) * shakeStrength * strength,
+            (int) (shakeVibrato * strength));
         // _animator.SetTrigger(Shake);
     }
 
