@@ -173,6 +173,6 @@ public class Player : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        _xInput = IsActive ? ctx.ReadValue<float>() : 0;
+        _xInput = IsActive ? (int) ctx.ReadValue<float>() : 0;
     }
 }
