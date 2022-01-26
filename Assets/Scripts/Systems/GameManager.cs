@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+    
         _inputSystem = gameObject.AddComponent<PlayerInput>();
         _inputSystem.actions = Globals.inputAction;
         _inputSystem.defaultActionMap = "General";

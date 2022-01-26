@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     private GroundDetector _groundDetector;
 
     private Vector2 _velocity = Vector2.zero;
-
+    private Vector2 _currMove;
     private float _xInput;
     private float _jumpForce;
     private float _gravity;
