@@ -24,10 +24,12 @@ MonoBehaviour:
   - level8
   - level9
   - level10
+  - level11
   inputAction: {fileID: -944628639613478452, guid: 3a28cb42729c8a74bb5efc4685531545, type: 3}
   outlineWidth: 0.15
   outlineTextureMode: 0
   outlineAnimationSpeed: 0.4
+  MenuColor: {r: 0.23529412, g: 0.40784314, b: 0.54901963, a: 1}
   outlineMaterials:
   - {fileID: 2100000, guid: 101502b80ffd05c479c2c819836b6e0b, type: 2}
   - {fileID: 2100000, guid: c3cc31aeb1fd833409c033c21de485e0, type: 2}

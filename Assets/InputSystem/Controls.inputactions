@@ -7,12 +7,12 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "cf1af490-cb25-48c0-a173-8a9ae47f22ea",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Jump",
@@ -107,7 +107,7 @@
                     "id": "5da5f6df-222b-45e4-85c1-18bec5b64e02",
                     "path": "<XInputController>/leftStick/left",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "AxisDeadzone,Clamp(max=1)",
                     "groups": "",
                     "action": "Move",
                     "isComposite": false,
@@ -118,7 +118,7 @@
                     "id": "93bb1398-79f9-4970-9ac8-c596297c7fc0",
                     "path": "<XInputController>/leftStick/right",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "AxisDeadzone,Clamp(max=1)",
                     "groups": "",
                     "action": "Move",
                     "isComposite": false,
@@ -150,6 +150,39 @@
                     "name": "positive",
                     "id": "476d0550-e4bf-45fe-b915-455bbf6726f9",
                     "path": "<XInputController>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "24691f7b-430f-453f-8cd0-a3089d879983",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "Clamp(max=1),AxisDeadzone",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "7d91ac46-62a5-43ad-bbf6-e87740361926",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "be4da646-9506-4f52-98fb-af7e8a2aea96",
+                    "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

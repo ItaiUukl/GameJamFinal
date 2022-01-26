@@ -17,7 +17,6 @@ public class LevelTransition : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-      
         if (!_wasActivated && other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
         {
             if(menu){
