@@ -1,7 +1,13 @@
 fileFormatVersion: 2
 guid: 650e3e08f9b29cc4386f8b3c6e97a988
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 6875079111340007291
+    second: Space_Up
+  - first:
+      213: 8746059415684039367
+    second: Space_Down
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -548,6 +554,48 @@ TextureImporter:
       bones: []
       spriteID: cacc94182bda59930800000000000000
       internalID: 4149413613876661420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Space_Up
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 565
+        width: 217
+        height: 97
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7f112aa600396f50800000000000000
+      internalID: 6875079111340007291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Space_Down
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 464
+        width: 217
+        height: 86
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c2ce4033be306970800000000000000
+      internalID: 8746059415684039367
       vertices: []
       indices: 
       edges: []
