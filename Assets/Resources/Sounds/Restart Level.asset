@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05807e4d2d6190a49b81b23bd4fd1e5b, type: 3}
-  m_Name: Qube Enter Level
+  m_Name: Restart Level
   m_EditorClassIdentifier: 
-  soundName: Qube Enter Level
-  clip: {fileID: 8300000, guid: c649da6cfc446b141856d5ab7007a8aa, type: 3}
-  clipsList: []
+  soundName: Restart Level
+  clip: {fileID: 8300000, guid: 8c3ee1bc70161684899c0736a476a080, type: 3}
+  clipsList:
+  - {fileID: 8300000, guid: 8c3ee1bc70161684899c0736a476a080, type: 3}
+  - {fileID: 8300000, guid: 313da4c8587cf664d81bc218be23b4d8, type: 3}
+  - {fileID: 8300000, guid: 6413ad346baabcd46940a3c3fe21839e, type: 3}
   volume: 1
   pitch: 1
   loop: 0

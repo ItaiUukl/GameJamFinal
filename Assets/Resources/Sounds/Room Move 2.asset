@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundName: Room Move 2
   clip: {fileID: 8300000, guid: d43eb2a1ed828d74d9305c2185a45df8, type: 3}
+  clipsList: []
   volume: 1
-  pitch: 0
+  pitch: 1
   loop: 0
   overlap: 0
   source: {fileID: 0}

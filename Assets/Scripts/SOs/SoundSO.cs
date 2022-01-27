@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Sound", menuName = "SoundSO")]
@@ -5,8 +6,9 @@ public class SoundSO : ScriptableObject
 {
     public string soundName;
     public AudioClip clip;
-    [Range(0f,1f)] public float volume;
-    [Range(.1f,3f)] public float pitch;
+    public List<AudioClip> clipsList;
+    [Range(0f,1f)] public float volume = 1f;
+    [Range(.1f,3f)] public float pitch = 1f;
     public bool loop;
     public bool overlap;
     
@@ -29,6 +31,10 @@ public class SoundSO : ScriptableObject
 
     public void Play()
     {
+        if (clipsList.Count > 0)
+        {
+            source.clip = clipsList[Random.Range(0, clipsList.Count - 1)];
+        }
         source.Play();
     }
 }
