@@ -10,7 +10,7 @@
                     "type": "Value",
                     "id": "cf1af490-cb25-48c0-a173-8a9ae47f22ea",
                     "expectedControlType": "Button",
-                    "processors": "",
+                    "processors": "AxisDeadzone",
                     "interactions": "",
                     "initialStateCheck": true
                 },
@@ -389,6 +389,45 @@
                     "action": "SwitchLevel",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "MainMenu",
+            "id": "e290e5a4-59cb-4247-bd0c-df2140a25f4d",
+            "actions": [
+                {
+                    "name": "StartLevel",
+                    "type": "Button",
+                    "id": "06a6fd21-38e5-47cb-bf76-791b788b2141",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4b53096e-6b0e-4aa4-a476-fc327c1396ea",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc7f6b0e-0eae-4b04-a7e1-dc155d02bee3",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

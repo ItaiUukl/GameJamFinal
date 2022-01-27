@@ -7,14 +7,17 @@ public class GameManager : Singleton<GameManager>
 {
     public static GlobalsSO Globals;
     private int _currLevel = 0;
-    private int _selectedLevel = 0;
     public static CameraTransitions Cam = null;
     private PlayerInput _inputSystem;
     private bool _menu = true;
 
+    public int maxUnlockedLevel;
+
     private void Awake()
     {
         Globals = Resources.LoadAll<GlobalsSO>("Globals")[0];
+        maxUnlockedLevel = PlayerPrefs.GetInt("currLevel", 1);
+        Debug.Log("max lvl is " + maxUnlockedLevel);
     }
 
     public void DoNothing()
@@ -35,11 +38,6 @@ public class GameManager : Singleton<GameManager>
     {
         Debug.Log("reset");
         if (!value.isPressed) return;
-        if (_menu) 
-        {
-            SetLevel(_selectedLevel - 1);
-            _menu = false;
-        }
         Cam.ExitTransition(true);
         AudioManager.Instance.Play("Restart Level");
     }
@@ -69,9 +67,12 @@ public class GameManager : Singleton<GameManager>
     {
         RoomsManager.Instance.ResetLevel();
         _currLevel = Math.Max(0, lvl) % Globals.levelAdvancement.Count;
-        int unlockedLevel = PlayerPrefs.GetInt("currLevel", 1);
-        if(unlockedLevel < _currLevel+1)
-            PlayerPrefs.SetInt("currLevel", _currLevel+1);
+        if (maxUnlockedLevel < _currLevel + 1)
+        {
+            maxUnlockedLevel = _currLevel + 1;
+            PlayerPrefs.SetInt("currLevel", _currLevel + 1);
+        }
+
         SceneManager.LoadScene(Globals.AdvanceLevel(_currLevel));
     }
 
@@ -80,11 +81,5 @@ public class GameManager : Singleton<GameManager>
     {
         RoomsManager.Instance.ResetLevel();
         SceneManager.LoadScene(Globals.AdvanceLevel(_currLevel));
-    }
-
-    public void SetMenuLevel(string index)
-    {
-        _menu = int.TryParse(index, out _selectedLevel);
-        Debug.Log(_menu ? "Convertion done" : "Convertion failed");
     }
 }

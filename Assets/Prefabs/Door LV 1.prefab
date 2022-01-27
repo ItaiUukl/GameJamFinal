@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 5637378345445529090}
   - component: {fileID: 5637378345445529116}
   - component: {fileID: 329038661172142897}
-  - component: {fileID: 7447586453866287500}
+  - component: {fileID: 7436776055270912763}
   m_Layer: 11
   m_Name: Door LV 1
   m_TagString: Finish
@@ -411,7 +411,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7447586453866287500
+--- !u!114 &7436776055270912763
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -420,10 +420,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5637378345445529091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9102ee00b131e8947ab07e693eee9a94, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f41aeeb707401648903b877dd63bc8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: 1
+  levelNumber: 1
+  tutorButton: {fileID: 3864598006328187143}
+  unlockedSprite: {fileID: 436563815456543028, guid: 3e2ee680eeae26048a6ae7cdeeb4152c, type: 3}
+  lockedSprite: {fileID: 6936692723106717497, guid: 3e2ee680eeae26048a6ae7cdeeb4152c, type: 3}
+  doorSprite: {fileID: 1863867949634898326}
+  numberSprites:
+  - {fileID: 3864598007049653873}
 --- !u!1 &6626344613192025922
 GameObject:
   m_ObjectHideFlags: 0

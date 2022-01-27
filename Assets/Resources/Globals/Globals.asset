@@ -29,7 +29,9 @@ MonoBehaviour:
   outlineWidth: 0.15
   outlineTextureMode: 0
   outlineAnimationSpeed: 0.4
-  MenuColor: {r: 0.23529412, g: 0.40784314, b: 0.54901963, a: 1}
+  menuColor: {r: 1, g: 1, b: 1, a: 1}
+  doorOrangeColor: {r: 0.97647065, g: 0.5647059, b: 0.38431376, a: 1}
+  doorBlueColor: {r: 0.23529412, g: 0.40784314, b: 0.54901963, a: 255}
   outlineMaterials:
   - {fileID: 2100000, guid: 101502b80ffd05c479c2c819836b6e0b, type: 2}
   - {fileID: 2100000, guid: c3cc31aeb1fd833409c033c21de485e0, type: 2}
