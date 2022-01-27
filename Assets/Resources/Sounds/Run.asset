@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: Run
   m_EditorClassIdentifier: 
   soundName: Run
-  clip: {fileID: 8300000, guid: 6113937a91a79c342b6b0aabe39e67a9, type: 3}
-  clipsList: []
+  clip: {fileID: 8300000, guid: 1a913ac4052f6df4095b5569d77ff7fc, type: 3}
+  clipsList:
+  - {fileID: 8300000, guid: 1a913ac4052f6df4095b5569d77ff7fc, type: 3}
+  - {fileID: 8300000, guid: 39d1796da6f370245b5cabf339d5381f, type: 3}
+  - {fileID: 8300000, guid: b95ea399cb0e3a14e851057d8dab6ee7, type: 3}
+  - {fileID: 8300000, guid: a6a5a8592655dcc418e7b9b7ddef10e8, type: 3}
   volume: 1
   pitch: 1
-  loop: 1
+  loop: 0
   overlap: 0
   source: {fileID: 0}

@@ -33,7 +33,7 @@ public class SoundSO : ScriptableObject
     {
         if (clipsList.Count > 0)
         {
-            source.clip = clipsList[Random.Range(0, clipsList.Count - 1)];
+            source.clip = clipsList[Random.Range(0, clipsList.Count)];
         }
         source.Play();
     }

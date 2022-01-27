@@ -41,6 +41,7 @@ public class GameManager : Singleton<GameManager>
             _menu = false;
         }
         Cam.ExitTransition(true);
+        AudioManager.Instance.Play("Restart Level");
     }
 
     private void OnExit(InputValue value)
