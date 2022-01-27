@@ -3,35 +3,29 @@ guid: 9579c4d1e0b26244c943559e76f7807f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2646632210091966348
-    second: Background
+      213: -8045002839287462340
+    second: Page
   - first:
-      213: 7684537235002591551
-    second: Log
+      213: 117766740416743565
+    second: Press A to start
   - first:
-      213: -4880102284528158475
-    second: Analogstick_2
+      213: 2038092165162834412
+    second: Press space to start
   - first:
-      213: 8477476404214639954
-    second: Analogstick_0
+      213: -7112594596665702785
+    second: Logo
   - first:
-      213: 5885742286590926058
-    second: Tutorial_0
+      213: 6684012242998773103
+    second: Quby
   - first:
-      213: -4051489298793785166
-    second: Analogstick_1
+      213: 2127813190358817664
+    second: Compasses
   - first:
-      213: 7159199218121594486
-    second: Title screen_6
+      213: 7517533804708137765
+    second: Pencils
   - first:
-      213: -887377095911101225
-    second: Button_0
-  - first:
-      213: -7732300390704986842
-    second: Button_1
-  - first:
-      213: 2097090723468178265
-    second: Y Button
+      213: -3653621363717492065
+    second: Pen
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -76,7 +70,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 122
+  spritePixelsToUnits: 112
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -121,13 +115,139 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Background
+      name: Page
       rect:
         serializedVersion: 2
         x: 0
+        y: 257
+        width: 2234
+        height: 1440
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c36034bba886a5090800000000000000
+      internalID: -8045002839287462340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Press A to start
+      rect:
+        serializedVersion: 2
+        x: 2242
+        y: 1630
+        width: 488
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8845e8f93462a100800000000000000
+      internalID: 117766740416743565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Press space to start
+      rect:
+        serializedVersion: 2
+        x: 2242
+        y: 1558
+        width: 579
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce99904a602c84c10800000000000000
+      internalID: 2038092165162834412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo
+      rect:
+        serializedVersion: 2
+        x: 2243
+        y: 1135
+        width: 655
+        height: 418
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f76c06206ecfa4d90800000000000000
+      internalID: -7112594596665702785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Quby
+      rect:
+        serializedVersion: 2
+        x: 2241
+        y: 832
+        width: 331
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f65cd4ab8b162cc50800000000000000
+      internalID: 6684012242998773103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Compasses
+      rect:
+        serializedVersion: 2
+        x: 2234
+        y: 720
+        width: 766
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08b5abfa2d2878d10800000000000000
+      internalID: 2127813190358817664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pencils
+      rect:
+        serializedVersion: 2
+        x: 2236
         y: 0
-        width: 2356
-        height: 1380
+        width: 536
+        height: 720
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -135,20 +255,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4708c520706454bd0800000000000000
-      internalID: -2646632210091966348
+      spriteID: 52b8e907a25a35860800000000000000
+      internalID: 7517533804708137765
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Log
+      name: Pen
       rect:
         serializedVersion: 2
-        x: 2367
-        y: 1060
-        width: 496
-        height: 320
+        x: 2771
+        y: 339
+        width: 574
+        height: 369
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,176 +276,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f39879b96e5f4aa60800000000000000
-      internalID: 7684537235002591551
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Analogstick_2
-      rect:
-        serializedVersion: 2
-        x: 2363
-        y: 786
-        width: 169
-        height: 123
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5f8702ff3d4664cb0800000000000000
-      internalID: -4880102284528158475
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Analogstick_0
-      rect:
-        serializedVersion: 2
-        x: 2363
-        y: 917
-        width: 170
-        height: 122
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 25d28f0cfdb06a570800000000000000
-      internalID: 8477476404214639954
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_0
-      rect:
-        serializedVersion: 2
-        x: 2363
-        y: 675
-        width: 364
-        height: 104
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aec5fb7fc6b5ea150800000000000000
-      internalID: 5885742286590926058
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Analogstick_1
-      rect:
-        serializedVersion: 2
-        x: 2536
-        y: 917
-        width: 172
-        height: 122
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2b8991ec2f736c7c0800000000000000
-      internalID: -4051489298793785166
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Title screen_6
-      rect:
-        serializedVersion: 2
-        x: 2366
-        y: 545
-        width: 362
-        height: 108
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 676546002c59a5360800000000000000
-      internalID: 7159199218121594486
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Button_0
-      rect:
-        serializedVersion: 2
-        x: 2373
-        y: 426
-        width: 97
-        height: 110
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7dca6689b376fa3f0800000000000000
-      internalID: -887377095911101225
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Button_1
-      rect:
-        serializedVersion: 2
-        x: 2485
-        y: 436
-        width: 95
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6254a6b13c951b490800000000000000
-      internalID: -7732300390704986842
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Y Button
-      rect:
-        serializedVersion: 2
-        x: 2586
-        y: 437
-        width: 95
-        height: 98
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9537612f6ec5a1d10800000000000000
-      internalID: 2097090723468178265
+      spriteID: f9237d73ababb4dc0800000000000000
+      internalID: -3653621363717492065
       vertices: []
       indices: 
       edges: []
