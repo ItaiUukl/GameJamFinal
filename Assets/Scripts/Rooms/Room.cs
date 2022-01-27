@@ -45,6 +45,14 @@ public class Room : MonoBehaviour
         _player = FindObjectOfType<Player>();
     }
 
+    private void Update()
+    {
+        if (maxSpeed < GameManager.Globals.maxSlowRoomSpeed && IsMoving)
+        {
+            AudioManager.Instance.Play("Slow Room");
+        }
+    }
+
     private void FixedUpdate()
     {
         _velocity = Mathf.Min(Time.fixedDeltaTime * acceleration + _velocity, maxSpeed) * _moveDir.magnitude;

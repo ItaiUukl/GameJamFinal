@@ -85,6 +85,10 @@ public class Player : MonoBehaviour
             }
             else
             {
+                if (_velocity.x != 0)
+                {
+                    AudioManager.Instance.Play("Run");
+                }
                 _coyote = _velocity.y < _jumpForce ? coyoteTime : _coyote;
 
                 if (_isJumpPressed)
