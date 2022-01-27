@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05807e4d2d6190a49b81b23bd4fd1e5b, type: 3}
+  m_Name: Restart Level
+  m_EditorClassIdentifier: 
+  soundName: Restart Level
+  clip: {fileID: 8300000, guid: 8c3ee1bc70161684899c0736a476a080, type: 3}
+  clipsList:
+  - {fileID: 8300000, guid: 8c3ee1bc70161684899c0736a476a080, type: 3}
+  - {fileID: 8300000, guid: 313da4c8587cf664d81bc218be23b4d8, type: 3}
+  - {fileID: 8300000, guid: 6413ad346baabcd46940a3c3fe21839e, type: 3}
+  volume: 1
+  pitch: 1
+  loop: 0
+  overlap: 0
+  source: {fileID: 0}

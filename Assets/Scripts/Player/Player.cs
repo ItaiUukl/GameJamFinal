@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     // public bool IsGrounded { set; get; }
 
     public bool IsActive { set; get; }
+    
+    private bool _isPaused = true;
 
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
@@ -61,8 +63,10 @@ public class Player : MonoBehaviour
         _rb.sharedMaterial = new PhysicsMaterial2D {friction = 0};
 
         _sprite = GetComponent<SpriteRenderer>();
+        _sprite.enabled = false;
 
         _animator = GetComponent<Animator>();
+        _animator.enabled = false;
 
         _groundDetector = GetComponentInChildren<GroundDetector>();
     }
@@ -70,6 +74,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_isPaused) return;
         _velocity.x = _xInput * speed;
         if (_xInput != 0) _sprite.flipX = _xInput < 0;
 
@@ -86,6 +91,10 @@ public class Player : MonoBehaviour
             }
             else
             {
+                if (_velocity.x != 0)
+                {
+                    AudioManager.Instance.Play("Run");
+                }
                 _coyote = _velocity.y < _jumpForce ? coyoteTime : _coyote;
 
                 if (_isJumpPressed)
@@ -145,7 +154,15 @@ public class Player : MonoBehaviour
 
     public void Activate()
     {
+        _isPaused = false;
         IsActive = true;
+    }
+
+    public void EnterLevel()
+    {
+        _sprite.enabled = true;
+        _animator.enabled = true;
+        AudioManager.Instance.Play("Qube Enter Level");
     }
 
     private void UpdateForces()

@@ -45,6 +45,14 @@ public class Room : MonoBehaviour
         _player = FindObjectOfType<Player>();
     }
 
+    private void Update()
+    {
+        if (maxSpeed < GameManager.Globals.maxSlowRoomSpeed && IsMoving)
+        {
+            AudioManager.Instance.Play("Slow Room");
+        }
+    }
+
     private void FixedUpdate()
     {
         _velocity = Mathf.Min(Time.fixedDeltaTime * acceleration + _velocity, maxSpeed) * _moveDir.magnitude;
@@ -56,6 +64,7 @@ public class Room : MonoBehaviour
     {
         if (_blockedSides[dir]) return;
         _moveDir = MoveDirectionUtils.ToVector2(dir);
+        AudioManager.Instance.Play("Room Move");
         if (_collider.IsTouchingLayers(LayerMask.NameToLayer(GlobalsSO.PlayerLayer)))
         {
             _player.transform.SetParent(transform);
@@ -78,6 +87,7 @@ public class Room : MonoBehaviour
         if (_moveDir != MoveDirectionUtils.ToVector2(side)) return;
         _velocity = 0;
         FixPosition(side, other);
+        AudioManager.Instance.Play("Room Hit");
         GameManager.Cam.ShakeCamera();
         _moveDir = Vector2.zero;
     }

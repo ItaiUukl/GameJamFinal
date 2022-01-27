@@ -13,6 +13,8 @@ public class GlobalsSO : ScriptableObject
 
     public InputActionAsset inputAction;
 
+    public float maxSlowRoomSpeed = 10;
+
     [Header("Outline")] public float outlineWidth = .2f;
     public LineTextureMode outlineTextureMode = LineTextureMode.Tile;
     public float outlineAnimationSpeed = .15f;

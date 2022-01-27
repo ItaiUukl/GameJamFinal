@@ -31,7 +31,7 @@ public class GameManager : Singleton<GameManager>
         _inputSystem.defaultActionMap = "General";
         _inputSystem.notificationBehavior = PlayerNotifications.SendMessages;
         _inputSystem.actions.Enable();
-
+        AudioManager.Instance.Play("Music");
     }
 
     private void OnReset(InputValue value)
@@ -39,6 +39,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("reset");
         if (!value.isPressed) return;
         Cam.ExitTransition(true);
+        AudioManager.Instance.Play("Restart Level");
     }
 
     private void OnExit(InputValue value)
