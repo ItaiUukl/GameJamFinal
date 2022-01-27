@@ -25,7 +25,7 @@ public class CameraTransitions : MonoBehaviour
 
     public void OnFinishedEnter()
     {
-        _player.IsActive = true;
+        _player.EnterLevel();
     }
 
     public void OnStartedExit()

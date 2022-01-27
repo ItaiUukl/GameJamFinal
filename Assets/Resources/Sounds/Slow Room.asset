@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Slow Room
   m_EditorClassIdentifier: 
   soundName: Slow Room
-  clip: {fileID: 8300000, guid: e052ad7e8ebbe0842a7321263e8dd6ec, type: 3}
+  clip: {fileID: 8300000, guid: 983dfc405e24389439817b91176d20a0, type: 3}
+  clipsList: []
   volume: 1
-  pitch: 0
-  loop: 1
+  pitch: 1
+  loop: 0
   overlap: 0
   source: {fileID: 0}

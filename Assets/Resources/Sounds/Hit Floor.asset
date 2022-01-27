@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Hit Floor
   m_EditorClassIdentifier: 
   soundName: Hit Floor
-  clip: {fileID: 8300000, guid: e4906f981c28bdb438ef9778e8af02e6, type: 3}
+  clip: {fileID: 8300000, guid: 049c773a88785d94792e32fb29d6bc19, type: 3}
+  clipsList:
+  - {fileID: 8300000, guid: 049c773a88785d94792e32fb29d6bc19, type: 3}
+  - {fileID: 8300000, guid: 691f35feae333bf4ca9c1a5b7990f1d8, type: 3}
+  - {fileID: 8300000, guid: 3dc328163b63e1448bb8e24fff47d964, type: 3}
   volume: 1
-  pitch: 0
+  pitch: 1
   loop: 0
   overlap: 0
   source: {fileID: 0}
