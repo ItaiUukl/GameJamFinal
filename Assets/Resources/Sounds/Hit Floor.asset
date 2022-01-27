@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundName: Hit Floor
   clip: {fileID: 8300000, guid: e4906f981c28bdb438ef9778e8af02e6, type: 3}
+  clipsList: []
   volume: 1
-  pitch: 0
+  pitch: 1
   loop: 0
   overlap: 0
   source: {fileID: 0}

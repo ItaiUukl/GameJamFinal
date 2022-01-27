@@ -23,12 +23,12 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-    
         _inputSystem = gameObject.AddComponent<PlayerInput>();
         _inputSystem.actions = Globals.inputAction;
         _inputSystem.defaultActionMap = "General";
         _inputSystem.notificationBehavior = PlayerNotifications.SendMessages;
         _inputSystem.actions.Enable();
+        AudioManager.Instance.Play("Music");
     }
 
     private void OnReset(InputValue value)

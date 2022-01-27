@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundName: Restart Level 2
   clip: {fileID: 8300000, guid: 313da4c8587cf664d81bc218be23b4d8, type: 3}
+  clipsList: []
   volume: 1
-  pitch: 0
+  pitch: 1
   loop: 0
   overlap: 0
   source: {fileID: 0}

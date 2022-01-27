@@ -54,6 +54,7 @@ public class Lever : MonoBehaviour
         {
             _pressable = false;
             _animator.SetTrigger(Pressed);
+            AudioManager.Instance.Play("Lever");
         }
     }
 }
