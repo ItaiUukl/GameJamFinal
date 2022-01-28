@@ -32,8 +32,8 @@ public class GlobalsSO : ScriptableObject
         PlayerLayer = "Player",
         DefaultLayer = "Default";
 
-    public string AdvanceLevel(int currLevel)
+    public string AdvanceLevel(int currLevelIdx)
     {
-        return levelAdvancement[currLevel];
+        return levelAdvancement[currLevelIdx];
     }
 }
