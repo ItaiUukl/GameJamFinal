@@ -76,6 +76,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SetLevel(int lvl)
     {
+        Debug.Log("starting lvl " + (lvl + 1));
         _currLevelIdx = Math.Max(0, lvl) % Globals.levelAdvancement.Count;
         if (maxUnlockedLevel < _currLevelIdx + 1)
         {
@@ -85,7 +86,6 @@ public class GameManager : Singleton<GameManager>
 
         Cam.ExitTransition();
     }
-
 
     // Resets the current level
     public void LoadLevel()

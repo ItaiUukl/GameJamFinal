@@ -8,8 +8,7 @@ public class CameraTransitions : MonoBehaviour
     private static readonly int AnimatorShake = Animator.StringToHash("Shake");
     private static readonly int AnimatorShakeSlow = Animator.StringToHash("ShakeSlow");
     private static readonly int AnimatorExit = Animator.StringToHash("Exit");
-
-
+    
     private void Awake()
     {
         GameManager.Cam = this;
