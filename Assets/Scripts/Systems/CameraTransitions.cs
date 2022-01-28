@@ -5,7 +5,7 @@ public class CameraTransitions : MonoBehaviour
     private Player _player;
     private Animator _animator;
 
-    private bool _reloadOnExit;
+    // private bool _reloadOnExit;
 
     private static readonly int Shake = Animator.StringToHash("Shake");
     private static readonly int Exit = Animator.StringToHash("Exit");
@@ -35,14 +35,15 @@ public class CameraTransitions : MonoBehaviour
 
     public void OnFinishedExit()
     {
-        if (_reloadOnExit)
-        {
-            GameManager.Instance.ReloadLevel();
-        }
-        else
-        {
-            GameManager.Instance.NextLevel();
-        }
+        // if (_reloadOnExit)
+        // {
+        //     GameManager.Instance.ReloadLevel();
+        // }
+        // else
+        // {
+            // GameManager.Instance.NextLevel();
+        // }
+        GameManager.Instance.LoadLevel();
     }
 
     public void ShakeCamera()
@@ -50,9 +51,9 @@ public class CameraTransitions : MonoBehaviour
         _animator.SetTrigger(Shake);
     }
 
-    public void ExitTransition(bool reload)
+    public void ExitTransition()
     {
-        _reloadOnExit = reload;
+        // _reloadOnExit = reload;
 
         _animator.SetTrigger(Exit);
     }

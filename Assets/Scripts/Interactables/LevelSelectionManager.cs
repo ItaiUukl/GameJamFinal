@@ -6,6 +6,19 @@ using UnityEngine.SceneManagement;
 public class LevelSelectionManager : MonoBehaviour
 {
     public int? DoorPlayerAt = null;
+    private Animator _animator;
+    private static readonly int AnimatorOnPress = Animator.StringToHash("On Press");
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+    }
+    
+    private void OnPlay(InputValue value)
+    {
+        if (!value.isPressed) return;
+        _animator.SetBool(AnimatorOnPress, true);
+    }
 
     private void OnStartLevel(InputValue value)
     {
@@ -13,7 +26,6 @@ public class LevelSelectionManager : MonoBehaviour
         if (DoorPlayerAt != null)
         {
             GameManager.Instance.SetLevel((int) DoorPlayerAt - 1);
-            // GameManager.Cam.ExitTransition(false);
         }
     }
 }
