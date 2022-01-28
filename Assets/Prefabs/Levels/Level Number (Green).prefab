@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 5925665421290837578}
   - component: {fileID: 5175502213925123338}
   m_Layer: 0
-  m_Name: Level 4 Name
+  m_Name: Level Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
