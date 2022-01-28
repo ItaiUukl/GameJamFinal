@@ -1,31 +1,46 @@
+using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.Text.RegularExpressions;
-using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
+[RequireComponent(typeof(Collider2D))]
 public class LevelSelection : MonoBehaviour
 {
-    private bool _wasActivated = false;
-    public GameObject[] doors_array;
-    private GlobalsSO globalSO;
-   
+    [SerializeField] private int levelNumber;
+    [SerializeField] private GameObject tutorButton;
+    [SerializeField] private Sprite unlockedSprite, lockedSprite;
+    [SerializeField] private SpriteRenderer doorSprite;
+    [SerializeField] private SpriteRenderer[] numberSprites;
+    private LevelSelectionManager _manager;
+    private bool _isLocked = true;
+
     private void Start()
     {
-        //PlayerPrefs.SetInt("currLevel", 1);
-        int currLevel = PlayerPrefs.GetInt("currLevel", 1);
-        for(int i = 0; i < currLevel; i++){
-            //if(i + 2 > int.Parse(GlobalsSO.AdvanceLevel(i))
-            doors_array[i].SetActive(true);
-        }
-    }
-    // Called when level is completed. Switches to next level with UI, etc.
-    private void SelectLevel(string stringScene) => SceneManager.LoadScene(stringScene);
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-         if (!_wasActivated && other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
+        Debug.Log("created door " + name);
+        GetComponent<Collider2D>().isTrigger = true;
+        _manager = FindObjectOfType<LevelSelectionManager>();
+        tutorButton.SetActive(false);
+        _isLocked = GameManager.Instance.maxUnlockedLevel < levelNumber;
+
+        // set door sprite
+        doorSprite.sprite = _isLocked ? lockedSprite : unlockedSprite;
+        foreach (var sr in numberSprites)
         {
-            SceneManager.LoadScene("Main Menu");
+            sr.color = _isLocked ? GameManager.Globals.doorBlueColor : GameManager.Globals.doorOrangeColor;
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (_isLocked || other.gameObject.layer != LayerMask.NameToLayer(GlobalsSO.PlayerLayer)) return;
+        // Activating the sprite above menu door;
+        tutorButton.SetActive(true);
+        _manager.DoorPlayerAt = levelNumber;
+    }
+
+    // Deactivating the sprite above menu door;
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        tutorButton.SetActive(false);
+        _manager.DoorPlayerAt = null;
+    }
 }

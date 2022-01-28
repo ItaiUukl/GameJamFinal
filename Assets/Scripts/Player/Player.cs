@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -190,6 +191,6 @@ public class Player : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        _xInput = IsActive ? (int) ctx.ReadValue<float>() : 0;
+        _xInput = IsActive ? Math.Sign(ctx.ReadValue<float>()) : 0;
     }
 }
