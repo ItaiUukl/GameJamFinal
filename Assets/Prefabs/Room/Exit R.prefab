@@ -264,13 +264,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8673723214626924310}
     m_Modifications:
+    - target: {fileID: 1138569593261289110, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5070832109336802826, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
       propertyPath: m_Name
       value: Door Sprite Mask
       objectReference: {fileID: 0}
     - target: {fileID: 5070832109336802826, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6923775231598965665, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
       propertyPath: m_RootOrder

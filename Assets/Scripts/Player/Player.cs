@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     // public bool IsGrounded { set; get; }
 
     public bool IsActive { set; get; }
-    
+
     private bool _isPaused = true;
 
     private Rigidbody2D _rb;
@@ -28,7 +28,6 @@ public class Player : MonoBehaviour
     private GroundDetector _groundDetector;
 
     private Vector2 _velocity = Vector2.zero;
-    private Vector2 _currMove;
     private float _xInput;
     private float _jumpForce;
     private float _gravity;
@@ -41,6 +40,10 @@ public class Player : MonoBehaviour
 
     private bool _isJumpPressed;
     private bool _isJumpReleased;
+
+    private Action _onReachedDestCallback = null;
+    private float? _destX = null;
+    private bool IsWalkingToDoor => _destX != null;
 
     private static readonly int AnimatorVelocityY = Animator.StringToHash("VelocityY");
     private static readonly int AnimatorRun = Animator.StringToHash("Run");
@@ -75,6 +78,16 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (_isPaused) return;
+        if (IsWalkingToDoor && (transform.position.x * _xInput > _destX * _xInput || _rb.velocity.x == 0))
+        {
+            _onReachedDestCallback.Invoke();
+            _rb.velocity = Vector2.zero;
+            _xInput = 0;
+            _destX = null;
+            _isPaused = true;
+            return;
+        }
+
         _velocity.x = _xInput * speed;
         if (_xInput != 0) _sprite.flipX = _xInput < 0;
 
@@ -95,6 +108,7 @@ public class Player : MonoBehaviour
                 {
                     AudioManager.Instance.Play("Run");
                 }
+
                 _coyote = _velocity.y < _jumpForce ? coyoteTime : _coyote;
 
                 if (_isJumpPressed)
@@ -192,5 +206,15 @@ public class Player : MonoBehaviour
     public void OnMove(InputAction.CallbackContext ctx)
     {
         _xInput = IsActive ? Math.Sign(ctx.ReadValue<float>()) : 0;
+    }
+
+    public void MoveTowards(float destX, Action callback)
+    {
+        IsActive = false;
+        _onReachedDestCallback = callback;
+        _xInput = Math.Sign(destX - transform.position.x);
+        _xInput /= 2;
+        _rb.velocity = new Vector2(_xInput * 0.1f, 0);
+        _destX = destX;
     }
 }
