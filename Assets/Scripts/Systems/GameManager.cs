@@ -10,13 +10,7 @@ public class GameManager : Singleton<GameManager>
     public static CameraTransitions Cam = null;
 
     private PlayerInput _inputSystem;
-<<<<<<< Updated upstream
-    private bool _menu = true;
-=======
-
-    // private bool _menu = true;
     public bool isGamepadConnected;
->>>>>>> Stashed changes
 
     public int maxUnlockedLevel;
 
