@@ -24,7 +24,7 @@ public class LevelTransition : MonoBehaviour
     {
         Debug.Log("next level");
         _wasActivated = true;
-        GameManager.Cam.ExitTransition(false);
+        GameManager.Instance.NextLevel();
     }
 
 }

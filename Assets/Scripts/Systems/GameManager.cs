@@ -8,8 +8,8 @@ public class GameManager : Singleton<GameManager>
     public static GlobalsSO Globals;
     private int _currLevel = 0;
     public static CameraTransitions Cam = null;
+
     private PlayerInput _inputSystem;
-    private bool _menu = true;
     public bool isGamepadConnected;
 
     public int maxUnlockedLevel;
@@ -45,7 +45,7 @@ public class GameManager : Singleton<GameManager>
     {
         Debug.Log("reset");
         if (!value.isPressed) return;
-        Cam.ExitTransition(true);
+        ReloadLevel();
         AudioManager.Instance.Play("Restart Level");
     }
 
@@ -65,14 +65,17 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSwitchLevel(InputValue value)
     {
-        SetLevel(_currLevel + (int) value.Get<float>());
+        SetLevel(_currLevel + Math.Sign(value.Get<float>()));
     }
 
+    // advances game to the next level
     public void NextLevel() => SetLevel(_currLevel + 1);
+
+    // Resets the current level
+    private void ReloadLevel() => SetLevel(_currLevel);
 
     public void SetLevel(int lvl)
     {
-        RoomsManager.Instance.ResetLevel();
         _currLevel = Math.Max(0, lvl) % Globals.levelAdvancement.Count;
         if (maxUnlockedLevel < _currLevel + 1)
         {
@@ -80,11 +83,12 @@ public class GameManager : Singleton<GameManager>
             PlayerPrefs.SetInt("currLevel", _currLevel + 1);
         }
 
-        SceneManager.LoadScene(Globals.AdvanceLevel(_currLevel));
+        Cam.ExitTransition();
     }
 
+
     // Resets the current level
-    public void ReloadLevel()
+    public void LoadLevel()
     {
         RoomsManager.Instance.ResetLevel();
         SceneManager.LoadScene(Globals.AdvanceLevel(_currLevel));
