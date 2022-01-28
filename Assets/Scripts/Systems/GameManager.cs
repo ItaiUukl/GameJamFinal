@@ -10,7 +10,7 @@ public class GameManager : Singleton<GameManager>
     public static CameraTransitions Cam = null;
 
     private PlayerInput _inputSystem;
-    public bool isGamepadConnected;
+    public static bool IsGamepadConnected { get; private set; }
 
     public int maxUnlockedLevel; // first level is 1 (not an index)
 
@@ -36,7 +36,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("Keyboard connected = " + (InputSystem.GetDevice(typeof(Keyboard)) is Keyboard));
         Debug.Log("Gamepad connected = " + (InputSystem.GetDevice(typeof(Gamepad)) is Gamepad));
         Debug.Log("Joystick connected = " + (InputSystem.GetDevice(typeof(Gamepad)) is Joystick));
-        isGamepadConnected = InputSystem.GetDevice(typeof(Gamepad)) is Gamepad;
+        IsGamepadConnected = InputSystem.GetDevice(typeof(Gamepad)) is Gamepad;
 
         AudioManager.Instance.Play("Music");
     }
@@ -82,6 +82,7 @@ public class GameManager : Singleton<GameManager>
             maxUnlockedLevel = _currLevelIdx + 1;
             PlayerPrefs.SetInt("currLevel", _currLevelIdx + 1);
         }
+
         Cam.ExitTransition();
     }
 
