@@ -85,10 +85,10 @@ public class Room : MonoBehaviour
     {
         SetBlocked(side, true);
         if (_moveDir != MoveDirectionUtils.ToVector2(side)) return;
+        GameManager.Cam.ShakeCamera(MoveDirectionUtils.ToVector2(side), _velocity / maxSpeed);
         _velocity = 0;
         FixPosition(side, other);
         AudioManager.Instance.Play("Room Hit");
-        GameManager.Cam.ShakeCamera();
         _moveDir = Vector2.zero;
     }
 

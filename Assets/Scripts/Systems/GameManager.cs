@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public static GlobalsSO Globals;
-    private int _currLevel = 0;
+    private int _currLevelIdx = 0;
     public static CameraTransitions Cam = null;
 
     private PlayerInput _inputSystem;
-    public bool isGamepadConnected;
+    public static bool IsGamepadConnected { get; private set; }
 
-    public int maxUnlockedLevel;
+    public int maxUnlockedLevel; // first level is 1 (not an index)
 
     private void Awake()
     {
@@ -36,7 +36,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("Keyboard connected = " + (InputSystem.GetDevice(typeof(Keyboard)) is Keyboard));
         Debug.Log("Gamepad connected = " + (InputSystem.GetDevice(typeof(Gamepad)) is Gamepad));
         Debug.Log("Joystick connected = " + (InputSystem.GetDevice(typeof(Gamepad)) is Joystick));
-        isGamepadConnected = InputSystem.GetDevice(typeof(Gamepad)) is Gamepad;
+        IsGamepadConnected = InputSystem.GetDevice(typeof(Gamepad)) is Gamepad;
 
         AudioManager.Instance.Play("Music");
     }
@@ -65,22 +65,22 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSwitchLevel(InputValue value)
     {
-        SetLevel(_currLevel + Math.Sign(value.Get<float>()));
+        SetLevel(_currLevelIdx + Math.Sign(value.Get<float>()));
     }
 
     // advances game to the next level
-    public void NextLevel() => SetLevel(_currLevel + 1);
+    public void NextLevel() => SetLevel(_currLevelIdx + 1);
 
     // Resets the current level
-    private void ReloadLevel() => SetLevel(_currLevel);
+    private void ReloadLevel() => SetLevel(_currLevelIdx);
 
     public void SetLevel(int lvl)
     {
-        _currLevel = Math.Max(0, lvl) % Globals.levelAdvancement.Count;
-        if (maxUnlockedLevel < _currLevel + 1)
+        _currLevelIdx = Math.Max(0, lvl) % Globals.levelAdvancement.Count;
+        if (maxUnlockedLevel < _currLevelIdx + 1)
         {
-            maxUnlockedLevel = _currLevel + 1;
-            PlayerPrefs.SetInt("currLevel", _currLevel + 1);
+            maxUnlockedLevel = _currLevelIdx + 1;
+            PlayerPrefs.SetInt("currLevel", _currLevelIdx + 1);
         }
 
         Cam.ExitTransition();
@@ -91,6 +91,6 @@ public class GameManager : Singleton<GameManager>
     public void LoadLevel()
     {
         RoomsManager.Instance.ResetLevel();
-        SceneManager.LoadScene(Globals.AdvanceLevel(_currLevel));
+        SceneManager.LoadScene(Globals.AdvanceLevel(_currLevelIdx));
     }
 }
