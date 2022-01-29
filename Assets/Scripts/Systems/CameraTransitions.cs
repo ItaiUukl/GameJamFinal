@@ -18,17 +18,26 @@ public class CameraTransitions : MonoBehaviour
     {
         _player = FindObjectOfType<Player>();
         _animator = GetComponent<Animator>();
-        _player.IsActive = false;
+        if (_player)
+        {
+            _player.IsActive = false;
+        }
     }
 
     public void OnFinishedEnter()
     {
-        _player.EnterLevel();
+        if (_player)
+        {
+            _player.EnterLevel();
+        }
     }
 
     public void OnStartedExit()
     {
-        _player.IsActive = false;
+        if (_player)
+        {
+            _player.IsActive = false;
+        }
     }
 
     public void OnFinishedExit()

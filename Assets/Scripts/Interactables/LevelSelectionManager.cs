@@ -17,6 +17,7 @@ public class LevelSelectionManager : MonoBehaviour
     private void OnPlay(InputValue value)
     {
         if (!value.isPressed) return;
+        Debug.Log("play");
         _animator.SetBool(AnimatorOnPress, true);
     }
 
