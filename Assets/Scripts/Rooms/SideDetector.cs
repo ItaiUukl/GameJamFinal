@@ -28,10 +28,13 @@ public class SideDetector : Directional
                 _triggerEnter(_side, other);
             }
         }
-        else if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer) &&
-                 other.gameObject.transform.parent != transform.parent)
+        else if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
         {
-            other.gameObject.transform.SetParent(transform.parent);
+            Player player = other.GetComponent<Player>();
+            if (player && player.roomToEnter != transform.parent)
+            {
+                player.roomToEnter = transform.parent;
+            }
         }
     }
 
@@ -47,6 +50,14 @@ public class SideDetector : Directional
             if (directional && directional.GetSide() == MoveDirectionUtils.ToOppositeDir(_side))
             {
                 _triggerExit(_side);
+            }
+        }
+        else if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
+        {
+            Player player = other.GetComponent<Player>();
+            if (player && player.transform.parent != player.roomToEnter)
+            {
+                other.transform.SetParent(player.roomToEnter);
             }
         }
     }
