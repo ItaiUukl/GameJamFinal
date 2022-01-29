@@ -4,7 +4,7 @@ public class CameraFollowPlayer : MonoBehaviour
 {
     [SerializeField] private float followSpeed = 1,
         leftBound = -.3f,
-        rightBound = 47.1f;
+        rightBound = 44.5f;
 
     private Transform _player;
 
