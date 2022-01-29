@@ -44,7 +44,7 @@ public class GameManager : Singleton<GameManager>
     private void OnReset(InputValue value)
     {
         Debug.Log("reset");
-        if (!value.isPressed) return;
+        if (!value.isPressed || SceneManager.GetActiveScene().name == Globals.mainMenuSceneName) return;
         ReloadLevel();
         AudioManager.Instance.Play("Restart Level");
     }
@@ -58,14 +58,20 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            RoomsManager.Instance.ResetLevel();
-            SceneManager.LoadScene(Globals.mainMenuSceneName);
+            LoadMainMenu();
         }
     }
 
     private void OnSwitchLevel(InputValue value)
     {
+        if (SceneManager.GetActiveScene().name == Globals.mainMenuSceneName) return;
         SetLevel(_currLevelIdx + Math.Sign(value.Get<float>()));
+    }
+
+    public void LoadMainMenu()
+    {
+        RoomsManager.Instance.ResetLevel();
+        SceneManager.LoadScene(Globals.mainMenuSceneName);
     }
 
     // advances game to the next level
