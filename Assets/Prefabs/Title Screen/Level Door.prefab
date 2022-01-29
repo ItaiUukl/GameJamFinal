@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 115256059066695250}
   - component: {fileID: 6230535434306646106}
-  - component: {fileID: 4276501057910267420}
+  - component: {fileID: 3857561449075579044}
   m_Layer: 11
   m_Name: Level Door
   m_TagString: Finish
@@ -61,7 +61,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 1.62}
   m_EdgeRadius: 0
---- !u!114 &4276501057910267420
+--- !u!114 &3857561449075579044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,9 +70,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 402834322766265304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9102ee00b131e8947ab07e693eee9a94, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f41aeeb707401648903b877dd63bc8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelNumber: 1
+  tutorButton: {fileID: 4899964813866709844}
+  unlockedSprite: {fileID: 8810642634522116868}
+  lockedSprite: {fileID: 5808240871608340672}
 --- !u!1 &1855967869272522686
 GameObject:
   m_ObjectHideFlags: 0

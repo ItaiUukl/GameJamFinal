@@ -7,9 +7,7 @@ public class LevelSelection : MonoBehaviour
 {
     [SerializeField] private int levelNumber;
     [SerializeField] private GameObject tutorButton;
-    [SerializeField] private Sprite unlockedSprite, lockedSprite;
-    [SerializeField] private SpriteRenderer doorSprite;
-    [SerializeField] private SpriteRenderer[] numberSprites;
+    [SerializeField] private GameObject unlockedSprite, lockedSprite;
     private LevelSelectionManager _manager;
     private bool _isLocked = true;
 
@@ -20,13 +18,8 @@ public class LevelSelection : MonoBehaviour
         _manager = FindObjectOfType<LevelSelectionManager>();
         tutorButton.SetActive(false);
         _isLocked = GameManager.Instance.maxUnlockedLevel < levelNumber;
-
-        // set door sprite
-        doorSprite.sprite = _isLocked ? lockedSprite : unlockedSprite;
-        foreach (var sr in numberSprites)
-        {
-            sr.color = _isLocked ? GameManager.Globals.doorBlueColor : GameManager.Globals.doorOrangeColor;
-        }
+        unlockedSprite.SetActive(!_isLocked);
+        lockedSprite.SetActive(_isLocked);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
