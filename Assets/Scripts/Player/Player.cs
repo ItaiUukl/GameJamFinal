@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        GameManager.Instance.DoNothing(); // TODO: delete
+        GameManager.Instance.Init(); // TODO: delete
         _height = maxJumpPeak;
         _distance = maxPeakDistance;
         UpdateForces();
