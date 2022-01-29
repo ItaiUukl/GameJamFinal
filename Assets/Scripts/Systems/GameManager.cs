@@ -13,6 +13,13 @@ public class GameManager : Singleton<GameManager>
     public static bool IsGamepadConnected { get; private set; }
 
     public int maxUnlockedLevel; // first level is 1 (not an index)
+    
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
+    private static void DisableCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     private void Awake()
     {
@@ -21,7 +28,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("max lvl is " + maxUnlockedLevel);
     }
 
-    public void DoNothing()
+    public void Init()
     {
     } // TODO: delete
 

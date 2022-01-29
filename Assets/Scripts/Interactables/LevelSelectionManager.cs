@@ -11,6 +11,7 @@ public class LevelSelectionManager : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.Init();
         _animator = GetComponent<Animator>();
     }
     
