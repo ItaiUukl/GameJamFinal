@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
     private float? _destX = null;
     private bool IsWalkingToDoor => _destX != null;
 
+    public Transform roomToEnter;
+
     private static readonly int AnimatorVelocityY = Animator.StringToHash("VelocityY");
     private static readonly int AnimatorRun = Animator.StringToHash("Run");
     private static readonly int AnimatorJump = Animator.StringToHash("Jump");
