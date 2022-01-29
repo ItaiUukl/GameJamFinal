@@ -156,7 +156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9102ee00b131e8947ab07e693eee9a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: 0
 --- !u!95 &3671636669866316325
 Animator:
   serializedVersion: 3
@@ -265,6 +264,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8673723214626924310}
     m_Modifications:
+    - target: {fileID: 1138569593261289110, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5070832109336802826, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
       propertyPath: m_Name
       value: Door Sprite Mask
