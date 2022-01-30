@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
         _velocity.x = _xInput * speed;
         if (_xInput != 0) _sprite.flipX = _xInput < 0;
 
-        if (_groundDetector.IsGrounded())
+        if (_groundDetector.IsGrounded() || IsWalkingToDoor)
         {
             _animator.SetBool(AnimatorGrounded, true);
             _distance = maxPeakDistance;
@@ -208,6 +208,13 @@ public class Player : MonoBehaviour
     public void OnMove(InputAction.CallbackContext ctx)
     {
         _xInput = IsActive ? Math.Sign(ctx.ReadValue<float>()) : 0;
+    }
+
+    public void Freeze()
+    {
+        IsActive = false;
+        _xInput = 0;
+        _rb.velocity = Vector2.zero;
     }
 
     public void MoveTowards(float destX, Action callback)

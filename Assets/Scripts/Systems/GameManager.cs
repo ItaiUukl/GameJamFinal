@@ -13,10 +13,11 @@ public class GameManager : Singleton<GameManager>
     public static bool IsGamepadConnected { get; private set; }
 
     public int maxUnlockedLevel; // first level is 1 (not an index)
-    
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
     private static void DisableCursor()
     {
+        if (Application.isEditor) return;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

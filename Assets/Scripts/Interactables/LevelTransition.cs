@@ -32,6 +32,7 @@ public class LevelTransition : MonoBehaviour
     {
         Debug.Log("next level");
         _mask.enabled = true;
+        _player.Freeze();
         _animator.SetTrigger(AnimatorOpen);
 
         _wasActivated = true;

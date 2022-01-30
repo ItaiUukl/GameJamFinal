@@ -21,7 +21,7 @@ public class LevelSelectionManager : MonoBehaviour
             _player.IsActive = false;
         }
     }
-    
+
     private void OnPlay(InputValue value)
     {
         if (!value.isPressed || _onLevelSelectScreen) return;
@@ -32,16 +32,12 @@ public class LevelSelectionManager : MonoBehaviour
 
     private void OnStartLevel(InputValue value)
     {
-        if (!value.isPressed || !_onLevelSelectScreen) return;
-        if (DoorPlayerAt != null)
-        {
-            GameManager.Instance.SetLevel((int) DoorPlayerAt - 1);
-        }
+        if (!value.isPressed || !_onLevelSelectScreen || DoorPlayerAt == null) return;
+        GameManager.Instance.SetLevel((int) DoorPlayerAt - 1);
     }
 
     private void OnTransitionFinished()
     {
-        
         if (_player)
         {
             _player.EnterLevel();
