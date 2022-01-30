@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelectionManager : MonoBehaviour
 {
-    public int? DoorPlayerAt = null;
+    public LevelSelection? DoorPlayerAt = null;
     private Animator _animator;
     private static readonly int AnimatorOnPress = Animator.StringToHash("On Press");
     private bool _onLevelSelectScreen = false;
@@ -33,7 +34,14 @@ public class LevelSelectionManager : MonoBehaviour
     private void OnStartLevel(InputValue value)
     {
         if (!value.isPressed || !_onLevelSelectScreen || DoorPlayerAt == null) return;
-        GameManager.Instance.SetLevel((int) DoorPlayerAt - 1);
+        DoorPlayerAt.OnDoorEnter();
+        _player.MoveTowards(DoorPlayerAt.PlayerDest, OnPlayerEnteredDoor);
+    }
+
+
+    private void OnPlayerEnteredDoor()
+    {
+        GameManager.Instance.SetLevel(DoorPlayerAt.levelNumber - 1);
     }
 
     private void OnTransitionFinished()
