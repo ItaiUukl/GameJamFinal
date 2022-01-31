@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Qube Enter Level
   m_EditorClassIdentifier: 
   soundName: Qube Enter Level
-  clip: {fileID: 8300000, guid: c649da6cfc446b141856d5ab7007a8aa, type: 3}
+  clip: {fileID: 8300000, guid: 4c2e0ff953c2d2a47be718159d2c0d65, type: 3}
   clipsList: []
-  volume: 1
+  volume: 0.4
   pitch: 1
   loop: 0
   overlap: 0
