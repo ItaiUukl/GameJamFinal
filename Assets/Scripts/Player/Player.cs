@@ -16,8 +16,9 @@ public class Player : MonoBehaviour
     [SerializeField, Min(.0001f)] private float minPeakDistance = .4f;
     [SerializeField, Min(.0001f)] private float fallDistance = .9f;
 
-    public bool isActive;
-    public bool isPaused = true;
+    [NonSerialized] public bool IsActive;
+    [NonSerialized] public bool IsPaused = true;
+    [NonSerialized] public bool InTransition;
 
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
@@ -67,14 +68,19 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (isPaused) return;
+        if (IsPaused) return;
         if (IsWalkingToDoor && (transform.position.x * _xInput > _destX * _xInput || _rb.velocity.x == 0))
         {
             _onReachedDestCallback.Invoke();
             _rb.velocity = Vector2.zero;
             _xInput = 0;
             _destX = null;
-            isPaused = true;
+            IsPaused = true;
+            return;
+        }
+        
+        if (InTransition)
+        {
             return;
         }
 
@@ -115,8 +121,13 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isPaused) return;
+        if (IsPaused) return;
 
+        if (InTransition && !IsWalkingToDoor)
+        {
+            TransitionUpdate();
+            return;
+        }
         _velocity.x = _xInput * speed;
         if (_groundDetector.IsGrounded())
         {
@@ -175,8 +186,8 @@ public class Player : MonoBehaviour
 
     public void Activate()
     {
-        isPaused = false;
-        isActive = true;
+        IsPaused = false;
+        IsActive = true;
     }
 
     public void EnterLevel()
@@ -192,7 +203,7 @@ public class Player : MonoBehaviour
     {
         _rb.isKinematic = true;
         _rb.velocity = Vector2.zero;
-        isPaused = true;
+        IsPaused = true;
         transform.localPosition = _initPos;
         _animator.Rebind();
         _animator.Update(0f);
@@ -200,17 +211,9 @@ public class Player : MonoBehaviour
         _sprite.enabled = false;
     }
 
-    private void UpdateForces(float h, float d)
-    {
-        _height = h;
-        _distance = d;
-        _jumpForce = (2 * _height * speed) / _distance;
-        _gravity = (2 * _height * speed * speed) / (_distance * _distance);
-    }
-
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (!isActive)
+        if (!IsActive)
         {
             _isJumpPressed = _isJumpReleased = false;
         }
@@ -228,16 +231,35 @@ public class Player : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        _xInput = isActive ? Math.Sign(ctx.ReadValue<float>()) : 0;
+        _xInput = IsActive ? Math.Sign(ctx.ReadValue<float>()) : 0;
     }
 
     public void MoveTowards(float destX, Action callback)
     {
-        isActive = false;
+        IsActive = false;
         _onReachedDestCallback = callback;
         _xInput = Math.Sign(destX - transform.position.x);
         _xInput /= 2;
         _rb.velocity = new Vector2(_xInput * 0.1f, 0);
         _destX = destX;
+    }
+
+    private void UpdateForces(float h, float d)
+    {
+        _height = h;
+        _distance = d;
+        _jumpForce = (2 * _height * speed) / _distance;
+        _gravity = (2 * _height * speed * speed) / (_distance * _distance);
+    }
+
+    private void TransitionUpdate()
+    {
+        _velocity.x = 0;
+        _velocity.y -= _gravity * Time.fixedDeltaTime;
+        _rb.velocity = _velocity;
+        
+        _animator.SetBool(AnimatorGrounded, _groundDetector.IsGrounded());
+        _animator.SetFloat(AnimatorVelocityY, _rb.velocity.y);
+        _animator.SetBool(AnimatorRun, Mathf.Abs(_rb.velocity.x) > 0.05);
     }
 }

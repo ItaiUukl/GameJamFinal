@@ -26,7 +26,7 @@ public class MainMenuManager : MonoBehaviour
         }
         else
         {
-            _player.isPaused = true;
+            _player.IsPaused = true;
         }
     }
 

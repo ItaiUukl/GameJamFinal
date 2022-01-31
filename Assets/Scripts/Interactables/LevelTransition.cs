@@ -32,7 +32,7 @@ public class LevelTransition : MonoBehaviour
     {
         _mask = _player.transform.position.x > transform.position.x ? leftMask : rightMask;
         _mask.SetActive(true);
-        _player.isActive = false;
+        _player.InTransition = true;
         _animator.SetTrigger(AnimatorOpen);
 
         _wasActivated = true;
