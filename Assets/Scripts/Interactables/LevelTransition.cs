@@ -1,10 +1,11 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Collider2D))]
 public class LevelTransition : MonoBehaviour
 {
     private static readonly int AnimatorOpen = Animator.StringToHash("Open");
+
+    [SerializeField] private SpriteMask rightMask, leftMask;
 
     private bool _wasActivated = false;
     private Animator _animator;
@@ -15,7 +16,6 @@ public class LevelTransition : MonoBehaviour
     {
         GetComponent<Collider2D>().isTrigger = true;
         _animator = GetComponent<Animator>();
-        _mask = GetComponentInChildren<SpriteMask>();
         _player = FindObjectOfType<Player>();
     }
 
@@ -31,7 +31,8 @@ public class LevelTransition : MonoBehaviour
     private void CompleteLevel()
     {
         Debug.Log("next level");
-        _mask.enabled = true;
+        _mask = _player.transform.position.x > transform.position.x ? leftMask : rightMask;
+        _mask.gameObject.SetActive(true);
         _player.Freeze();
         _animator.SetTrigger(AnimatorOpen);
 
