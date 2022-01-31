@@ -90,16 +90,7 @@ public class Player : MonoBehaviour
 
         if (_groundDetector.IsGrounded())
         {
-            _animator.SetBool(AnimatorGrounded, true);
-            _distance = maxPeakDistance;
-            _height = maxJumpPeak;
-            UpdateForces();
-
-            if (_jumpBuffer > 0)
-            {
-                _velocity.y = _jumpForce;
-            }
-            else
+            if (_jumpBuffer <= 0)
             {
                 if (_velocity.x != 0)
                 {
@@ -107,20 +98,10 @@ public class Player : MonoBehaviour
                 }
 
                 _coyote = _velocity.y < _jumpForce ? coyoteTime : _coyote;
-
-                if (_isJumpPressed)
-                {
-                    _isJumpPressed = false;
-                    _animator.SetTrigger(AnimatorJump);
-                    _velocity.y = _jumpForce;
-                    _coyote = 0;
-                }
             }
         }
         else
         {
-            _animator.SetBool(AnimatorGrounded, false);
-
             _coyote = Mathf.Max(_coyote - Time.deltaTime, 0);
         }
 
@@ -135,9 +116,32 @@ public class Player : MonoBehaviour
         if (isPaused) return;
 
         _velocity.x = _xInput * speed;
-
-        if (!_groundDetector.IsGrounded())
+        if (_groundDetector.IsGrounded())
         {
+            _animator.SetBool(AnimatorGrounded, true);
+            _distance = maxPeakDistance;
+            _height = maxJumpPeak;
+            UpdateForces();
+
+            if (_jumpBuffer > 0)
+            {
+                _velocity.y = _jumpForce;
+            }
+            else
+            {
+                if (_isJumpPressed)
+                {
+                    _isJumpPressed = false;
+                    _animator.SetTrigger(AnimatorJump);
+                    _velocity.y = _jumpForce;
+                    _coyote = 0;
+                }
+            }
+        }
+        else
+        {
+            _animator.SetBool(AnimatorGrounded, false);
+            
             _velocity.y = _rb.velocity.y;
 
             if (_rb.velocity.y <= 0)
@@ -172,6 +176,7 @@ public class Player : MonoBehaviour
                 }
             }
         }
+        
 
         _rb.velocity = _velocity;
     }
