@@ -228,6 +228,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ResetMaxLevel",
+                    "type": "Button",
+                    "id": "89bf257b-8b7f-4833-a7f1-b4b38ed78e1b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Exit",
                     "type": "Button",
                     "id": "874133c1-af91-41c1-b714-0a67d4960dcd",
@@ -356,6 +365,17 @@
                     "action": "SwitchLevel",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "903b5f15-9acf-410d-8849-ab9c5aa3397e",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetMaxLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

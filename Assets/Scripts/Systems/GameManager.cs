@@ -64,6 +64,14 @@ public class GameManager : Singleton<GameManager>
         AudioManager.Instance.Play("Restart Level");
     }
 
+    private void OnResetMaxLevel(InputValue value)
+    {
+        if (!value.isPressed) return;
+        PlayerPrefs.SetInt("currLevel", 1);
+        maxUnlockedLevel = 1;
+        LoadMainMenu();
+    }
+
     private void OnExit(InputValue value)
     {
         if (!value.isPressed || SceneManager.GetActiveScene().name == Globals.mainMenuSceneName) return;
