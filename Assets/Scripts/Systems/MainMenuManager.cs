@@ -25,6 +25,7 @@ public class MainMenuManager : MonoBehaviour
         if (_onLevelSelectScreen)
         {
             _animator.SetTrigger(AnimatorIdle);
+            _player.EnterLevel();
         }
         else if (_player)
         {
