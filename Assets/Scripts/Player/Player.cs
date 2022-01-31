@@ -15,29 +15,24 @@ public class Player : MonoBehaviour
     [SerializeField, Min(.0001f)] private float maxPeakDistance = 1.2f;
     [SerializeField, Min(.0001f)] private float minPeakDistance = .4f;
     [SerializeField, Min(.0001f)] private float fallDistance = .9f;
-    
-    private bool _isActive;
 
-    private bool _isPaused = true;
+    public bool isActive;
+    public bool isPaused = true;
 
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
     private Animator _animator;
     private GroundDetector _groundDetector;
 
+    private Vector3 _initPos;
     private Vector2 _velocity = Vector2.zero;
-    private float _xInput;
-    private float _jumpForce;
-    private float _gravity;
+    private float _xInput, _jumpForce, _gravity;
 
-    private float _coyote;
-    private float _jumpBuffer;
+    private float _coyote, _jumpBuffer;
 
-    private float _height;
-    private float _distance;
+    private float _height, _distance;
 
-    private bool _isJumpPressed;
-    private bool _isJumpReleased;
+    private bool _isJumpPressed, _isJumpReleased;
 
     private Action _onReachedDestCallback = null;
     private float? _destX = null;
@@ -45,16 +40,15 @@ public class Player : MonoBehaviour
 
     public Transform roomToEnter;
 
-    private static readonly int AnimatorVelocityY = Animator.StringToHash("VelocityY");
-    private static readonly int AnimatorRun = Animator.StringToHash("Run");
-    private static readonly int AnimatorJump = Animator.StringToHash("Jump");
-    private static readonly int AnimatorGrounded = Animator.StringToHash("Grounded");
-
+    private static readonly int AnimatorVelocityY = Animator.StringToHash("VelocityY"),
+        AnimatorRun = Animator.StringToHash("Run"),
+        AnimatorJump = Animator.StringToHash("Jump"),
+        AnimatorGrounded = Animator.StringToHash("Grounded");
 
     // Use this for initialization
     void Start()
     {
-        GameManager.Instance.Init(); // TODO: delete
+        _initPos = transform.position;
         _height = maxJumpPeak;
         _distance = maxPeakDistance;
         UpdateForces();
@@ -77,19 +71,20 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isPaused) return;
+        if (isPaused) return;
         if (IsWalkingToDoor && (transform.position.x * _xInput > _destX * _xInput || _rb.velocity.x == 0))
         {
             _onReachedDestCallback.Invoke();
             _rb.velocity = Vector2.zero;
             _xInput = 0;
             _destX = null;
-            _isPaused = true;
+            isPaused = true;
             return;
         }
 
         _velocity.x = _xInput * speed;
         if (_xInput != 0) _sprite.flipX = _xInput < 0;
+        // todo: particle system
 
         if (_groundDetector.IsGrounded() || IsWalkingToDoor)
         {
@@ -168,8 +163,8 @@ public class Player : MonoBehaviour
 
     public void Activate()
     {
-        _isPaused = false;
-        _isActive = true;
+        isPaused = false;
+        isActive = true;
     }
 
     public void EnterLevel()
@@ -177,6 +172,16 @@ public class Player : MonoBehaviour
         _sprite.enabled = true;
         _animator.enabled = true;
         AudioManager.Instance.Play("Qube Enter Level");
+    }
+
+    public void Vanish()
+    {
+        Debug.Log("pos = " + _initPos);
+        _sprite.enabled = false;
+        _animator.enabled = false;
+        isPaused = true;
+        GetComponent<Collider2D>().enabled = false;
+        transform.position = _initPos;
     }
 
     private void UpdateForces()
@@ -187,7 +192,7 @@ public class Player : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (!_isActive)
+        if (!isActive)
         {
             _isJumpPressed = _isJumpReleased = false;
         }
@@ -205,22 +210,12 @@ public class Player : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        _xInput = _isActive ? Math.Sign(ctx.ReadValue<float>()) : 0;
-    }
-
-    public void Freeze()
-    {
-        _isActive = false;
-        _xInput = 0;
-        if (_rb)
-        {
-            _rb.velocity = Vector2.zero;
-        }
+        _xInput = isActive ? Math.Sign(ctx.ReadValue<float>()) : 0;
     }
 
     public void MoveTowards(float destX, Action callback)
     {
-        _isActive = false;
+        isActive = false;
         _onReachedDestCallback = callback;
         _xInput = Math.Sign(destX - transform.position.x);
         _xInput /= 2;

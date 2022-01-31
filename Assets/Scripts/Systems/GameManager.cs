@@ -10,7 +10,17 @@ public class GameManager : Singleton<GameManager>
     public static CameraTransitions Cam = null;
 
     private PlayerInput _inputSystem;
-    private bool _hasGameStarted;
+
+    private bool _hasGameStarted = false;
+    public bool HasGameStarted
+    {
+        get
+        {
+            if (_hasGameStarted) return true;
+            _hasGameStarted = true;
+            return false;
+        }
+    }
     public static bool IsGamepadConnected => InputSystem.GetDevice(typeof(Gamepad)) is Gamepad;
 
     public int maxUnlockedLevel; // first level is 1 (not an index)
@@ -33,11 +43,8 @@ public class GameManager : Singleton<GameManager>
     /**
      * returns false if it is it's first call, else true.
      */
-    public bool Init()
+    public void Init()
     {
-        bool prevVal = _hasGameStarted;
-        _hasGameStarted = true;
-        return prevVal;
     }
 
     private void Start()
@@ -53,7 +60,6 @@ public class GameManager : Singleton<GameManager>
 
     private void OnReset(InputValue value)
     {
-        Debug.Log("reset");
         if (!value.isPressed || SceneManager.GetActiveScene().name == Globals.mainMenuSceneName) return;
         ReloadLevel();
         AudioManager.Instance.Play("Restart Level");

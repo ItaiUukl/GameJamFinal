@@ -1,8 +1,6 @@
 #nullable enable
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -18,17 +16,17 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
-        bool firstInit = !GameManager.Instance.Init();
         _animator = GetComponent<Animator>();
         _player = FindObjectOfType<Player>();
-        _onLevelSelectScreen = !firstInit;
+        bool hasGameStarted = GameManager.Instance.HasGameStarted;
+        _onLevelSelectScreen = !hasGameStarted;
         if (_onLevelSelectScreen)
         {
             _animator.SetTrigger(AnimatorIdle);
         }
-        else if (_player)
+        else
         {
-            _player.Freeze();
+            _player.isPaused = true;
         }
     }
 
@@ -36,7 +34,6 @@ public class MainMenuManager : MonoBehaviour
     {
         if (!value.isPressed || _onLevelSelectScreen) return;
         _onLevelSelectScreen = true;
-        Debug.Log("play");
         _animator.SetBool(AnimatorOnPress, true);
     }
 
@@ -49,13 +46,12 @@ public class MainMenuManager : MonoBehaviour
 
     private void OnExit(InputValue value)
     {
-        Debug.Log("esc from lvl select" + _onLevelSelectScreen);
         if (!value.isPressed) return;
         if (_onLevelSelectScreen)
         {
             _animator.SetTrigger(AnimatorEsc);
             _onLevelSelectScreen = false;
-            // todo: reset player
+            _player.Vanish();
         }
         else
         {
@@ -71,9 +67,6 @@ public class MainMenuManager : MonoBehaviour
 
     private void OnTransitionFinished()
     {
-        if (_player)
-        {
-            _player.EnterLevel();
-        }
+        _player.EnterLevel();
     }
 }

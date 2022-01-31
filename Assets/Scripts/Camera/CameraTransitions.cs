@@ -12,6 +12,7 @@ public class CameraTransitions : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.Instance.Init();
         GameManager.Cam = this;
     }
 
@@ -19,26 +20,17 @@ public class CameraTransitions : MonoBehaviour
     {
         _player = FindObjectOfType<Player>();
         _animator = GetComponent<Animator>();
-        if (_player)
-        {
-            _player.Freeze();
-        }
+        _player.isPaused = true;
     }
 
     public void OnFinishedEnter()
     {
-        if (_player)
-        {
-            _player.EnterLevel();
-        }
+        _player.EnterLevel();
     }
 
     public void OnStartedExit()
     {
-        if (_player)
-        {
-            _player.Freeze();
-        }
+        _player.isActive = false;
     }
 
     public void OnFinishedExit()

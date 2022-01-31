@@ -19,7 +19,6 @@ public class LevelSelection : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("created door " + name);
         GetComponent<Collider2D>().isTrigger = true;
         _manager = FindObjectOfType<MainMenuManager>();
         tutorButton.SetActive(false);
