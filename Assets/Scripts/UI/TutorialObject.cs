@@ -8,7 +8,7 @@ public class TutorialObject : MonoBehaviour
 {
     [SerializeField] private GameObject keyboardSprite;
     [SerializeField] private GameObject controllerSprite;
-    
+
     // Start is called before the first frame update
     void Start()
     {

@@ -11,7 +11,7 @@ public class GameManager : Singleton<GameManager>
 
     private PlayerInput _inputSystem;
     private bool _hasGameStarted;
-    public static bool IsGamepadConnected { get; private set; }
+    public static bool IsGamepadConnected => InputSystem.GetDevice(typeof(Gamepad)) is Gamepad;
 
     public int maxUnlockedLevel; // first level is 1 (not an index)
 
@@ -47,8 +47,6 @@ public class GameManager : Singleton<GameManager>
         _inputSystem.defaultActionMap = "General";
         _inputSystem.notificationBehavior = PlayerNotifications.SendMessages;
         _inputSystem.actions.Enable();
-
-        IsGamepadConnected = InputSystem.GetDevice(typeof(Gamepad)) is Gamepad;
 
         AudioManager.Instance.Play("Music");
     }
