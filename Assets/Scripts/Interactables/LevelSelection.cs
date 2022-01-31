@@ -6,6 +6,8 @@ public class LevelSelection : MonoBehaviour
     [SerializeField] public int levelNumber;
     [SerializeField] private GameObject tutorButton;
     [SerializeField] private GameObject unlockedSprite, lockedSprite;
+    [SerializeField] private SpriteMask rightMask, leftMask;
+
     private LevelSelectionManager _manager;
     private bool _isLocked = true;
     private SpriteMask _mask;
@@ -17,7 +19,6 @@ public class LevelSelection : MonoBehaviour
         Debug.Log("created door " + name);
         GetComponent<Collider2D>().isTrigger = true;
         _manager = FindObjectOfType<LevelSelectionManager>();
-        _mask = GetComponentInChildren<SpriteMask>();
         tutorButton.SetActive(false);
         _isLocked = GameManager.Instance.maxUnlockedLevel < levelNumber;
         unlockedSprite.SetActive(!_isLocked);
@@ -40,8 +41,9 @@ public class LevelSelection : MonoBehaviour
         _manager.DoorPlayerAt = null;
     }
 
-    public void OnDoorEnter()
+    public void OnDoorEnter(Transform player)
     {
+        _mask = player.position.x > transform.position.x ? leftMask : rightMask;
         wasActivated = _mask.enabled = true;
     }
 }
