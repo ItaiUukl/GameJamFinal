@@ -20,11 +20,9 @@ public class Fireworks : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer) || _isIn)
-        {
-            _isIn = true;
-            StartCoroutine(Shoot());
-        }
+        if (other.gameObject.layer != LayerMask.NameToLayer(GlobalsSO.PlayerLayer) && !_isIn) return;
+        _isIn = true;
+        StartCoroutine(Shoot());
     }
 
     private IEnumerator Shoot()
