@@ -47,10 +47,7 @@ public class GameManager : Singleton<GameManager>
         _inputSystem.defaultActionMap = "General";
         _inputSystem.notificationBehavior = PlayerNotifications.SendMessages;
         _inputSystem.actions.Enable();
-
-        Debug.Log("Keyboard connected = " + (InputSystem.GetDevice(typeof(Keyboard)) is Keyboard));
-        Debug.Log("Gamepad connected = " + (InputSystem.GetDevice(typeof(Gamepad)) is Gamepad));
-        Debug.Log("Joystick connected = " + (InputSystem.GetDevice(typeof(Gamepad)) is Joystick));
+        
         IsGamepadConnected = InputSystem.GetDevice(typeof(Gamepad)) is Gamepad;
 
         AudioManager.Instance.Play("Music");
