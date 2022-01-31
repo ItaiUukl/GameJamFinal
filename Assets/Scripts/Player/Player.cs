@@ -15,10 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField, Min(.0001f)] private float maxPeakDistance = 1.2f;
     [SerializeField, Min(.0001f)] private float minPeakDistance = .4f;
     [SerializeField, Min(.0001f)] private float fallDistance = .9f;
-
-    // public bool IsGrounded { set; get; }
-
-    public bool IsActive { set; get; }
+    
+    private bool _isActive;
 
     private bool _isPaused = true;
 
@@ -171,7 +169,7 @@ public class Player : MonoBehaviour
     public void Activate()
     {
         _isPaused = false;
-        IsActive = true;
+        _isActive = true;
     }
 
     public void EnterLevel()
@@ -189,7 +187,7 @@ public class Player : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (!IsActive)
+        if (!_isActive)
         {
             _isJumpPressed = _isJumpReleased = false;
         }
@@ -207,19 +205,22 @@ public class Player : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        _xInput = IsActive ? Math.Sign(ctx.ReadValue<float>()) : 0;
+        _xInput = _isActive ? Math.Sign(ctx.ReadValue<float>()) : 0;
     }
 
     public void Freeze()
     {
-        IsActive = false;
+        _isActive = false;
         _xInput = 0;
-        _rb.velocity = Vector2.zero;
+        if (_rb)
+        {
+            _rb.velocity = Vector2.zero;
+        }
     }
 
     public void MoveTowards(float destX, Action callback)
     {
-        IsActive = false;
+        _isActive = false;
         _onReachedDestCallback = callback;
         _xInput = Math.Sign(destX - transform.position.x);
         _xInput /= 2;

@@ -95,6 +95,7 @@ public class RoomsManager : Singleton<RoomsManager>
             l.loop = true;
             l.startWidth = GameManager.Globals.outlineWidth;
             l.textureMode = GameManager.Globals.outlineTextureMode;
+            l.sortingOrder = GameManager.Globals.outlineSortingOrder;
             /* if you would want different line color in the menu
             if(GameManager._menu)
             {

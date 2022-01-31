@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     public static CameraTransitions Cam = null;
 
     private PlayerInput _inputSystem;
+    private bool _hasGameStarted;
     public static bool IsGamepadConnected { get; private set; }
 
     public int maxUnlockedLevel; // first level is 1 (not an index)
@@ -29,9 +30,15 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("max lvl is " + maxUnlockedLevel);
     }
 
-    public void Init()
+    /**
+     * returns false if it is it's first call, else true.
+     */
+    public bool Init()
     {
-    } // TODO: delete
+        bool prevVal = _hasGameStarted;
+        _hasGameStarted = true;
+        return prevVal;
+    }
 
     private void Start()
     {
@@ -40,10 +47,7 @@ public class GameManager : Singleton<GameManager>
         _inputSystem.defaultActionMap = "General";
         _inputSystem.notificationBehavior = PlayerNotifications.SendMessages;
         _inputSystem.actions.Enable();
-
-        Debug.Log("Keyboard connected = " + (InputSystem.GetDevice(typeof(Keyboard)) is Keyboard));
-        Debug.Log("Gamepad connected = " + (InputSystem.GetDevice(typeof(Gamepad)) is Gamepad));
-        Debug.Log("Joystick connected = " + (InputSystem.GetDevice(typeof(Gamepad)) is Joystick));
+        
         IsGamepadConnected = InputSystem.GetDevice(typeof(Gamepad)) is Gamepad;
 
         AudioManager.Instance.Play("Music");
@@ -57,17 +61,19 @@ public class GameManager : Singleton<GameManager>
         AudioManager.Instance.Play("Restart Level");
     }
 
-    private void OnExit(InputValue value)
+    private void OnResetMaxLevel(InputValue value)
     {
         if (!value.isPressed) return;
-        if (SceneManager.GetActiveScene().name == Globals.mainMenuSceneName)
-        {
-            Application.Quit();
-        }
-        else
-        {
-            LoadMainMenu();
-        }
+        PlayerPrefs.SetInt("currLevel", 1);
+        maxUnlockedLevel = 1;
+        _hasGameStarted = false;
+        LoadMainMenu();
+    }
+
+    private void OnExit(InputValue value)
+    {
+        if (!value.isPressed || SceneManager.GetActiveScene().name == Globals.mainMenuSceneName) return;
+        LoadMainMenu();
     }
 
     private void OnSwitchLevel(InputValue value)

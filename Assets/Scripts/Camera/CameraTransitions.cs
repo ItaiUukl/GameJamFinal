@@ -8,7 +8,7 @@ public class CameraTransitions : MonoBehaviour
     private static readonly int AnimatorShake = Animator.StringToHash("Shake");
     private static readonly int AnimatorShakeSlow = Animator.StringToHash("ShakeSlow");
     private static readonly int AnimatorExit = Animator.StringToHash("Exit");
-    
+
     private void Awake()
     {
         GameManager.Cam = this;
@@ -20,7 +20,7 @@ public class CameraTransitions : MonoBehaviour
         _animator = GetComponent<Animator>();
         if (_player)
         {
-            _player.IsActive = false;
+            _player.Freeze();
         }
     }
 
@@ -36,7 +36,7 @@ public class CameraTransitions : MonoBehaviour
     {
         if (_player)
         {
-            _player.IsActive = false;
+            _player.Freeze();
         }
     }
 
@@ -45,11 +45,15 @@ public class CameraTransitions : MonoBehaviour
         GameManager.Instance.LoadLevel();
     }
 
-    public void ShakeCamera(Vector2 dir, float strength)
+    public void ShakeCamera()
     {
-        Debug.Log("shake strength = " + strength);
-        _animator.SetBool(AnimatorShakeSlow, strength < .4);
+        // _animator.SetBool(AnimatorShakeSlow);
         _animator.SetTrigger(AnimatorShake);
+    }
+
+    public void SetSlowShake(bool value)
+    {
+        _animator.SetBool(AnimatorShakeSlow, value);
     }
 
     public void ExitTransition()
