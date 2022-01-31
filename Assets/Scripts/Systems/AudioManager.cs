@@ -16,14 +16,25 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
     
-    public void Play(string name){
-        if(!_sounds.ContainsKey(name)){
-            Debug.LogWarning("Missing Sound:" + name);
+    public void Play(string soundName){
+        if(!_sounds.ContainsKey(soundName)){
+            Debug.LogWarning("Missing Sound:" + soundName);
             return;
         }
-        if (!_sounds[name].IsPlaying())
+        if (_sounds[soundName].overlap || !_sounds[soundName].IsPlaying())
         {
-            _sounds[name].Play();
+            _sounds[soundName].Play();
+        }
+    }
+    
+    public void Stop(string soundName){
+        if(!_sounds.ContainsKey(soundName)){
+            Debug.LogWarning("Missing Sound:" + soundName);
+            return;
+        }
+        if (_sounds[soundName].IsPlaying())
+        {
+            _sounds[soundName].Stop();
         }
     }
 }

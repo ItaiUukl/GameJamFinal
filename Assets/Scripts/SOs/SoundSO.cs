@@ -37,4 +37,9 @@ public class SoundSO : ScriptableObject
         }
         source.Play();
     }
+    
+    public void Stop()
+    {
+        source.Stop();
+    }
 }
