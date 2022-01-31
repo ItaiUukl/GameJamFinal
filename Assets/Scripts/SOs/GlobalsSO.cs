@@ -17,6 +17,7 @@ public class GlobalsSO : ScriptableObject
 
     [Header("Outline")] public float outlineWidth = .2f;
     public LineTextureMode outlineTextureMode = LineTextureMode.Tile;
+    public int outlineSortingOrder = 15;
     public float outlineAnimationSpeed = .15f;
 
     public Color menuColor = Color.white;

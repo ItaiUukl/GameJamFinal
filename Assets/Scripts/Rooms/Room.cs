@@ -24,6 +24,8 @@ public class Room : MonoBehaviour
     private readonly Dictionary<MoveDirection, bool> _blockedSides = new Dictionary<MoveDirection, bool>();
 
     public bool IsMoving => _moveDir.magnitude != 0;
+    private bool IsSlow => maxSpeed < GameManager.Globals.maxSlowRoomSpeed;
+    private bool _isShakingScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -47,9 +49,23 @@ public class Room : MonoBehaviour
 
     private void Update()
     {
-        if (maxSpeed < GameManager.Globals.maxSlowRoomSpeed && IsMoving)
+        if (!IsSlow) return;
+        if (IsMoving)
         {
             AudioManager.Instance.Play("Slow Room");
+            if (!_isShakingScreen)
+            {
+                GameManager.Cam.SetSlowShake(true);
+                _isShakingScreen = true;
+            }
+        }
+        else
+        {
+            if (_isShakingScreen)
+            {
+                GameManager.Cam.SetSlowShake(false);
+                _isShakingScreen = false;
+            }
         }
     }
 
@@ -85,7 +101,7 @@ public class Room : MonoBehaviour
     {
         SetBlocked(side, true);
         if (_moveDir != MoveDirectionUtils.ToVector2(side)) return;
-        GameManager.Cam.ShakeCamera(MoveDirectionUtils.ToVector2(side), _velocity / maxSpeed);
+        GameManager.Cam.ShakeCamera();
         _velocity = 0;
         FixPosition(side, other);
         AudioManager.Instance.Play("Room Hit");
@@ -121,9 +137,9 @@ public class Room : MonoBehaviour
 
     private void SetBlocked(MoveDirection side, bool state)
     {
-        Debug.Log(name  + " blocked: " + state + " in side " + side);
+        Debug.Log(name + " blocked: " + state + " in side " + side);
         _blockedSides[side] = state;
-        
+
         foreach (MoveDirection key in _levers.Keys)
         {
             foreach (Lever l in _levers[key])
@@ -132,6 +148,7 @@ public class Room : MonoBehaviour
                 {
                     l.SetActivation(!state);
                 }
+
                 if (IsMoving)
                 {
                     l.Moving(!state);
