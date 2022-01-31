@@ -66,6 +66,7 @@ public class GameManager : Singleton<GameManager>
         if (!value.isPressed) return;
         PlayerPrefs.SetInt("currLevel", 1);
         maxUnlockedLevel = 1;
+        _hasGameStarted = false;
         LoadMainMenu();
     }
 
