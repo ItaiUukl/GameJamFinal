@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
 
     private float _height, _distance;
 
-    private bool _isJumpPressed, _isJumpReleased;
+    private bool _isJumpPressed, _isJumpReleased, _animateJump;
 
     private Action _onReachedDestCallback = null;
     private float? _destX = null;
@@ -48,9 +48,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        _height = maxJumpPeak;
-        _distance = maxPeakDistance;
-        UpdateForces();
+        UpdateForces(maxJumpPeak, maxPeakDistance);
 
         _rb = GetComponent<Rigidbody2D>();
         _rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
@@ -104,7 +102,13 @@ public class Player : MonoBehaviour
         }
 
         _jumpBuffer = Mathf.Max(_jumpBuffer - Time.deltaTime, 0);
-
+        
+        _animator.SetBool(AnimatorGrounded, _groundDetector.IsGrounded());
+        if (_animateJump)
+        {
+            _animator.SetTrigger(AnimatorJump);
+            _animateJump = false;
+        }
         _animator.SetFloat(AnimatorVelocityY, _rb.velocity.y);
         _animator.SetBool(AnimatorRun, Mathf.Abs(_rb.velocity.x) > 0.05);
     }
@@ -116,10 +120,7 @@ public class Player : MonoBehaviour
         _velocity.x = _xInput * speed;
         if (_groundDetector.IsGrounded())
         {
-            _animator.SetBool(AnimatorGrounded, true);
-            _distance = maxPeakDistance;
-            _height = maxJumpPeak;
-            UpdateForces();
+            UpdateForces(maxJumpPeak, maxPeakDistance);
 
             if (_jumpBuffer > 0)
             {
@@ -130,7 +131,7 @@ public class Player : MonoBehaviour
                 if (_isJumpPressed)
                 {
                     _isJumpPressed = false;
-                    _animator.SetTrigger(AnimatorJump);
+                    _animateJump = true;
                     _velocity.y = _jumpForce;
                     _coyote = 0;
                 }
@@ -138,22 +139,16 @@ public class Player : MonoBehaviour
         }
         else
         {
-            _animator.SetBool(AnimatorGrounded, false);
-            
             _velocity.y = _rb.velocity.y;
             
-            if (_rb.velocity.y <= 0)
+            if (_velocity.y <= 0)
             {
-                _distance = fallDistance;
-                _height = maxJumpPeak;
-                UpdateForces();
+                UpdateForces(maxJumpPeak, fallDistance);
             }
             else if (_isJumpReleased)
             {
                 _isJumpReleased = false;
-                _height = minJumpPeak;
-                _distance = minPeakDistance;
-                UpdateForces();
+                UpdateForces(minJumpPeak, minPeakDistance);
                 _velocity.y = Mathf.Min(_jumpForce, _velocity.y);
             }
 
@@ -164,7 +159,7 @@ public class Player : MonoBehaviour
                 _isJumpPressed = false;
                 if (_coyote > 0)
                 {
-                    _animator.SetTrigger(AnimatorJump);
+                    _animateJump = true;
                     _velocity.y = _jumpForce;
                     _coyote = 0;
                 }
@@ -205,8 +200,10 @@ public class Player : MonoBehaviour
         _sprite.enabled = false;
     }
 
-    private void UpdateForces()
+    private void UpdateForces(float h, float d)
     {
+        _height = h;
+        _distance = d;
         _jumpForce = (2 * _height * speed) / _distance;
         _gravity = (2 * _height * speed * speed) / (_distance * _distance);
     }
