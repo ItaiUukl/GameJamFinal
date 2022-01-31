@@ -31,9 +31,9 @@ public class SideDetector : Directional
         else if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
         {
             Player player = other.GetComponent<Player>();
-            if (player && player.roomToEnter != transform.parent)
+            if (player && player.RoomToEnter != transform.parent)
             {
-                player.roomToEnter = transform.parent;
+                player.RoomToEnter = transform.parent;
             }
         }
     }
@@ -55,9 +55,9 @@ public class SideDetector : Directional
         else if (other.gameObject.layer == LayerMask.NameToLayer(GlobalsSO.PlayerLayer))
         {
             Player player = other.GetComponent<Player>();
-            if (player && player.transform.parent != player.roomToEnter)
+            if (player && player.transform.parent != player.RoomToEnter)
             {
-                other.transform.SetParent(player.roomToEnter);
+                other.transform.SetParent(player.RoomToEnter);
             }
         }
     }

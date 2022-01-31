@@ -30,7 +30,13 @@ public class GroundDetector : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!_groundLayers.Contains(other.gameObject.layer)) return;
-        Instantiate(dust, transform.position, transform.rotation, _player.transform.parent);
+        InstantiateDust();
         AudioManager.Instance.Play("Hit Floor");
+    }
+
+    public void InstantiateDust()
+    {
+        if (!IsGrounded()) return;
+        var ps = Instantiate(dust, transform.position, transform.rotation, _player.transform.parent);
     }
 }

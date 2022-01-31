@@ -30,10 +30,9 @@ public class LevelTransition : MonoBehaviour
     // Called when level is completed. Switches to next level with UI, etc.
     private void CompleteLevel()
     {
-        Debug.Log("next level");
         _mask = _player.transform.position.x > transform.position.x ? leftMask : rightMask;
         _mask.SetActive(true);
-        _player.Freeze();
+        _player.isActive = false;
         _animator.SetTrigger(AnimatorOpen);
 
         _wasActivated = true;
