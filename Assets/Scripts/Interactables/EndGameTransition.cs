@@ -8,6 +8,8 @@ public class EndGameTransition : MonoBehaviour
     {
         if (_wasActivated || other.gameObject.layer != LayerMask.NameToLayer(GlobalsSO.PlayerLayer)) return;
         _wasActivated = true;
+        AudioManager.Instance.Stop("EndingNote");
+        AudioManager.Instance.Play("Music");
         GameManager.Instance.SetMainMenu(true);
     }
 }
