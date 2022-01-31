@@ -11,7 +11,7 @@ public class LevelSelection : MonoBehaviour
         rightMask,
         leftMask;
 
-    private LevelSelectionManager _manager;
+    private MainMenuManager _manager;
     private bool _isLocked = true;
     private GameObject _mask;
     private bool _wasActivated = false;
@@ -21,7 +21,7 @@ public class LevelSelection : MonoBehaviour
     {
         Debug.Log("created door " + name);
         GetComponent<Collider2D>().isTrigger = true;
-        _manager = FindObjectOfType<LevelSelectionManager>();
+        _manager = FindObjectOfType<MainMenuManager>();
         tutorButton.SetActive(false);
         _isLocked = GameManager.Instance.maxUnlockedLevel < levelNumber;
         unlockedSprite.SetActive(!_isLocked);
@@ -34,7 +34,7 @@ public class LevelSelection : MonoBehaviour
             other.gameObject.layer != LayerMask.NameToLayer(GlobalsSO.PlayerLayer)) return;
         // Activating the sprite above menu door;
         tutorButton.SetActive(true);
-        _manager.DoorPlayerAt = this;
+        _manager.doorPlayerAt = this;
     }
 
     // Deactivating the sprite above menu door;
@@ -42,7 +42,7 @@ public class LevelSelection : MonoBehaviour
     {
         if (_wasActivated) return;
         tutorButton.SetActive(false);
-        _manager.DoorPlayerAt = null;
+        _manager.doorPlayerAt = null;
     }
 
     public void OnDoorEnter(Transform player)

@@ -20,7 +20,7 @@ public class CameraTransitions : MonoBehaviour
         _animator = GetComponent<Animator>();
         if (_player)
         {
-            _player.IsActive = false;
+            _player.Freeze();
         }
     }
 
@@ -36,7 +36,7 @@ public class CameraTransitions : MonoBehaviour
     {
         if (_player)
         {
-            _player.IsActive = false;
+            _player.Freeze();
         }
     }
 
@@ -47,8 +47,8 @@ public class CameraTransitions : MonoBehaviour
 
     public void ShakeCamera(Vector2 dir, float strength)
     {
-        Debug.Log("shake strength = " + strength);
-        _animator.SetBool(AnimatorShakeSlow, strength < .4);
+        Debug.Log("shake strength = " + strength + " is slow == "+ (strength < .4f));
+        _animator.SetBool(AnimatorShakeSlow, strength < .4f);
         _animator.SetTrigger(AnimatorShake);
     }
 

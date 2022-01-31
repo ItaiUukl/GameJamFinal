@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     public static CameraTransitions Cam = null;
 
     private PlayerInput _inputSystem;
+    private bool _hasGameStarted;
     public static bool IsGamepadConnected { get; private set; }
 
     public int maxUnlockedLevel; // first level is 1 (not an index)
@@ -29,9 +30,15 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("max lvl is " + maxUnlockedLevel);
     }
 
-    public void Init()
+    /**
+     * returns true if it is it's first call, else false.
+     */
+    public bool Init()
     {
-    } // TODO: delete
+        bool prevVal = _hasGameStarted;
+        _hasGameStarted = true;
+        return prevVal;
+    }
 
     private void Start()
     {
@@ -59,15 +66,8 @@ public class GameManager : Singleton<GameManager>
 
     private void OnExit(InputValue value)
     {
-        if (!value.isPressed) return;
-        if (SceneManager.GetActiveScene().name == Globals.mainMenuSceneName)
-        {
-            Application.Quit();
-        }
-        else
-        {
-            LoadMainMenu();
-        }
+        if (!value.isPressed || SceneManager.GetActiveScene().name == Globals.mainMenuSceneName) return;
+        LoadMainMenu();
     }
 
     private void OnSwitchLevel(InputValue value)
