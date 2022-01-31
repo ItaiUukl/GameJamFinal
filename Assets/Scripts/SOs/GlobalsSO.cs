@@ -20,7 +20,7 @@ public class GlobalsSO : ScriptableObject
     public int outlineSortingOrder = 15;
     public float outlineAnimationSpeed = .15f;
 
-    public Color menuColor = Color.white;
+    public Color menuRoomOutlinesColor = new Color(60, 104, 140);
 
     public List<Material> outlineMaterials;
 

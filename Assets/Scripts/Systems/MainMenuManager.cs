@@ -4,8 +4,10 @@ using UnityEngine.InputSystem;
 
 public class MainMenuManager : MonoBehaviour
 {
+    [SerializeField] private Room elevator;
     public LevelSelection? doorPlayerAt = null;
     private Animator _animator;
+    private Vector3 elevatorInitPos;
 
     private static readonly int AnimatorOnPress = Animator.StringToHash("On Press"),
         AnimatorEsc = Animator.StringToHash("Esc"),
@@ -16,6 +18,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
+        elevatorInitPos = elevator.transform.localPosition;
         _animator = GetComponent<Animator>();
         _player = FindObjectOfType<Player>();
         bool hasGameStarted = GameManager.Instance.HasGameStarted;
@@ -67,6 +70,8 @@ public class MainMenuManager : MonoBehaviour
     private void OnTransitionToOpenScreenFinished()
     {
         _player.Vanish();
+        elevator.transform.localPosition = elevatorInitPos;
+        // elevator.Move(MoveDirection.Down);
     }
     
     private void OnTransitionToLevelSelectionFinished()

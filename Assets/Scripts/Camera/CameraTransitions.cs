@@ -40,6 +40,7 @@ public class CameraTransitions : MonoBehaviour
 
     public void ShakeCamera()
     {
+        if (GameManager.Instance.IsInMainMenu) return;
         _animator.SetTrigger(AnimatorShake);
     }
 

@@ -23,6 +23,8 @@ public class GameManager : Singleton<GameManager>
     }
     public static bool IsGamepadConnected => InputSystem.GetDevice(typeof(Gamepad)) is Gamepad;
 
+    public bool IsInMainMenu => SceneManager.GetActiveScene().name == Globals.mainMenuSceneName;
+
     public int maxUnlockedLevel; // first level is 1 (not an index)
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
@@ -60,7 +62,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnReset(InputValue value)
     {
-        if (!value.isPressed || SceneManager.GetActiveScene().name == Globals.mainMenuSceneName) return;
+        if (!value.isPressed || IsInMainMenu) return;
         ReloadLevel();
         AudioManager.Instance.Play("Restart Level");
     }
@@ -76,13 +78,13 @@ public class GameManager : Singleton<GameManager>
 
     private void OnExit(InputValue value)
     {
-        if (!value.isPressed || SceneManager.GetActiveScene().name == Globals.mainMenuSceneName) return;
+        if (!value.isPressed || IsInMainMenu) return;
         SetMainMenu(false);
     }
 
     private void OnSwitchLevel(InputValue value)
     {
-        if (SceneManager.GetActiveScene().name == Globals.mainMenuSceneName) return;
+        if (IsInMainMenu) return;
         SetLevel(_currLevelIdx + Math.Sign(value.Get<float>()));
     }
 

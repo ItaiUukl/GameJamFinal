@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     private GroundDetector _groundDetector;
 
     private Vector3 _initPos;
+    private Transform _initParent;
+
     private Vector2 _velocity = Vector2.zero;
     private float _xInput, _jumpForce, _gravity;
 
@@ -192,6 +194,7 @@ public class Player : MonoBehaviour
 
     public void EnterLevel()
     {
+        _initParent = transform.parent;
         _initPos = transform.localPosition;
         _sprite.enabled = true;
         _animator.enabled = true;
@@ -204,6 +207,7 @@ public class Player : MonoBehaviour
         _rb.isKinematic = true;
         _rb.velocity = Vector2.zero;
         IsPaused = true;
+        transform.SetParent(_initParent);
         transform.localPosition = _initPos;
         _animator.Rebind();
         _animator.Update(0f);
