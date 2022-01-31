@@ -34,13 +34,14 @@ public class LevelSelectionManager : MonoBehaviour
     private void OnStartLevel(InputValue value)
     {
         if (!value.isPressed || !_onLevelSelectScreen || DoorPlayerAt == null) return;
-        DoorPlayerAt.OnDoorEnter();
+        DoorPlayerAt.OnDoorEnter(_player.transform);
         _player.MoveTowards(DoorPlayerAt.PlayerDest, OnPlayerEnteredDoor);
     }
 
 
     private void OnPlayerEnteredDoor()
     {
+        if (DoorPlayerAt == null) return;
         GameManager.Instance.SetLevel(DoorPlayerAt.levelNumber - 1);
     }
 
