@@ -18,11 +18,11 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
-        bool firstInit = GameManager.Instance.Init();
+        bool firstInit = !GameManager.Instance.Init();
         _animator = GetComponent<Animator>();
         _player = FindObjectOfType<Player>();
         _onLevelSelectScreen = !firstInit;
-        if (!firstInit)
+        if (_onLevelSelectScreen)
         {
             _animator.SetTrigger(AnimatorIdle);
         }

@@ -31,7 +31,7 @@ public class GameManager : Singleton<GameManager>
     }
 
     /**
-     * returns true if it is it's first call, else false.
+     * returns false if it is it's first call, else true.
      */
     public bool Init()
     {
