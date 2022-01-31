@@ -20,7 +20,7 @@ public class CameraTransitions : MonoBehaviour
     {
         _player = FindObjectOfType<Player>();
         _animator = GetComponent<Animator>();
-        _player.isPaused = true;
+        _player.IsPaused = true;
     }
 
     public void OnFinishedEnter()
@@ -30,7 +30,7 @@ public class CameraTransitions : MonoBehaviour
 
     public void OnStartedExit()
     {
-        _player.isActive = false;
+        _player.IsActive = false;
     }
 
     public void OnFinishedExit()
