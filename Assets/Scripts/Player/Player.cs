@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     private float? _destX = null;
     private bool IsWalkingToDoor => _destX != null;
 
-    public Transform roomToEnter;
+    [NonSerialized] public Transform RoomToEnter;
 
     private static readonly int AnimatorVelocityY = Animator.StringToHash("VelocityY"),
         AnimatorRun = Animator.StringToHash("Run"),
@@ -48,7 +48,6 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        _initPos = transform.position;
         _height = maxJumpPeak;
         _distance = maxPeakDistance;
         UpdateForces();
@@ -83,8 +82,11 @@ public class Player : MonoBehaviour
         }
 
         _velocity.x = _xInput * speed;
-        if (_xInput != 0) _sprite.flipX = _xInput < 0;
-        // todo: particle system
+        if (_xInput != 0 && _sprite.flipX != _xInput < 0)
+        {
+            _groundDetector.InstantiateDust();
+            _sprite.flipX = _xInput < 0;
+        }
 
         if (_groundDetector.IsGrounded() || IsWalkingToDoor)
         {
@@ -169,19 +171,23 @@ public class Player : MonoBehaviour
 
     public void EnterLevel()
     {
+        _initPos = transform.localPosition;
         _sprite.enabled = true;
         _animator.enabled = true;
+        _rb.isKinematic = false;
         AudioManager.Instance.Play("Qube Enter Level");
     }
 
     public void Vanish()
     {
-        Debug.Log("pos = " + _initPos);
-        _sprite.enabled = false;
-        _animator.enabled = false;
+        _rb.isKinematic = true;
+        _rb.velocity = Vector2.zero;
         isPaused = true;
-        GetComponent<Collider2D>().enabled = false;
-        transform.position = _initPos;
+        transform.localPosition = _initPos;
+        _animator.Rebind();
+        _animator.Update(0f);
+        _animator.enabled = false;
+        _sprite.enabled = false;
     }
 
     private void UpdateForces()

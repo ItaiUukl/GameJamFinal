@@ -19,7 +19,7 @@ public class MainMenuManager : MonoBehaviour
         _animator = GetComponent<Animator>();
         _player = FindObjectOfType<Player>();
         bool hasGameStarted = GameManager.Instance.HasGameStarted;
-        _onLevelSelectScreen = !hasGameStarted;
+        _onLevelSelectScreen = hasGameStarted;
         if (_onLevelSelectScreen)
         {
             _animator.SetTrigger(AnimatorIdle);
@@ -51,7 +51,6 @@ public class MainMenuManager : MonoBehaviour
         {
             _animator.SetTrigger(AnimatorEsc);
             _onLevelSelectScreen = false;
-            _player.Vanish();
         }
         else
         {
@@ -64,8 +63,13 @@ public class MainMenuManager : MonoBehaviour
         if (doorPlayerAt == null) return;
         GameManager.Instance.SetLevel(doorPlayerAt.levelNumber - 1);
     }
-
-    private void OnTransitionFinished()
+    
+    private void OnTransitionToOpenScreenFinished()
+    {
+        _player.Vanish();
+    }
+    
+    private void OnTransitionToLevelSelectionFinished()
     {
         _player.EnterLevel();
     }
