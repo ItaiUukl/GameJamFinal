@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Music
   m_EditorClassIdentifier: 
   soundName: Music
-  clip: {fileID: 8300000, guid: 7ba945db3f56a3f48bfb8d780ffd69b4, type: 3}
+  clip: {fileID: 8300000, guid: 67a9d1230f309d14dac345d4d5d8568b, type: 3}
   clipsList: []
-  volume: 0.7
+  volume: 0.318
   pitch: 1
   loop: 1
   overlap: 0

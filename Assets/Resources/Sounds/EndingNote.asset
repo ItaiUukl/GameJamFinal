@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05807e4d2d6190a49b81b23bd4fd1e5b, type: 3}
+  m_Name: EndingNote
+  m_EditorClassIdentifier: 
+  soundName: EndingNote
+  clip: {fileID: 8300000, guid: dba84e7f5e4f3b548acf1db90230c1c6, type: 3}
+  clipsList: []
+  volume: 0.557
+  pitch: 1
+  loop: 0
+  overlap: 0
+  source: {fileID: 0}

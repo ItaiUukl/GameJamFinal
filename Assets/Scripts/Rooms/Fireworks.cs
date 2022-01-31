@@ -20,6 +20,7 @@ public class Fireworks : MonoBehaviour
         if (other.gameObject.layer != LayerMask.NameToLayer(GlobalsSO.PlayerLayer) && !_isIn) return;
         _isIn = true;
         StartCoroutine(Shoot());
+        AudioManager.Instance.Play("EndingNote");
     }
 
     private IEnumerator Shoot()
