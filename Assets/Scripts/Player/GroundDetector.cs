@@ -14,7 +14,6 @@ public class GroundDetector : MonoBehaviour
     {
         _groundLayers ??= new HashSet<LayerMask>
         {
-            // LayerMask.NameToLayer(GlobalsSO.BorderLayer),
             LayerMask.NameToLayer(GlobalsSO.OutlinesLayer),
             LayerMask.NameToLayer(GlobalsSO.DefaultLayer)
         };
@@ -34,10 +33,4 @@ public class GroundDetector : MonoBehaviour
         Instantiate(dust, transform.position, transform.rotation, _player.transform.parent);
         AudioManager.Instance.Play("Hit Floor");
     }
-
-    // private void OnTriggerExit2D(Collider2D other)
-    // {
-    //     if (!_groundLayers.Contains(other.gameObject.layer)) return;
-    //     player.IsGrounded = _collider.IsTouchingLayers();
-    // }
 }
