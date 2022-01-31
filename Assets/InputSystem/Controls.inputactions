@@ -228,6 +228,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ResetMaxLevel",
+                    "type": "Button",
+                    "id": "89bf257b-8b7f-4833-a7f1-b4b38ed78e1b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Exit",
                     "type": "Button",
                     "id": "874133c1-af91-41c1-b714-0a67d4960dcd",
@@ -356,6 +365,17 @@
                     "action": "SwitchLevel",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "903b5f15-9acf-410d-8849-ab9c5aa3397e",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetMaxLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -376,6 +396,15 @@
                     "name": "Play",
                     "type": "Button",
                     "id": "1bff344f-83c5-4de1-8d22-c3f5c1cfcca1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Exit",
+                    "type": "Button",
+                    "id": "9638a7c5-976b-41a7-abc3-e4a74b46e763",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -424,6 +453,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Play",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "72704fc6-b933-4ed8-88b7-4329198aca36",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Exit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6a120bcf-118b-4dfa-8166-f7932987843f",
+                    "path": "<XInputController>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Exit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
