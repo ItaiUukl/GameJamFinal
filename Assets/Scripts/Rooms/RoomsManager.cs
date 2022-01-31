@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,13 +95,12 @@ public class RoomsManager : Singleton<RoomsManager>
             l.startWidth = GameManager.Globals.outlineWidth;
             l.textureMode = GameManager.Globals.outlineTextureMode;
             l.sortingOrder = GameManager.Globals.outlineSortingOrder;
-            /* if you would want different line color in the menu
-            if(GameManager._menu)
+            if (GameManager.Instance.IsInMainMenu)
             {
-                l.endColor = GameManager.Globals.MenuColor;
-                l.startColor = GameManager.Globals.MenuColor;
-            } */
-            //new Color(60, 104, 140);
+                l.endColor = GameManager.Globals.menuRoomOutlinesColor;
+                l.startColor = GameManager.Globals.menuRoomOutlinesColor;
+            }
+
             l.sortingLayerName = "Room";
             _materialsRoutines.Add(StartCoroutine(ChangeMaterial(l)));
         }
