@@ -184,6 +184,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80864fbb8e582004a8d451458121bcda, type: 3}
+--- !u!4 &15930975 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1601947130554385102, guid: 106a705dc68dcfa448a767243e37b5f3, type: 3}
+  m_PrefabInstance: {fileID: 1056157070}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &41923471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,7 +286,7 @@ Transform:
   - {fileID: 182046636}
   - {fileID: 1146216906}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &59875233
 PrefabInstance:
@@ -1351,7 +1356,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &487517541
 PrefabInstance:
@@ -1971,7 +1976,7 @@ GameObject:
   - component: {fileID: 1047531192}
   - component: {fileID: 1047531193}
   - component: {fileID: 1047531191}
-  m_Layer: 1
+  m_Layer: 3
   m_Name: Fireworks Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2000,11 +2005,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1047531190}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 45, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 15930975}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1047531193
 BoxCollider2D:
@@ -2077,7 +2082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1601947130554385102, guid: 106a705dc68dcfa448a767243e37b5f3, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1601947130554385102, guid: 106a705dc68dcfa448a767243e37b5f3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2590,7 +2595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1052098095366545542, guid: 01bb22bfa874abd40a3c93f8779b11fc, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1052098095366545542, guid: 01bb22bfa874abd40a3c93f8779b11fc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2836,7 +2841,7 @@ GameObject:
   - component: {fileID: 1364756936}
   - component: {fileID: 1364756935}
   - component: {fileID: 1364756937}
-  m_Layer: 1
+  m_Layer: 3
   m_Name: EndGameTransition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2877,11 +2882,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1364756934}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 55.1, y: -0.31, z: -0.45419323}
+  m_LocalPosition: {x: 10.099998, y: -0.31, z: -0.45419323}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 15930975}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1364756937
 MonoBehaviour:
