@@ -79,7 +79,8 @@ MonoBehaviour:
   tutorButton: {fileID: 4899964813866709844}
   unlockedSprite: {fileID: 8810642634522116868}
   lockedSprite: {fileID: 5808240871608340672}
-  wasActivated: 0
+  rightMask: {fileID: 1028885177478503319}
+  leftMask: {fileID: 6927874641808643106}
 --- !u!1 &1855967869272522686
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,6 +531,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
+--- !u!1 &6927874641808643106 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5070832109336802826, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
+  m_PrefabInstance: {fileID: 2773082295997489704}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5074931451359678857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6923775231598965665, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
@@ -675,6 +681,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
+--- !u!1 &1028885177478503319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5070832109336802826, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
+  m_PrefabInstance: {fileID: 5195011511431425437}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2886336299046133308 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6923775231598965665, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}

@@ -157,8 +157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9102ee00b131e8947ab07e693eee9a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightMask: {fileID: 3157108662395857919}
-  leftMask: {fileID: 1790069612478069763}
+  rightMask: {fileID: 7080354008852181859}
+  leftMask: {fileID: 5856279549011403935}
 --- !u!95 &3671636669866316325
 Animator:
   serializedVersion: 3
@@ -333,14 +333,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
+--- !u!1 &5856279549011403935 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5070832109336802826, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
+  m_PrefabInstance: {fileID: 1664812161779602069}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8578417433193554228 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6923775231598965665, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
-  m_PrefabInstance: {fileID: 1664812161779602069}
-  m_PrefabAsset: {fileID: 0}
---- !u!331 &1790069612478069763 stripped
-SpriteMask:
-  m_CorrespondingSourceObject: {fileID: 1138569593261289110, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
   m_PrefabInstance: {fileID: 1664812161779602069}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2602322586462291305
@@ -416,13 +416,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
+--- !u!1 &7080354008852181859 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5070832109336802826, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
+  m_PrefabInstance: {fileID: 2602322586462291305}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4903151679577601736 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6923775231598965665, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
-  m_PrefabInstance: {fileID: 2602322586462291305}
-  m_PrefabAsset: {fileID: 0}
---- !u!331 &3157108662395857919 stripped
-SpriteMask:
-  m_CorrespondingSourceObject: {fileID: 1138569593261289110, guid: 7974686a0d32e334db1793ad4d9624f0, type: 3}
   m_PrefabInstance: {fileID: 2602322586462291305}
   m_PrefabAsset: {fileID: 0}

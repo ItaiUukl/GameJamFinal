@@ -41,6 +41,7 @@ public class LevelSelectionManager : MonoBehaviour
 
     private void OnPlayerEnteredDoor()
     {
+        if (DoorPlayerAt == null) return;
         GameManager.Instance.SetLevel(DoorPlayerAt.levelNumber - 1);
     }
 
