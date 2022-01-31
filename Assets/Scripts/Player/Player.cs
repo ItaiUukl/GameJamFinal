@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 
     private Vector3 _initPos;
     private Transform _initParent;
-    
+
     private Vector2 _velocity = Vector2.zero;
     private float _xInput, _jumpForce, _gravity;
 
@@ -139,7 +139,7 @@ public class Player : MonoBehaviour
         if (!_groundDetector.IsGrounded())
         {
             _velocity.y = _rb.velocity.y;
-            
+
             if (_rb.velocity.y <= 0)
             {
                 _distance = fallDistance;
@@ -172,6 +172,7 @@ public class Player : MonoBehaviour
                 }
             }
         }
+
         _rb.velocity = _velocity;
     }
 
@@ -212,6 +213,7 @@ public class Player : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
+        if (IsWalkingToDoor) return;
         if (!isActive)
         {
             _isJumpPressed = _isJumpReleased = false;
@@ -230,6 +232,7 @@ public class Player : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
+        if (IsWalkingToDoor) return;
         _xInput = isActive ? Math.Sign(ctx.ReadValue<float>()) : 0;
     }
 
