@@ -69,8 +69,7 @@ public class Player : MonoBehaviour
         _groundDetector = GetComponentInChildren<GroundDetector>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (isPaused) return;
         if (IsWalkingToDoor && (transform.position.x * _xInput > _destX * _xInput || _rb.velocity.x == 0))
@@ -83,14 +82,13 @@ public class Player : MonoBehaviour
             return;
         }
 
-        _velocity.x = _xInput * speed;
         if (_xInput != 0 && _sprite.flipX != _xInput < 0)
         {
             _groundDetector.InstantiateDust();
             _sprite.flipX = _xInput < 0;
         }
 
-        if (_groundDetector.IsGrounded() || IsWalkingToDoor)
+        if (_groundDetector.IsGrounded())
         {
             _animator.SetBool(AnimatorGrounded, true);
             _distance = maxPeakDistance;
@@ -122,7 +120,26 @@ public class Player : MonoBehaviour
         else
         {
             _animator.SetBool(AnimatorGrounded, false);
+
+            _coyote = Mathf.Max(_coyote - Time.deltaTime, 0);
+        }
+
+        _jumpBuffer = Mathf.Max(_jumpBuffer - Time.deltaTime, 0);
+
+        _animator.SetFloat(AnimatorVelocityY, _rb.velocity.y);
+        _animator.SetBool(AnimatorRun, Mathf.Abs(_rb.velocity.x) > 0.05);
+    }
+
+    private void FixedUpdate()
+    {
+        if (isPaused) return;
+
+        _velocity.x = _xInput * speed;
+
+        if (!_groundDetector.IsGrounded())
+        {
             _velocity.y = _rb.velocity.y;
+            
             if (_rb.velocity.y <= 0)
             {
                 _distance = fallDistance;
@@ -138,7 +155,7 @@ public class Player : MonoBehaviour
                 _velocity.y = Mathf.Min(_jumpForce, _velocity.y);
             }
 
-            _velocity.y -= _gravity * Time.deltaTime;
+            _velocity.y -= _gravity * Time.fixedDeltaTime;
 
             if (_isJumpPressed)
             {
@@ -154,15 +171,8 @@ public class Player : MonoBehaviour
                     _jumpBuffer = airBuffer;
                 }
             }
-
-            _coyote = Mathf.Max(_coyote - Time.deltaTime, 0);
         }
-
-        _jumpBuffer = Mathf.Max(_jumpBuffer - Time.deltaTime, 0);
         _rb.velocity = _velocity;
-
-        _animator.SetFloat(AnimatorVelocityY, _rb.velocity.y);
-        _animator.SetBool(AnimatorRun, Mathf.Abs(_rb.velocity.x) > 0.05);
     }
 
     public void Activate()
