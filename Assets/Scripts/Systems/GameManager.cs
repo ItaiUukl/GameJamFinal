@@ -47,7 +47,7 @@ public class GameManager : Singleton<GameManager>
         _inputSystem.defaultActionMap = "General";
         _inputSystem.notificationBehavior = PlayerNotifications.SendMessages;
         _inputSystem.actions.Enable();
-        
+
         IsGamepadConnected = InputSystem.GetDevice(typeof(Gamepad)) is Gamepad;
 
         AudioManager.Instance.Play("Music");
@@ -67,13 +67,13 @@ public class GameManager : Singleton<GameManager>
         PlayerPrefs.SetInt("currLevel", 1);
         maxUnlockedLevel = 1;
         _hasGameStarted = false;
-        LoadMainMenu();
+        SetMainMenu(false);
     }
 
     private void OnExit(InputValue value)
     {
         if (!value.isPressed || SceneManager.GetActiveScene().name == Globals.mainMenuSceneName) return;
-        LoadMainMenu();
+        SetMainMenu(false);
     }
 
     private void OnSwitchLevel(InputValue value)
@@ -82,10 +82,10 @@ public class GameManager : Singleton<GameManager>
         SetLevel(_currLevelIdx + Math.Sign(value.Get<float>()));
     }
 
-    public void LoadMainMenu()
+    public void SetMainMenu(bool isCalledFromEndScene)
     {
-        RoomsManager.Instance.ResetLevel();
-        SceneManager.LoadScene(Globals.mainMenuSceneName);
+        _currLevelIdx = -1;
+        Cam.ExitTransition(isCalledFromEndScene);
     }
 
     // advances game to the next level
@@ -104,13 +104,13 @@ public class GameManager : Singleton<GameManager>
             PlayerPrefs.SetInt("currLevel", _currLevelIdx + 1);
         }
 
-        Cam.ExitTransition();
+        Cam.ExitTransition(false);
     }
 
     // Resets the current level
     public void LoadLevel()
     {
         RoomsManager.Instance.ResetLevel();
-        SceneManager.LoadScene(Globals.AdvanceLevel(_currLevelIdx));
+        SceneManager.LoadScene(_currLevelIdx >= 0 ? Globals.AdvanceLevel(_currLevelIdx) : Globals.mainMenuSceneName);
     }
 }

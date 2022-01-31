@@ -8,6 +8,6 @@ public class EndGameTransition : MonoBehaviour
     {
         if (_wasActivated || other.gameObject.layer != LayerMask.NameToLayer(GlobalsSO.PlayerLayer)) return;
         _wasActivated = true;
-        GameManager.Instance.LoadMainMenu();
+        GameManager.Instance.SetMainMenu(true);
     }
 }

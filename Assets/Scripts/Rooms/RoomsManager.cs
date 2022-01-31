@@ -11,21 +11,7 @@ public class RoomsManager : Singleton<RoomsManager>
     private HashSet<Room> _rooms = new HashSet<Room>();
 
     private List<GameObject> _linesList = new List<GameObject>();
-
-    // private float _outlineWidth;
-    // private LineTextureMode _outlineTextureMode;
-    // private List<Material> _outlineMaterials;
-    // private float _outlineTransition;
     private List<Coroutine> _materialsRoutines = new List<Coroutine>();
-
-
-    // private void Start()
-    // {
-    //     _outlineWidth = GameManager.Globals.outlineWidth;
-    //     _outlineTextureMode = GameManager.Globals.outlineTextureMode;
-    //     _outlineMaterials = GameManager.Globals.outlineMaterials;
-    //     _outlineTransition = GameManager.Globals.outlineAnimationSpeed;
-    // }
 
     // Calling the funcation on Update, might need to find a better place for that, maybe on collision with other room
     private void Update()
@@ -39,6 +25,7 @@ public class RoomsManager : Singleton<RoomsManager>
         if (!_compositeHolder)
         {
             GenerateComposite();
+            _compColl.transform.SetParent(room.transform.parent);
         }
 
         _rooms.Add(room);
@@ -56,7 +43,7 @@ public class RoomsManager : Singleton<RoomsManager>
             yield return new WaitForSeconds(GameManager.Globals.outlineAnimationSpeed);
         }
     }
-    
+
     private void GenerateComposite()
     {
         _compositeHolder = new GameObject

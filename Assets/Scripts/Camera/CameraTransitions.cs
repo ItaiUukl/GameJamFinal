@@ -8,6 +8,7 @@ public class CameraTransitions : MonoBehaviour
     private static readonly int AnimatorShake = Animator.StringToHash("Shake");
     private static readonly int AnimatorShakeSlow = Animator.StringToHash("ShakeSlow");
     private static readonly int AnimatorExit = Animator.StringToHash("Exit");
+    private static readonly int AnimatorFinish = Animator.StringToHash("Finish");
 
     private void Awake()
     {
@@ -47,7 +48,6 @@ public class CameraTransitions : MonoBehaviour
 
     public void ShakeCamera()
     {
-        // _animator.SetBool(AnimatorShakeSlow);
         _animator.SetTrigger(AnimatorShake);
     }
 
@@ -56,8 +56,8 @@ public class CameraTransitions : MonoBehaviour
         _animator.SetBool(AnimatorShakeSlow, value);
     }
 
-    public void ExitTransition()
+    public void ExitTransition(bool isFinish)
     {
-        _animator.SetTrigger(AnimatorExit);
+        _animator.SetTrigger(isFinish ? AnimatorFinish : AnimatorExit);
     }
 }

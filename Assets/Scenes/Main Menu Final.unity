@@ -1965,7 +1965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6777f3976670364d8ae226a725b4cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DoorPlayerAt: {fileID: 0}
+  doorPlayerAt: {fileID: 0}
 --- !u!114 &987784454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3766,7 +3766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1601947130554385103, guid: 106a705dc68dcfa448a767243e37b5f3, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3791923466787292047, guid: 106a705dc68dcfa448a767243e37b5f3, type: 3}
       propertyPath: m_Size.x
