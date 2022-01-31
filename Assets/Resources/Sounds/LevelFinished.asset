@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05807e4d2d6190a49b81b23bd4fd1e5b, type: 3}
-  m_Name: Music
+  m_Name: LevelFinished
   m_EditorClassIdentifier: 
-  soundName: Music
-  clip: {fileID: 8300000, guid: 67a9d1230f309d14dac345d4d5d8568b, type: 3}
+  soundName: Level Finish
+  clip: {fileID: 8300000, guid: 3eb1126fc8af6c4479d2a7f93b0cb194, type: 3}
   clipsList: []
-  volume: 0.35
+  volume: 0.4
   pitch: 1
-  loop: 1
+  loop: 0
   overlap: 0
   source: {fileID: 0}
