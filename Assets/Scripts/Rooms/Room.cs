@@ -135,7 +135,7 @@ public class Room : MonoBehaviour
         }
     }
 
-    private void SetBlocked(MoveDirection side, bool state)
+    public void SetBlocked(MoveDirection side, bool state)
     {
         _blockedSides[side] = state;
 
