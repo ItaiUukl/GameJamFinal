@@ -38,7 +38,6 @@ public class Lever : MonoBehaviour
 
     public void Moving(bool state)
     {
-        Debug.Log(name + " pressable: " + _pressable);
         _collider.enabled = _pressable && !state;
     }
 

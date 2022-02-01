@@ -137,7 +137,6 @@ public class Room : MonoBehaviour
 
     private void SetBlocked(MoveDirection side, bool state)
     {
-        Debug.Log(name + " blocked: " + state + " in side " + side);
         _blockedSides[side] = state;
 
         foreach (MoveDirection key in _levers.Keys)
