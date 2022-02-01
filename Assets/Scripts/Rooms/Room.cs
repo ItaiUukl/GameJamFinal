@@ -81,10 +81,10 @@ public class Room : MonoBehaviour
         if (_blockedSides[dir]) return;
         _moveDir = MoveDirectionUtils.ToVector2(dir);
         AudioManager.Instance.Play("Room Move");
-        if (_collider.IsTouchingLayers(LayerMask.NameToLayer(GlobalsSO.PlayerLayer)))
-        {
-            _player.transform.SetParent(transform);
-        }
+        // if (_collider.OverlapPoint(_player.transform.position))
+        // {
+        _player.transform.SetParent(transform);
+        // }
     }
 
     public void AddLever(Lever lever)
@@ -137,7 +137,6 @@ public class Room : MonoBehaviour
 
     private void SetBlocked(MoveDirection side, bool state)
     {
-        Debug.Log(name + " blocked: " + state + " in side " + side);
         _blockedSides[side] = state;
 
         foreach (MoveDirection key in _levers.Keys)

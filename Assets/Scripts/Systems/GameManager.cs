@@ -39,7 +39,6 @@ public class GameManager : Singleton<GameManager>
     {
         Globals = Resources.LoadAll<GlobalsSO>("Globals")[0];
         maxUnlockedLevel = PlayerPrefs.GetInt("currLevel", 1);
-        Debug.Log("max lvl is " + maxUnlockedLevel);
     }
 
     /**
@@ -102,7 +101,6 @@ public class GameManager : Singleton<GameManager>
 
     public void SetLevel(int lvl)
     {
-        Debug.Log("starting lvl " + (lvl + 1));
         _currLevelIdx = Math.Max(0, lvl) % Globals.levelAdvancement.Count;
         if (maxUnlockedLevel < _currLevelIdx + 1)
         {

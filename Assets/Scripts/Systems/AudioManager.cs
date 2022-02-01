@@ -18,7 +18,7 @@ public class AudioManager : Singleton<AudioManager>
     
     public void Play(string soundName){
         if(!_sounds.ContainsKey(soundName)){
-            Debug.LogWarning("Missing Sound:" + soundName);
+            // Debug.LogWarning("Missing Sound:" + soundName);
             return;
         }
         if (_sounds[soundName].overlap || !_sounds[soundName].IsPlaying())
@@ -29,7 +29,7 @@ public class AudioManager : Singleton<AudioManager>
     
     public void Stop(string soundName){
         if(!_sounds.ContainsKey(soundName)){
-            Debug.LogWarning("Missing Sound:" + soundName);
+            // Debug.LogWarning("Missing Sound:" + soundName);
             return;
         }
         if (_sounds[soundName].IsPlaying())

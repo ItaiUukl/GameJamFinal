@@ -15,10 +15,20 @@ public class Player : MonoBehaviour
     [SerializeField, Min(.0001f)] private float maxPeakDistance = 1.2f;
     [SerializeField, Min(.0001f)] private float minPeakDistance = .4f;
     [SerializeField, Min(.0001f)] private float fallDistance = .9f;
+    [SerializeField] private float exitSpeed = 0.5f;
 
     [NonSerialized] public bool IsActive;
     [NonSerialized] public bool IsPaused = true;
-    [NonSerialized] public bool InTransition;
+    private bool _inTransition;
+    public bool InTransition
+    {
+        get => _inTransition;
+        set
+        {
+            _inTransition = value;
+            IsActive = !value;
+        }
+    }
 
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
@@ -125,7 +135,7 @@ public class Player : MonoBehaviour
     {
         if (IsPaused) return;
 
-        if (InTransition && !IsWalkingToDoor)
+        if (InTransition)
         {
             TransitionUpdate();
             return;
@@ -192,6 +202,11 @@ public class Player : MonoBehaviour
         IsActive = true;
     }
 
+    public bool IsGrounded()
+    {
+        return _groundDetector.IsGrounded();
+    }
+
     public void EnterLevel()
     {
         _initParent = transform.parent;
@@ -235,7 +250,7 @@ public class Player : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        _xInput = IsActive ? Math.Sign(ctx.ReadValue<float>()) : 0;
+        _xInput = IsActive ? Math.Sign(ctx.ReadValue<float>()) : _xInput;
     }
 
     public void MoveTowards(float destX, Action callback)
@@ -243,9 +258,10 @@ public class Player : MonoBehaviour
         IsActive = false;
         _onReachedDestCallback = callback;
         _xInput = Math.Sign(destX - transform.position.x);
-        _xInput /= 2;
-        _rb.velocity = new Vector2(_xInput * 0.1f, 0);
+        _sprite.flipX = _xInput < 0;
+        _rb.velocity = new Vector2(_xInput * speed * exitSpeed, 0);
         _destX = destX;
+        _animator.SetBool(AnimatorRun, true);
     }
 
     private void UpdateForces(float h, float d)
@@ -258,6 +274,8 @@ public class Player : MonoBehaviour
 
     private void TransitionUpdate()
     {
+        if (IsWalkingToDoor) return;
+        
         _velocity.x = 0;
         _velocity.y -= _gravity * Time.fixedDeltaTime;
         _rb.velocity = _velocity;
