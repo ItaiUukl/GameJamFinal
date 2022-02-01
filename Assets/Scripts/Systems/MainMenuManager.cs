@@ -42,8 +42,10 @@ public class MainMenuManager : MonoBehaviour
 
     private void OnStartLevel(InputValue value)
     {
-        if (!value.isPressed || !_onLevelSelectScreen || doorPlayerAt == null) return;
+        if (!_player.IsGrounded() || _player.InTransition || !value.isPressed || !_onLevelSelectScreen || 
+            doorPlayerAt == null) return;
         doorPlayerAt.OnDoorEnter(_player.transform);
+        _player.InTransition = true;
         _player.MoveTowards(doorPlayerAt.PlayerDest, OnPlayerEnteredDoor);
     }
 
