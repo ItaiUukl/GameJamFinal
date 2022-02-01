@@ -227,6 +227,7 @@ public class Player : MonoBehaviour
         _animator.Rebind();
         _animator.Update(0f);
         _animator.enabled = false;
+        _sprite.flipX = false;
         _sprite.enabled = false;
     }
 

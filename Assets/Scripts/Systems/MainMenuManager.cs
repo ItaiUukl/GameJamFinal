@@ -18,7 +18,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
-        elevatorInitPos = elevator.transform.localPosition;
+        elevatorInitPos = elevator.transform.position;
         _animator = GetComponent<Animator>();
         _player = FindObjectOfType<Player>();
         bool hasGameStarted = GameManager.Instance.HasGameStarted;
@@ -72,7 +72,8 @@ public class MainMenuManager : MonoBehaviour
     private void OnTransitionToOpenScreenFinished()
     {
         _player.Vanish();
-        elevator.transform.localPosition = elevatorInitPos;
+        elevator.transform.position = elevatorInitPos;
+        elevator.SetBlocked(MoveDirection.Down, true);
         // elevator.Move(MoveDirection.Down);
     }
     
