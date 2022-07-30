@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer _sprite;
     private Animator _animator;
     private GroundDetector _groundDetector;
+    public Rumbler _rumbler;
 
     private Vector3 _initPos;
     private Transform _initParent;
@@ -76,6 +77,7 @@ public class Player : MonoBehaviour
         _animator.enabled = false;
 
         _groundDetector = GetComponentInChildren<GroundDetector>();
+        _rumbler = GetComponent<Rumbler>();
     }
 
     private void Update()

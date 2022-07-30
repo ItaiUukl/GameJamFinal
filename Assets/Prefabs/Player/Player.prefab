@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1623005161509950284}
   - component: {fileID: 4029250518122137873}
   - component: {fileID: 1623005161509950282}
+  - component: {fileID: -3401934787408406448}
   - component: {fileID: 582360689009154429}
   - component: {fileID: 3622745557634114856}
   m_Layer: 6
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -45102777
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -5634107977525041186, guid: 09ebb5d2394656c438e0c8d32e0955d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -155,6 +156,20 @@ MonoBehaviour:
   maxPeakDistance: 1.4
   minPeakDistance: 0.6
   fallDistance: 1.2
+  exitSpeed: 0.5
+  _rumbler: {fileID: -3401934787408406448}
+--- !u!114 &-3401934787408406448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623005161509950281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec3013667a868b4e92359524dc5b5fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &582360689009154429
 Animator:
   serializedVersion: 3
@@ -243,6 +258,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3f96e920-ebda-4f63-b0bb-c2289f00f6f9
     m_ActionName: General/SwitchLevel[/Keyboard/comma,/Keyboard/period]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 89bf257b-8b7f-4833-a7f1-b4b38ed78e1b
+    m_ActionName: General/ResetMaxLevel[/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 06a6fd21-38e5-47cb-bf76-791b788b2141
+    m_ActionName: MainMenu/StartLevel[/Keyboard/e,/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1bff344f-83c5-4de1-8d22-c3f5c1cfcca1
+    m_ActionName: MainMenu/Play[/Keyboard/space,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9638a7c5-976b-41a7-abc3-e4a74b46e763
+    m_ActionName: MainMenu/Exit[/Keyboard/escape,/XInputControllerWindows/start]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

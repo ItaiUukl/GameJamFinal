@@ -53,6 +53,7 @@ public class Room : MonoBehaviour
         if (IsMoving)
         {
             AudioManager.Instance.Play("Slow Room");
+            _player._rumbler.RumbleLinear(0.01f, 0.3f, 0.01f, 0.5f, 0.2f);
             if (!_isShakingScreen)
             {
                 GameManager.Cam.SetSlowShake(true);
@@ -61,6 +62,7 @@ public class Room : MonoBehaviour
         }
         else
         {
+            _player._rumbler.StopRumble();
             if (_isShakingScreen)
             {
                 GameManager.Cam.SetSlowShake(false);
@@ -102,6 +104,7 @@ public class Room : MonoBehaviour
         SetBlocked(side, true);
         if (_moveDir != MoveDirectionUtils.ToVector2(side)) return;
         GameManager.Cam.ShakeCamera();
+        _player._rumbler.RumbleConstant(0.1f, 0.3f, 0.1f);
         _velocity = 0;
         FixPosition(side, other);
         AudioManager.Instance.Play("Room Hit");

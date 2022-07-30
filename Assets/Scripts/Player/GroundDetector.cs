@@ -32,6 +32,7 @@ public class GroundDetector : MonoBehaviour
         if (!_groundLayers.Contains(other.gameObject.layer)) return;
         InstantiateDust();
         AudioManager.Instance.Play("Hit Floor");
+        _player._rumbler.RumbleConstant(0.01f, 0.1f, 0.05f);
     }
 
     public void InstantiateDust()
